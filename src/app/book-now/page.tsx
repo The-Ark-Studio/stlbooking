@@ -18,25 +18,14 @@ import type {TableProps} from 'antd';
 import ButtonCustom from '@components/buttonCustom/ButtonCustom';
 import Colors from '@constants/Colors';
 import BookingFormModal from '@app/book-now/partials/bookingModal/BookingModal';
+import {IBasePriceRange, IExtraHours} from '@interfaces/booking/booking';
+import SuccessModal from '@app/book-now/partials/successModal/SuccessModal';
 const {Text} = Typography;
-
-interface IBasePriceRange {
-  key: string | number;
-  adultPrice: string;
-  childrenPrice: string;
-  underPrice: string;
-}
-
-interface IExtraHours {
-  key: string | number;
-  fiveHours: string;
-  sevenHours: string;
-  nineHours: string;
-  elevenHours: string;
-}
 
 const BookNowScreen = () => {
   const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
+  const [isOpenSuccessModal, setIsOpenSuccessModal] = useState(false);
+
   const [basePriceRangeData, setBasePriceRangeData] = useState<
     IBasePriceRange[]
   >([]);
@@ -188,6 +177,14 @@ const BookNowScreen = () => {
         <BookingFormModal
           isModalOpen={isOpenBookingModal}
           handleCancel={() => setIsOpenBookingModal(false)}
+          setSuccessModalOpen={setIsOpenSuccessModal}
+        />
+      ) : null}
+
+      {isOpenSuccessModal ? (
+        <SuccessModal
+          open={isOpenSuccessModal}
+          handleCancel={() => setIsOpenSuccessModal(false)}
         />
       ) : null}
     </BookingNowWrapStyled>

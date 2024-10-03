@@ -4,7 +4,6 @@ import dayjs from 'dayjs';
 import {
   Form,
   Input,
-  Button,
   Select,
   DatePicker,
   TimePicker,
@@ -16,39 +15,24 @@ import {
 import styled from 'styled-components';
 import Colors from '@constants/Colors';
 import {useCustomMutation} from '@refinedev/core';
+import {GLOBAL_DATE_FORMAT, HOUR_FORMAT} from '@utility/conmom';
+import {IDataFormType} from '@interfaces/booking/booking';
+import ButtonCustom from '@components/buttonCustom/ButtonCustom';
 
 const {Option} = Select;
 const {Text} = Typography;
-
-interface IDataFormType {
-  facility: string;
-  date: dayjs.Dayjs | null;
-  adults: number;
-  children: number;
-  infants: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  checkinTime: dayjs.Dayjs | null;
-  checkoutTime: dayjs.Dayjs | null;
-  extraServices: {
-    airportPickup: boolean;
-    spaManicure: boolean;
-    tourPackage: boolean;
-  };
-  notes: string;
-}
 
 interface IBookingFormModalProps {
   isModalOpen: boolean;
   //   handleOk: () => void;
   handleCancel: () => void;
+  setSuccessModalOpen?: (isOpen: boolean) => void;
 }
 
 const BookingFormModal = ({
   isModalOpen,
   handleCancel,
+  setSuccessModalOpen,
 }: IBookingFormModalProps) => {
   const {
     control,
@@ -69,12 +53,14 @@ const BookingFormModal = ({
     mode: 'onChange',
   });
 
-  const {mutate: sendBooking} = useCustomMutation();
+  const {mutate: sendBooking, isLoading} = useCustomMutation();
 
   const checkinTime = useWatch({control, name: 'checkinTime'});
   const checkoutTime = useWatch({control, name: 'checkoutTime'});
   const adults = useWatch({control, name: 'adults'});
   const children = useWatch({control, name: 'children'});
+
+  const today = dayjs().format(GLOBAL_DATE_FORMAT);
 
   // Calculate the total stay hours when both times are selected
   const totalStayHours =
@@ -94,26 +80,22 @@ const BookingFormModal = ({
     console.log('Submitted:', data);
     if (!isValid) return;
     const currency = 'VND';
+    const rentalType = 'Hour';
+
     const payload = {
       room: data.facility,
-      checkinTime: data.checkinTime?.format('YYYY-MM-DD HH:mm:ss'),
-      checkoutTime: data.checkoutTime?.format('YYYY-MM-DD HH:mm:ss'),
+      checkInDate: data.date?.format(GLOBAL_DATE_FORMAT),
+      checkInTime: data.checkinTime?.format(HOUR_FORMAT),
+      checkOutTime: data.checkoutTime?.format(HOUR_FORMAT),
       adults: data.adults,
-      children: data.children,
+      childrens: data.children,
       babies: data.infants,
       firstName: data.firstName,
       lastName: data.lastName,
       currency: currency,
-      email: data.email,
-      phone: data.phone,
-      totalStayHours,
-      subTotal,
-      extraServices: {
-        airportPickup: data.extraServices.airportPickup,
-        spaManicure: data.extraServices.spaManicure,
-        tourPackage: data.extraServices.tourPackage,
-      },
-      notes: data.notes ?? '',
+      rentalType: rentalType,
+      emailAddress: data.email,
+      phoneNumber: data.phone,
     };
 
     console.log('payload: ', payload);
@@ -148,6 +130,9 @@ const BookingFormModal = ({
       {
         onSuccess: () => {
           handleCancel();
+          if (setSuccessModalOpen) {
+            setSuccessModalOpen(true);
+          }
         },
       }
     );
@@ -157,8 +142,8 @@ const BookingFormModal = ({
 
   return (
     <Modal
+      maskClosable={false}
       open={isModalOpen}
-      //   onOk={handleOk}
       onCancel={handleCancel}
       footer={null}
     >
@@ -192,6 +177,7 @@ const BookingFormModal = ({
                 {...field}
                 style={{width: '100%'}}
                 placeholder="DD - MMM - YYYY"
+                minDate={dayjs(today, GLOBAL_DATE_FORMAT)}
               />
             )}
             rules={{required: true}}
@@ -353,6 +339,7 @@ const BookingFormModal = ({
           </Form.Item>
         </FormGroup>
 
+        {/* TODO For requesting Note is Disabled */}
         <NoteStyled>
           {/* note */}
           <div style={{padding: '16px'}}>
@@ -428,26 +415,21 @@ const BookingFormModal = ({
         {/* Submit Button */}
         <ButtonSubmitWrapStyled>
           <Form.Item>
-            <Button
+            <ButtonCustom
+              loading={isLoading}
               style={{width: 180, height: 40}}
               type="primary"
               htmlType="submit"
               block
             >
               Send my booking
-            </Button>
+            </ButtonCustom>
           </Form.Item>
         </ButtonSubmitWrapStyled>
       </Form>
     </Modal>
   );
 };
-
-const FormStyled = styled(Form)`
-  .ant-form-item {
-    margin-bottom: 20px;
-  }
-`;
 
 const FormGroup = styled.div`
   display: flex;
@@ -460,6 +442,7 @@ const FormGroup = styled.div`
 `;
 
 const NoteStyled = styled.div`
+  display: none; // TODO: For requesting Note and Extra Services is disabled
   width: 431px;
   position: absolute;
   top: 80px;
