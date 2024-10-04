@@ -201,16 +201,17 @@ const BookingFormModal = ({
   const handleOk = () => { };
 
   return (
-    <Modal
-      maskClosable={false}
-      open={isModalOpen}
-      onCancel={handleCancel}
-      footer={null}
-    >
-      <FromWrapStyled>
-        <Form onFinish={handleSubmit(onSubmit)} layout="vertical">
-          {/* Facility Selection */}
-          {/* <Form.Item label="Select facility*">
+    <div>
+      <Modal
+        maskClosable={false}
+        open={isModalOpen}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <FromWrapStyled>
+          <Form onFinish={handleSubmit(onSubmit)} layout="vertical">
+            {/* Facility Selection */}
+            {/* <Form.Item label="Select facility*">
           <Controller
             name="facility"
             control={control}
@@ -226,351 +227,353 @@ const BookingFormModal = ({
           {errors.facility && <Text type="danger">This is required.</Text>}
         </Form.Item> */}
 
-          {/* Date Selection */}
-          <Form.Item label="Select a date*">
-            <Controller
-              name="date"
-              control={control}
-              render={({ field }) => (
-                <DatePicker
-                  size="large"
-                  {...field}
-                  format="DD-MM-YYYY"  // Định dạng cho UI
-                  style={{ width: '100%' }}
-                  placeholder="DD - MMM - YYYY"
-                  minDate={dayjs(today, GLOBAL_DATE_FORMAT)}
-                  value={field.value ? dayjs(field.value, "DD-MM-YYYY") : null}  // Định dạng giá trị khi hiển thị
-                  onChange={(date, dateString) => {
-                    field.onChange(dateString);
-                    handleFormChange();
-                  }
-                  }  // Định dạng giá trị được chọn
-                />
-              )}
-              rules={{ required: true }}
-            />
-            {errors.date && <Text type="danger">This is required.</Text>}
-          </Form.Item>
-
-          <FormGroup>
-            {/* Number of Adults */}
-            <Form.Item label="Adults">
+            {/* Date Selection */}
+            <Form.Item label="Select a date*">
               <Controller
-                name="adults"
+                name="date"
                 control={control}
-                defaultValue={1}
                 render={({ field }) => (
-                  <InputNumber
+                  <DatePicker
                     size="large"
                     {...field}
-                    min={1}
-                    max={10}
+                    format="DD-MM-YYYY"  // Định dạng cho UI
                     style={{ width: '100%' }}
-                    onChange={handleFormChange}
-                  />
-                )}
-              />
-            </Form.Item>
-
-            {/* Number of Children */}
-            <Form.Item label="Children from 7-12">
-              <Controller
-                name="children"
-                control={control}
-                defaultValue={0}
-                render={({ field }) => (
-                  <InputNumber
-                    size="large"
-                    {...field}
-                    min={0}
-                    max={10}
-                    style={{ width: '100%' }}
-                    onChange={handleFormChange}
-                  />
-                )}
-              />
-            </Form.Item>
-
-            {/* Number of Infants */}
-            <Form.Item label="Below 7">
-              <Controller
-                name="infants"
-                control={control}
-                defaultValue={0}
-                render={({ field }) => (
-                  <InputNumber
-                    size="large"
-                    {...field}
-                    min={0}
-                    max={10}
-                    style={{ width: '100%' }}
-                    onChange={handleFormChange}
-                  />
-                )}
-              />
-            </Form.Item>
-          </FormGroup>
-
-          <FormGroup>
-            {/* First Name */}
-            <Form.Item label="First name*">
-              <Controller
-                name="firstName"
-                control={control}
-                render={({ field }) => (
-                  <Input size="large" {...field} placeholder="First name" />
-                )}
-                rules={{ required: true }}
-              />
-              {errors.firstName && <Text type="danger">This is required.</Text>}
-            </Form.Item>
-
-            {/* Last Name */}
-            <Form.Item label="Last name*">
-              <Controller
-                name="lastName"
-                control={control}
-                render={({ field }) => (
-                  <Input size="large" {...field} placeholder="Last name" />
-                )}
-                rules={{ required: true }}
-              />
-              {errors.lastName && <Text type="danger">This is required.</Text>}
-            </Form.Item>
-          </FormGroup>
-
-          <FormGroup>
-            {/* Email */}
-            <Form.Item label="Email*">
-              <Controller
-                name="email"
-                control={control}
-                render={({ field }) => (
-                  <Input size="large" {...field} placeholder="Email" />
-                )}
-                rules={{ required: true }}
-              />
-              {errors.email && <Text type="danger">This is required.</Text>}
-            </Form.Item>
-
-            {/* Phone Number */}
-            <Form.Item label="Phone number*">
-              <Controller
-                name="phone"
-                control={control}
-                render={({ field }) => (
-                  <Input size="large" {...field} placeholder="Phone number" />
-                )}
-                rules={{ required: true }}
-              />
-              {errors.phone && <Text type="danger">This is required.</Text>}
-            </Form.Item>
-          </FormGroup>
-
-          <FormGroup>
-            {/* Check-in Time */}
-            <Form.Item label="Check-in time*">
-              <Controller
-                name="checkinTime"
-                control={control}
-                render={({ field }) => (
-                  <TimePicker
-                    size="large"
-                    {...field}
-                    format="HH:mm"
-                    style={{ width: '100%' }}
-                    onChange={(time, _) => {
-                      setValue('checkinTime', dayjs(time));
-                      handleFormChange()
-                    }}
-                    disabledMinutes={() => {
-                      const disabledMinutes = [];
-                      for (let i = 0; i < 60; i++) {
-                        if (i !== 0 && i !== 30) {
-                          disabledMinutes.push(i);
-                        }
-                      }
-                      return disabledMinutes;
-                    }}
+                    placeholder="DD - MMM - YYYY"
+                    minDate={dayjs(today, GLOBAL_DATE_FORMAT)}
+                    value={field.value ? dayjs(field.value, "DD-MM-YYYY") : null}  // Định dạng giá trị khi hiển thị
+                    onChange={(date, dateString) => {
+                      field.onChange(dateString);
+                      handleFormChange();
+                    }
+                    }  // Định dạng giá trị được chọn
                   />
                 )}
                 rules={{ required: true }}
               />
-              {errors.checkinTime && <Text type="danger">This is required.</Text>}
+              {errors.date && <Text type="danger">This is required.</Text>}
             </Form.Item>
 
-            {/* Check-out Time */}
-            <Form.Item label="Check-out time*">
-              <Controller
-                name="checkoutTime"
-                control={control}
-                render={({ field }) => (
-                  <TimePicker
-                    size="large"
-                    {...field}
-                    format="HH:mm"
-                    style={{ width: '100%' }}
-                    onChange={(time, _) => {
-                      setValue('checkoutTime', dayjs(time));
-                      handleFormChange()
-                    }}
-                    disabledMinutes={() => {
-                      const disabledMinutes = [];
-                      for (let i = 0; i < 60; i++) {
-                        if (i !== 0 && i !== 30) {
-                          disabledMinutes.push(i);
-                        }
-                      }
-                      return disabledMinutes;
-                    }}
-                  />
-
-                )}
-                rules={{ required: true }}
-              />
-              {errors.checkoutTime && (
-                <Text type="danger">This is required.</Text>
-              )}
-            </Form.Item>
-          </FormGroup>
-
-          {/* TODO For requesting Note is Disabled */}
-          <NoteStyled>
-            {/* note */}
-            <div style={{ padding: '16px' }}>
-              <Form.Item>
-                <div className="notes-label">Notes for extra services</div>
-                <div style={{ margin: '10px 0' }}>
-                  <Controller
-                    name="extraServices.airportPickup"
-                    control={control}
-                    render={({ field }) => (
-                      <Checkbox {...field} checked={field.value}>
-                        <Text className="checkbox-label">Airport pickup</Text>
-                      </Checkbox>
-                    )}
-                  />
-
-                  <Controller
-                    name="extraServices.spaManicure"
-                    control={control}
-                    render={({ field }) => (
-                      <Checkbox
-                        style={{ marginLeft: '10px' }}
-                        {...field}
-                        checked={field.value}
-                      >
-                        <Text className="checkbox-label">Spa & manicure</Text>
-                      </Checkbox>
-                    )}
-                  />
-
-                  <Controller
-                    name="extraServices.tourPackage"
-                    control={control}
-                    render={({ field }) => (
-                      <Checkbox
-                        style={{ marginLeft: '10px' }}
-                        {...field}
-                        checked={field.value}
-                      >
-                        <Text className="checkbox-label">Tour package</Text>
-                      </Checkbox>
-                    )}
-                  />
-                </div>
-
+            <FormGroup>
+              {/* Number of Adults */}
+              <Form.Item label="Adults">
                 <Controller
-                  name="notes"
+                  name="adults"
                   control={control}
+                  defaultValue={1}
                   render={({ field }) => (
-                    <Input.TextArea
+                    <InputNumber
+                      size="large"
                       {...field}
-                      rows={4}
-                      placeholder="Input text"
+                      min={1}
+                      max={10}
+                      style={{ width: '100%' }}
+                      onChange={handleFormChange}
                     />
                   )}
                 />
               </Form.Item>
-            </div>
-          </NoteStyled>
-          {
-            !isCalculateDisabled ? null :
-              (<div>
-                <FormGroup>
-                  {/* Total Guests */}
-                  <Form.Item>
-                    <Text>{`Total guests: ${calculationData?.totalGuests || 0}`}</Text>
-                  </Form.Item>
-                  {/* Total Stay Time */}
-                  <Form.Item>
-                    <Text>{`Total stay time: ${Math.round((calculationData?.totalDurations || 0) * 10) / 10} hour(s)`}</Text>
-                  </Form.Item>
-                </FormGroup>
-                <FormGroup>
-                  {/* Extra hours */}
-                  <Form.Item>
-                    <Text>{`Extra hour: ${calculationData?.extraHour || 0} hour(s)`}</Text>
-                  </Form.Item>
-                  {/* Extra price */}
-                  <Form.Item>
-                    <Text>{`Extra price: ${calculationData?.extraPrice.toLocaleString() ?? 0} VND`}</Text>
-                  </Form.Item>
-                </FormGroup>
-                <FormGroup>
-                  {/* Sub Total */}
-                  <Form.Item>
-                    {/* <Text>Sub total: 500,000 VND</Text> */}
-                    <Text>{`Sub total: ${calculationData?.subtotalCost.toLocaleString() ?? 0} VND`}</Text>
-                  </Form.Item>
-                  {/* Total price */}
-                  <Form.Item>
-                    <Text>{`Total: ${calculationData?.totalCost.toLocaleString() ?? 0} VND`}</Text>
-                  </Form.Item>
-                </FormGroup>
-                <FormGroup>
-                  {/* Payment method */}
-                  <Form.Item>
-                    <Text>{`Payment method: Cash on Receipt`}</Text>
-                  </Form.Item>
-                </FormGroup>
-              </div>)
-          }
 
-          {/* Submit Button */}
-          <ButtonSubmitWrapStyled>
-            <Form.Item>
-              <Row >
-                <Col span={2} />
-                <Col span={9}>
-                  <ButtonCustom
-                    loading={isLoading}
-                    style={{ width: '100%', height: 40 }}
-                    type="primary"
-                    disabled={isCalculateDisabled}
-                    htmlType="submit"
-                  >
-                    1. Calculate price
-                  </ButtonCustom>
-                </Col>
-                <Col span={2} />
-                <Col span={9}>
-                  <ButtonCustom
-                    loading={isLoading}
-                    style={{ width: '100%', height: 40 }}
-                    type="primary"
-                    htmlType="submit"
-                    disabled={isSendBookingDisabled}
-                  >
-                    2. Send my booking
-                  </ButtonCustom>
-                </Col>
-              </Row>
-            </Form.Item>
-          </ButtonSubmitWrapStyled>
-        </Form>
-      </FromWrapStyled>
-    </Modal>
+              {/* Number of Children */}
+              <Form.Item label="Children from 7-12">
+                <Controller
+                  name="children"
+                  control={control}
+                  defaultValue={0}
+                  render={({ field }) => (
+                    <InputNumber
+                      size="large"
+                      {...field}
+                      min={0}
+                      max={10}
+                      style={{ width: '100%' }}
+                      onChange={handleFormChange}
+                    />
+                  )}
+                />
+              </Form.Item>
+
+              {/* Number of Infants */}
+              <Form.Item label="Below 7">
+                <Controller
+                  name="infants"
+                  control={control}
+                  defaultValue={0}
+                  render={({ field }) => (
+                    <InputNumber
+                      size="large"
+                      {...field}
+                      min={0}
+                      max={10}
+                      style={{ width: '100%' }}
+                      onChange={handleFormChange}
+                    />
+                  )}
+                />
+              </Form.Item>
+            </FormGroup>
+
+            <FormGroup>
+              {/* First Name */}
+              <Form.Item label="First name*">
+                <Controller
+                  name="firstName"
+                  control={control}
+                  render={({ field }) => (
+                    <Input size="large" {...field} placeholder="First name" />
+                  )}
+                  rules={{ required: true }}
+                />
+                {errors.firstName && <Text type="danger">This is required.</Text>}
+              </Form.Item>
+
+              {/* Last Name */}
+              <Form.Item label="Last name*">
+                <Controller
+                  name="lastName"
+                  control={control}
+                  render={({ field }) => (
+                    <Input size="large" {...field} placeholder="Last name" />
+                  )}
+                  rules={{ required: true }}
+                />
+                {errors.lastName && <Text type="danger">This is required.</Text>}
+              </Form.Item>
+            </FormGroup>
+
+            <FormGroup>
+              {/* Email */}
+              <Form.Item label="Email*">
+                <Controller
+                  name="email"
+                  control={control}
+                  render={({ field }) => (
+                    <Input size="large" {...field} placeholder="Email" />
+                  )}
+                  rules={{ required: true }}
+                />
+                {errors.email && <Text type="danger">This is required.</Text>}
+              </Form.Item>
+
+              {/* Phone Number */}
+              <Form.Item label="Phone number*">
+                <Controller
+                  name="phone"
+                  control={control}
+                  render={({ field }) => (
+                    <Input size="large" {...field} placeholder="Phone number" />
+                  )}
+                  rules={{ required: true }}
+                />
+                {errors.phone && <Text type="danger">This is required.</Text>}
+              </Form.Item>
+            </FormGroup>
+
+            <FormGroup>
+              {/* Check-in Time */}
+              <Form.Item label="Check-in time*">
+                <Controller
+                  name="checkinTime"
+                  control={control}
+                  render={({ field }) => (
+                    <TimePicker
+                      size="large"
+                      {...field}
+                      format="HH:mm"
+                      style={{ width: '100%' }}
+                      onChange={(time, _) => {
+                        setValue('checkinTime', dayjs(time));
+                        handleFormChange()
+                      }}
+                      disabledMinutes={() => {
+                        const disabledMinutes = [];
+                        for (let i = 0; i < 60; i++) {
+                          if (i !== 0 && i !== 30) {
+                            disabledMinutes.push(i);
+                          }
+                        }
+                        return disabledMinutes;
+                      }}
+                    />
+                  )}
+                  rules={{ required: true }}
+                />
+                {errors.checkinTime && <Text type="danger">This is required.</Text>}
+              </Form.Item>
+
+              {/* Check-out Time */}
+              <Form.Item label="Check-out time*">
+                <Controller
+                  name="checkoutTime"
+                  control={control}
+                  render={({ field }) => (
+                    <TimePicker
+                      size="large"
+                      {...field}
+                      format="HH:mm"
+                      style={{ width: '100%' }}
+                      onChange={(time, _) => {
+                        setValue('checkoutTime', dayjs(time));
+                        handleFormChange()
+                      }}
+                      disabledMinutes={() => {
+                        const disabledMinutes = [];
+                        for (let i = 0; i < 60; i++) {
+                          if (i !== 0 && i !== 30) {
+                            disabledMinutes.push(i);
+                          }
+                        }
+                        return disabledMinutes;
+                      }}
+                    />
+
+                  )}
+                  rules={{ required: true }}
+                />
+                {errors.checkoutTime && (
+                  <Text type="danger">This is required.</Text>
+                )}
+              </Form.Item>
+            </FormGroup>
+
+            {/* TODO For requesting Note is Disabled */}
+            <NoteStyled>
+              {/* note */}
+              <div style={{ padding: '16px' }}>
+                <Form.Item>
+                  <div className="notes-label">Notes for extra services</div>
+                  <div style={{ margin: '10px 0' }}>
+                    <Controller
+                      name="extraServices.airportPickup"
+                      control={control}
+                      render={({ field }) => (
+                        <Checkbox {...field} checked={field.value}>
+                          <Text className="checkbox-label">Airport pickup</Text>
+                        </Checkbox>
+                      )}
+                    />
+
+                    <Controller
+                      name="extraServices.spaManicure"
+                      control={control}
+                      render={({ field }) => (
+                        <Checkbox
+                          style={{ marginLeft: '10px' }}
+                          {...field}
+                          checked={field.value}
+                        >
+                          <Text className="checkbox-label">Spa & manicure</Text>
+                        </Checkbox>
+                      )}
+                    />
+
+                    <Controller
+                      name="extraServices.tourPackage"
+                      control={control}
+                      render={({ field }) => (
+                        <Checkbox
+                          style={{ marginLeft: '10px' }}
+                          {...field}
+                          checked={field.value}
+                        >
+                          <Text className="checkbox-label">Tour package</Text>
+                        </Checkbox>
+                      )}
+                    />
+                  </div>
+
+                  <Controller
+                    name="notes"
+                    control={control}
+                    render={({ field }) => (
+                      <Input.TextArea
+                        {...field}
+                        rows={4}
+                        placeholder="Input text"
+                      />
+                    )}
+                  />
+                </Form.Item>
+              </div>
+            </NoteStyled>
+            {
+              !isCalculateDisabled ? null :
+                (<div>
+                  <FormGroup>
+                    {/* Total Guests */}
+                    <Form.Item>
+                      <Text>{`Total guests: ${calculationData?.totalGuests || 0}`}</Text>
+                    </Form.Item>
+                    {/* Total Stay Time */}
+                    <Form.Item>
+                      <Text>{`Total stay time: ${Math.round((calculationData?.totalDurations || 0) * 10) / 10} hour(s)`}</Text>
+                    </Form.Item>
+                  </FormGroup>
+                  <FormGroup>
+                    {/* Extra hours */}
+                    <Form.Item>
+                      <Text>{`Extra hour: ${calculationData?.extraHour || 0} hour(s)`}</Text>
+                    </Form.Item>
+                    {/* Extra price */}
+                    <Form.Item>
+                      <Text>{`Extra price: ${calculationData?.extraPrice.toLocaleString() ?? 0} VND`}</Text>
+                    </Form.Item>
+                  </FormGroup>
+                  <FormGroup>
+                    {/* Sub Total */}
+                    <Form.Item>
+                      {/* <Text>Sub total: 500,000 VND</Text> */}
+                      <Text>{`Sub total: ${calculationData?.subtotalCost.toLocaleString() ?? 0} VND`}</Text>
+                    </Form.Item>
+                    {/* Total price */}
+                    <Form.Item>
+                      <Text>{`Total: ${calculationData?.totalCost.toLocaleString() ?? 0} VND`}</Text>
+                    </Form.Item>
+                  </FormGroup>
+                  <FormGroup>
+                    {/* Payment method */}
+                    <Form.Item>
+                      <Text>{`Payment method: Cash on Receipt`}</Text>
+                    </Form.Item>
+                  </FormGroup>
+                </div>)
+            }
+
+            {/* Submit Button */}
+            <ButtonSubmitWrapStyled>
+              <Form.Item>
+                <Row >
+                  <Col span={2} />
+                  <Col span={9}>
+                    <ButtonCustom
+                      loading={isLoading}
+                      style={{ width: '100%', height: 40 }}
+                      type="primary"
+                      disabled={isCalculateDisabled}
+                      htmlType="submit"
+                    >
+                      1. Calculate price
+                    </ButtonCustom>
+                  </Col>
+                  <Col span={2} />
+                  <Col span={9}>
+                    <ButtonCustom
+                      loading={isLoading}
+                      style={{ width: '100%', height: 40 }}
+                      type="primary"
+                      htmlType="submit"
+                      disabled={isSendBookingDisabled}
+                    >
+                      2. Send my booking
+                    </ButtonCustom>
+                  </Col>
+                </Row>
+              </Form.Item>
+            </ButtonSubmitWrapStyled>
+          </Form>
+        </FromWrapStyled>
+      </Modal>
+    </div>
+
 
   );
 };
