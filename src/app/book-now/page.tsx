@@ -23,10 +23,16 @@ import { IBasePriceRange, IExtraHours } from '@interfaces/booking/booking';
 import SuccessModal from '@app/book-now/partials/successModal/SuccessModal';
 
 const { Text } = Typography;
+import { useMediaQuery } from 'react-responsive';
+import { useTranslations } from 'next-intl';
+
 
 const BookNowScreen = () => {
+  const t = useTranslations('BookingScreen');
   const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
   const [isOpenSuccessModal, setIsOpenSuccessModal] = useState(false);
+
+  const isMobile = useMediaQuery({ query: '(max-width: 576px)' });
 
   const [basePriceRangeData, setBasePriceRangeData] = useState<
     IBasePriceRange[]
@@ -36,42 +42,53 @@ const BookNowScreen = () => {
 
   const columns: TableProps<IBasePriceRange>['columns'] = [
     {
-      title: 'Adult',
+      title: `${t('base_price_range_table.adult_column_header')}`,
       dataIndex: 'adultPrice',
       align: 'center',
     },
     {
-      title: 'Children from 7~12',
+      title: `${t('base_price_range_table.children_column_header')}`,
       dataIndex: 'childrenPrice',
       align: 'center',
     },
     {
-      title: 'Under 7',
+      title: `${t('base_price_range_table.babies_column_header')}`,
       dataIndex: 'underPrice',
       align: 'center',
+      render: () => (
+        <Text>{t('base_price_range_table.babies_column_row_cell')}</Text>
+      ),
     },
   ];
 
   const columnsExtraHours: TableProps<IExtraHours>['columns'] = [
     {
-      title: '5 hours',
+      title: `${t('extra_services_table.fiveHours_column_header')}`,
       dataIndex: 'fiveHours',
       align: 'center',
+      render: () => <Text>{t('extra_services_table.fiveHours_row_cell')}</Text>,
     },
     {
-      title: '7 hours',
+      title: `${t('extra_services_table.sevenHours_column_header')}`,
       dataIndex: 'sevenHours',
       align: 'center',
+      render: () => (
+        <Text>{t('extra_services_table.sevenHours_row_cell')}</Text>
+      ),
     },
     {
-      title: '9 hours',
+      title: `${t('extra_services_table.nineHours_column_header')}`,
       dataIndex: 'nineHours',
       align: 'center',
+      render: () => <Text>{t('extra_services_table.nineHours_row_cell')}</Text>,
     },
     {
-      title: '11 hours',
+      title: `${t('extra_services_table.elevenHours_column_header')}`,
       dataIndex: 'elevenHours',
       align: 'center',
+      render: () => (
+        <Text>{t('extra_services_table.elevenHours_row_cell')}</Text>
+      ),
     },
   ];
 
@@ -96,13 +113,14 @@ const BookNowScreen = () => {
       />
       {/* Content */}
       <BookNowContentStyled>
-        <ContentLeftWrap>
+        <ContentLeftWrap id="booking-content-left">
           <ImagePrimary>
             <Image
               width="100%"
               style={{ height: 400 }}
               preview={true}
               src={BannerBooking.src}
+              alt=""
             />
           </ImagePrimary>
           <ImageBottomList>
@@ -112,40 +130,111 @@ const BookNowScreen = () => {
             <div>
               <Image preview={true} width={150} src={BookNow2.src} />
             </div>
-
             <div>
-              <Image preview={true} width={150} src={BookNow3.src} />
+              <Image preview={true} width={150} src={BookNow3.src} alt="" />
             </div>
-
             <div>
-              <Image preview={true} width={150} src={BookNow4.src} />
+              <Image preview={true} width={150} src={BookNow4.src} alt="" />
             </div>
             <div>
               <Image preview={true} width={150} src={BookNow5.src} />
             </div>
           </ImageBottomList>
         </ContentLeftWrap>
-        <ContentRightWrap>
+        <ContentRightWrap id="booking-content-right">
           <ContentRightTop className="content-right__top">
             <div>
-              <Text className="title-text">Lounge Booking</Text>
-            </div>
-            <div>
-              <Text className="sub-title-text">from 500,000VND / 5 hours</Text>
-            </div>
-            <div>
-              <Text className="description-text">
-                You can enjoy access to your own private balcony, the room is
-                equipped with modern and most luxurious equipment to bring you
-                the most wonderful time.
+              <Text
+                style={{ fontSize: isMobile ? 24 : 34 }}
+                className="title-text"
+              >
+                {t('title_text')}
               </Text>
             </div>
-          </ContentRightTop>
-          <div>
-            <Text style={{ fontSize: 26, color: Colors.neutral900 }}>
-              Base Price Range
-            </Text>
+            {/*  </ContentRightTop>
+           <div>
+             <Text style={{ fontSize: 26, color: Colors.neutral900 }}>
+               Base Price Range
+             </Text> */}
             <div>
+              <Text
+                style={{ fontSize: isMobile ? 20 : 26 }}
+                className="sub-title-text"
+              >
+                {t('subtitle_text')}
+              </Text>
+            </div>
+            <div>
+              <Text className="description-text">{t('description_text')}</Text>
+            </div>
+          </ContentRightTop>
+
+          {/*Gallery for mobile view  */}
+          {isMobile ? (
+            <ContentLeftWrap style={{ width: '100%' }}>
+              <ImagePrimary>
+                <Image
+                  width="100%"
+                  style={{ height: 600 }}
+                  preview={true}
+                  src={BannerBooking.src}
+                  alt=""
+                />
+              </ImagePrimary>
+              <ImageBottomList style={{ columnGap: isMobile ? 8 : 20 }}>
+                <div>
+                  <Image
+                    preview={true}
+                    width={isMobile ? 132 : 150}
+                    src={BookNow1.src}
+                    alt=""
+                  />
+                </div>
+
+                <div>
+                  <Image
+                    preview={true}
+                    width={isMobile ? 132 : 150}
+                    src={BookNow2.src}
+                    alt=""
+                  />
+                </div>
+
+                <div>
+                  <Image
+                    preview={true}
+                    width={isMobile ? 132 : 150}
+                    src={BookNow3.src}
+                    alt=""
+                  />
+                </div>
+                <div>
+                  <Image
+                    preview={true}
+                    width={isMobile ? 132 : 150}
+                    src={BookNow4.src}
+                    alt=""
+                  />
+                </div>
+                <div>
+                  <Image
+                    preview={true}
+                    width={isMobile ? 132 : 150}
+                    src={BookNow5.src}
+                    alt=""
+                  />
+                </div>
+              </ImageBottomList>
+            </ContentLeftWrap>
+          ) : null}
+
+          <div>
+            <Text
+              style={{ fontSize: isMobile ? 22 : 26, color: Colors.neutral900 }}
+            >
+              {t('base_price_range_table.title')}
+            </Text>
+            <div id="booking__base-price-range">
               <Table<IBasePriceRange>
                 columns={columns}
                 dataSource={basePriceRangeData}
@@ -155,9 +244,14 @@ const BookNowScreen = () => {
             </div>
           </div>
 
-          <div>
-            <Text style={{ fontSize: 26, color: Colors.neutral900 }}>
-              Extra hours (apply for Adults only)
+          {/* <div> */}
+          {/* <Text style={{ fontSize: 26, color: Colors.neutral900 }}>
+              Extra hours (apply for Adults only) */}
+          <div id="booking__extra-hours">
+            <Text
+              style={{ fontSize: isMobile ? 22 : 26, color: Colors.neutral900 }}
+            >
+              {t('extra_services_table.title')}
             </Text>
             <div>
               <Table<IExtraHours>
@@ -171,11 +265,16 @@ const BookNowScreen = () => {
 
           <div className="booking-button">
             <ButtonCustom
-              style={{ height: 40, width: 180, padding: 30 }}
+              // style={{ height: 40, width: 180, padding: 30 }}
+              style={{
+                height: isMobile ? 30 : 40,
+                width: 180,
+                padding: isMobile ? 20 : 30,
+              }}
               type="primary"
               onClick={() => setIsOpenBookingModal(true)}
             >
-              Reserve my seat
+              {t('reserve_button')}
             </ButtonCustom>
           </div>
         </ContentRightWrap>
@@ -265,13 +364,13 @@ const ContentRightTop = styled.div`
   row-gap: 8px;
 
   .title-text {
-    font-size: 34px;
+    /* font-size: 34px; */
     font-weight: 500;
     line-height: 40px;
     color: ${Colors.neutral900};
   }
   .sub-title-text {
-    font-size: 26px;
+    /* font-size: 26px; */
     font-weight: 400;
     line-height: 36px;
     color: ${Colors.neutral400};

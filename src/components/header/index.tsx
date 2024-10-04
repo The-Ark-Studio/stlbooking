@@ -1,4 +1,5 @@
 'use client';
+import {useTranslations} from 'next-intl';
 import {useEffect, useState} from 'react';
 import {ReactComponent as KrFlag} from '../../../public/images/countryFlags/krFlag.svg';
 import {ReactComponent as EnFlag} from '../../../public/images/countryFlags/enFlag.svg';
@@ -13,54 +14,40 @@ import Colors from '@constants/Colors';
 import type {MenuProps} from 'antd';
 
 import {useMediaQuery} from 'react-responsive';
-const {Text} = Typography;
 
 type MenuItem = Required<MenuProps>['items'][number];
-const items: MenuItem[] = [
-  {
-    label: 'Introduction',
-    key: 'introduce',
-    icon: <DownOutlined />,
-    children: [{key: 'about1', label: 'About Us'}],
-  },
-  {
-    label: 'Saigon Travel Lounge',
-    key: 'travel-lounge',
-    icon: <DownOutlined />,
-    children: [
-      {key: 'service1', label: 'Service'},
-      {key: 'contact1', label: 'Contact'},
-      {key: 'partnership1', label: 'Partnership'},
-    ],
-  },
-];
-
-const mobileItems: MenuItem[] = [
-  {
-    label: 'Introduction',
-    key: 'introduce',
-    icon: <DownOutlined />,
-    children: [{key: 'about1', label: 'About Us'}],
-  },
-  {
-    label: 'Saigon Travel Lounge',
-    key: 'travel-lounge',
-    icon: <DownOutlined />,
-    children: [
-      {key: 'service1', label: 'Service'},
-      {key: 'contact1', label: 'Contact'},
-      {key: 'partnership1', label: 'Partnership'},
-    ],
-  },
-];
 
 const Header = () => {
+  const t = useTranslations('header');
   const [openSideBar, setOpenSideBar] = useState(false);
 
   const [current, setCurrent] = useState('introduce');
   const [showHeader, setShowHeader] = useState(false);
 
   const isTabletOrMobile = useMediaQuery({query: '(max-width: 1023px)'});
+
+  const items: MenuItem[] = [
+    {
+      label: `${t('Nav.intro')}`,
+      key: 'introduce',
+      icon: <DownOutlined />,
+      children: [{key: 'about1', label: 'About Us'}],
+    },
+    {
+      label: `${t('Nav.service')}`,
+      key: 'service',
+      icon: <DownOutlined />,
+      children: [
+        {key: 'faqs', label: 'FAQs'},
+        {key: 'contact', label: 'Contact'},
+        {key: 'partnership', label: 'Partnership'},
+      ],
+    },
+    {
+      label: `${t('Nav.gallery')}`,
+      key: 'gallery',
+    },
+  ];
 
   const showSideBar = () => {
     setOpenSideBar(true);
@@ -72,9 +59,9 @@ const Header = () => {
 
   const [collapsed, setCollapsed] = useState(false);
 
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
+  // const toggleCollapsed = () => {
+  //   setCollapsed(!collapsed);
+  // };
 
   const onClick: MenuProps['onClick'] = (e) => {
     console.log('click ', e);
@@ -136,17 +123,22 @@ const Header = () => {
             style={{maxWidth: '253px', width: '125px', height: '40px'}}
             type="primary"
           >
-            Book Now
+            {t('booking_button')}
           </ButtonCustom>
 
           {/* Mobile */}
-          <div style={{marginLeft: 10, display: 'none'}}>
+          <div id="mobile-menu" style={{marginLeft: 10}}>
             <ButtonCustom onClick={showSideBar}>
               {openSideBar ? <CloseOutlined /> : <MenuOutlined />}
             </ButtonCustom>
             <DrawerStyled
-              style={{background: '#222'}}
-              title="Basic Drawer"
+              title={
+                <div className="close-in-sideBar">
+                  <ButtonCustom onClick={onCloseSideBar}>
+                    <CloseOutlined />
+                  </ButtonCustom>
+                </div>
+              }
               placement="left"
               closable={false}
               onClose={onCloseSideBar}
@@ -166,7 +158,6 @@ const Header = () => {
 
               <MobileMenuWrapStyle>
                 <Menu
-                  theme="dark"
                   className="mobile-menu"
                   onClick={onClick}
                   selectedKeys={[current]}
@@ -187,7 +178,12 @@ const Header = () => {
 
 const HeaderWrap = styled.div`
   width: 100%;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
   background-color: ${Colors.white};
+  z-index: 100;
 `;
 
 const SpaceWrap = styled.div`
@@ -237,8 +233,16 @@ const MenuWrapStyle = styled(Space)`
   }
 `;
 
+// Mobile styles
 const DrawerStyled = styled(Drawer)`
-  background: '#222' !important;
+  .close-in-sideBar {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .close-in-sideBar button {
+    box-shadow: inset;
+    border: none;
+  }
   .ant-drawer-body {
     padding-top: 16px;
     padding-left: 8px;
@@ -266,13 +270,14 @@ const ListItemFlagsStyled = styled.ul`
     height: 40px;
     padding-left: 32px;
     cursor: pointer;
+    border-bottom: 1px solid ${Colors.neutral200};
   }
   .country-flag-item:hover {
     background-color: ${Colors.listHover};
     border-radius: 8px;
   }
   .country-flag-item:first-child {
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
   }
   .country-flag-item svg {
     width: 40px;

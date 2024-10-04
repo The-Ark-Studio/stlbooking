@@ -1,0 +1,45 @@
+/* Tablet and Mobile */
+
+@media (max-width: 576px) {
+    #booking-content-left {
+        display: none;
+    }
+
+    #booking-content-right {
+        width: 100%;
+    }
+
+    #booking__base-price-range .ant-table,
+    #booking__extra-hours .ant-table {
+        font-size: 14px;
+    }
+
+    #booking__base-price-range .ant-table .ant-table-cell,
+    #booking__extra-hours .ant-table .ant-table-cell {
+        padding: 12px;
+    }
+
+
+
+
+}
+
+@media (max-width: 1023px) {
+
+    #header,
+    #body-content {
+        padding: 0 30px;
+    }
+
+    #main-navbar {
+        display: none !important;
+    }
+}
+
+@media (min-width: 1023.1px) {
+
+    /* Mobile */
+    #mobile-menu {
+        display: none;
+    }
+}
