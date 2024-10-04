@@ -23,6 +23,7 @@ const {Option} = Select;
 const {Text} = Typography;
 
 import {useMediaQuery} from 'react-responsive';
+import {useTranslations} from 'next-intl';
 
 interface IBookingFormModalProps {
   isModalOpen: boolean;
@@ -55,6 +56,8 @@ const BookingFormModal = ({
     mode: 'onChange',
   });
 
+  const t = useTranslations('BookingScreen');
+
   const {mutate: sendBooking, isLoading} = useCustomMutation();
   const isMobile = useMediaQuery({query: '(max-width: 576px)'});
 
@@ -80,7 +83,6 @@ const BookingFormModal = ({
     children * childRate * Number(totalStayHours);
 
   const onSubmit = (data: IDataFormType) => {
-    console.log('Submitted:', data);
     if (!isValid) return;
     const currency = 'VND';
     const rentalType = 'Hour';
@@ -100,8 +102,6 @@ const BookingFormModal = ({
       emailAddress: data.email,
       phoneNumber: data.phone,
     };
-
-    console.log('payload: ', payload);
 
     const url = 'https://services.theark.studio/api/booking-stls';
     sendBooking(
@@ -154,7 +154,7 @@ const BookingFormModal = ({
         <FromWrapStyled>
           <Form onFinish={handleSubmit(onSubmit)} layout="vertical">
             {/* Facility Selection */}
-            <Form.Item label="Select facility*">
+            <Form.Item label={t('modal_booking.facility')}>
               <Controller
                 name="facility"
                 control={control}
@@ -176,7 +176,7 @@ const BookingFormModal = ({
             </Form.Item>
 
             {/* Date Selection */}
-            <Form.Item label="Select a date*">
+            <Form.Item label={t('modal_booking.date')}>
               <Controller
                 name="date"
                 control={control}
@@ -196,7 +196,7 @@ const BookingFormModal = ({
 
             <FormGroup>
               {/* Number of Adults */}
-              <Form.Item label="Adults">
+              <Form.Item label={t('modal_booking.adults')}>
                 <Controller
                   name="adults"
                   control={control}
@@ -215,7 +215,8 @@ const BookingFormModal = ({
 
               {/* Number of Children */}
               <Form.Item
-                label={`${isMobile ? 'Children' : 'Children from 7-12'}`}
+                // label={`${isMobile ? 'Children' : 'Children from 7-12'}`}
+                label={t('modal_booking.children')}
               >
                 <Controller
                   name="children"
@@ -234,7 +235,7 @@ const BookingFormModal = ({
               </Form.Item>
 
               {/* Number of Infants */}
-              <Form.Item label="Below 7">
+              <Form.Item label={t('modal_booking.infants')}>
                 <Controller
                   name="infants"
                   control={control}
@@ -254,7 +255,7 @@ const BookingFormModal = ({
 
             <FormGroup>
               {/* First Name */}
-              <Form.Item label="First name*">
+              <Form.Item label={t('modal_booking.first_name')}>
                 <Controller
                   name="firstName"
                   control={control}
@@ -269,7 +270,7 @@ const BookingFormModal = ({
               </Form.Item>
 
               {/* Last Name */}
-              <Form.Item label="Last name*">
+              <Form.Item label={t('modal_booking.last_name')}>
                 <Controller
                   name="lastName"
                   control={control}
@@ -286,7 +287,7 @@ const BookingFormModal = ({
 
             <FormGroup>
               {/* Email */}
-              <Form.Item label="Email*">
+              <Form.Item label={t('modal_booking.email')}>
                 <Controller
                   name="email"
                   control={control}
@@ -299,7 +300,7 @@ const BookingFormModal = ({
               </Form.Item>
 
               {/* Phone Number */}
-              <Form.Item label="Phone number*">
+              <Form.Item label={t('modal_booking.phone_number')}>
                 <Controller
                   name="phone"
                   control={control}
@@ -314,7 +315,7 @@ const BookingFormModal = ({
 
             <FormGroup>
               {/* Check-in Time */}
-              <Form.Item label="Check-in time*">
+              <Form.Item label={t('modal_booking.check_in_time')}>
                 <Controller
                   name="checkinTime"
                   control={control}
@@ -337,7 +338,7 @@ const BookingFormModal = ({
               </Form.Item>
 
               {/* Check-out Time */}
-              <Form.Item label="Check-out time*">
+              <Form.Item label={t('modal_booking.check_out_time')}>
                 <Controller
                   name="checkoutTime"
                   control={control}
@@ -424,20 +425,22 @@ const BookingFormModal = ({
             <FormGroup>
               {/* Total Stay Time */}
               <Form.Item>
-                <Text>{`Total stay time: ${totalStayHours ?? 0} hour(s)`}</Text>
+                <Text>{`${t('modal_booking.total_stay_hours')}: ${
+                  totalStayHours ?? 0
+                } hour(s)`}</Text>
               </Form.Item>
 
               <FormGroupLeft>
                 {/* Sub Total */}
                 <Form.Item style={{marginBottom: 0}}>
-                  <Text>{`Sub total: ${
+                  <Text>{`${t('modal_booking.sub_total_price')}: ${
                     subTotal.toLocaleString() ?? 0
                   } VND`}</Text>
                 </Form.Item>
 
                 {/* Extra Hours */}
                 <Form.Item>
-                  <Text>{`Extra Hours: 00 hour(s)`}</Text>
+                  <Text>{`${t('modal_booking.extra_hours')}: 00 hour(s)`}</Text>
                 </Form.Item>
               </FormGroupLeft>
             </FormGroup>
@@ -452,7 +455,7 @@ const BookingFormModal = ({
                   htmlType="button"
                   onClick={() => console.log('calculate')}
                 >
-                  1 Calculate price
+                  {t('modal_booking.calculate_button')}
                 </ButtonCustom>
               </Form.Item>
               <div className="dashed-arrow"></div>
@@ -463,7 +466,7 @@ const BookingFormModal = ({
                   type="primary"
                   htmlType="submit"
                 >
-                  2 Send my booking
+                  {t('modal_booking.send_booking_button')}
                 </ButtonCustom>
               </Form.Item>
             </ButtonSubmitWrapStyled>

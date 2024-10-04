@@ -1,0 +1,52 @@
+{
+  "header": {
+    "booking_button": "지금 예약하세요",
+    "Nav": {
+      "intro": "소개",
+      "service": "서비스",
+      "gallery": "갱도"
+    }
+  },
+  "BookingScreen": {
+    "title_text": "라운지 예약",
+    "subtitle_text": "500,000VND부터 / 5시간",
+    "description_text": "전용 발코니를 이용하실 수 있으며, 객실에는 현대적이고 고급스러운 장비가 갖추어져 있어 가장 멋진 시간을 보내실 수 있습니다.",
+    "base_price_range_table": {
+      "title": "기본 가격대",
+      "adult_column_header": "성인",
+      "children_column_header": "7~12세 어린이",
+      "babies_column_header": "7세 미만",
+      "babies_column_row_cell": "무료"
+    },
+    "extra_services_table": {
+      "title": "추가 시간(성인에게만 적용)",
+      "fiveHours_column_header": "5시간",
+      "sevenHours_column_header": "7시간",
+      "nineHours_column_header": "9시간",
+      "elevenHours_column_header": "11시간",
+      "fiveHours_row_cell": "성인 500,000VND",
+      "sevenHours_row_cell": "성인 600,000VND",
+      "nineHours_row_cell": "성인 700,000VND",
+      "elevenHours_row_cell": "성인 800,000VND"
+    },
+    "reserve_button": "내 자리를 예약하세요",
+    "modal_booking": {
+      "facility": "시설 선택*",
+      "date": "날짜를 선택하세요*",
+      "adults": "성인",
+      "children": "7~12세 어린이",
+      "infants": "7세 미만",
+      "first_name": "이름*",
+      "last_name": "성*",
+      "email": "이메일*",
+      "phone_number": "전화 번호*",
+      "check_in_time": "체크인 시간*",
+      "check_out_time": "체크아웃 시간*",
+      "total_stay_hours": "총 체류 시간",
+      "sub_total_price": "소계",
+      "extra_hours": "추가 시간",
+      "calculate_button": "1 추가 시간",
+      "send_booking_button": " 2 내 예약을 보냈습니다"
+    }
+  }
+}

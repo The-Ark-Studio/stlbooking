@@ -21,10 +21,12 @@ import {IBasePriceRange, IExtraHours} from '@interfaces/booking/booking';
 import SuccessModal from '@app/book-now/partials/successModal/SuccessModal';
 
 import {useMediaQuery} from 'react-responsive';
+import {useTranslations} from 'next-intl';
 
 const {Text} = Typography;
 
 const BookNowScreen = () => {
+  const t = useTranslations('BookingScreen');
   const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
   const [isOpenSuccessModal, setIsOpenSuccessModal] = useState(false);
 
@@ -38,42 +40,53 @@ const BookNowScreen = () => {
 
   const columns: TableProps<IBasePriceRange>['columns'] = [
     {
-      title: 'Adult',
+      title: `${t('base_price_range_table.adult_column_header')}`,
       dataIndex: 'adultPrice',
       align: 'center',
     },
     {
-      title: 'Children from 7~12',
+      title: `${t('base_price_range_table.children_column_header')}`,
       dataIndex: 'childrenPrice',
       align: 'center',
     },
     {
-      title: 'Under 7',
+      title: `${t('base_price_range_table.babies_column_header')}`,
       dataIndex: 'underPrice',
       align: 'center',
+      render: () => (
+        <Text>{t('base_price_range_table.babies_column_row_cell')}</Text>
+      ),
     },
   ];
 
   const columnsExtraHours: TableProps<IExtraHours>['columns'] = [
     {
-      title: '5 hours',
+      title: `${t('extra_services_table.fiveHours_column_header')}`,
       dataIndex: 'fiveHours',
       align: 'center',
+      render: () => <Text>{t('extra_services_table.fiveHours_row_cell')}</Text>,
     },
     {
-      title: '7 hours',
+      title: `${t('extra_services_table.sevenHours_column_header')}`,
       dataIndex: 'sevenHours',
       align: 'center',
+      render: () => (
+        <Text>{t('extra_services_table.sevenHours_row_cell')}</Text>
+      ),
     },
     {
-      title: '9 hours',
+      title: `${t('extra_services_table.nineHours_column_header')}`,
       dataIndex: 'nineHours',
       align: 'center',
+      render: () => <Text>{t('extra_services_table.nineHours_row_cell')}</Text>,
     },
     {
-      title: '11 hours',
+      title: `${t('extra_services_table.elevenHours_column_header')}`,
       dataIndex: 'elevenHours',
       align: 'center',
+      render: () => (
+        <Text>{t('extra_services_table.elevenHours_row_cell')}</Text>
+      ),
     },
   ];
 
@@ -129,7 +142,7 @@ const BookNowScreen = () => {
                 style={{fontSize: isMobile ? 24 : 34}}
                 className="title-text"
               >
-                Lounge Booking
+                {t('title_text')}
               </Text>
             </div>
             <div>
@@ -137,15 +150,11 @@ const BookNowScreen = () => {
                 style={{fontSize: isMobile ? 20 : 26}}
                 className="sub-title-text"
               >
-                from 500,000VND / 5 hours
+                {t('subtitle_text')}
               </Text>
             </div>
             <div>
-              <Text className="description-text">
-                You can enjoy access to your own private balcony, the room is
-                equipped with modern and most luxurious equipment to bring you
-                the most wonderful time.
-              </Text>
+              <Text className="description-text">{t('description_text')}</Text>
             </div>
           </ContentRightTop>
 
@@ -196,7 +205,7 @@ const BookNowScreen = () => {
             <Text
               style={{fontSize: isMobile ? 22 : 26, color: Colors.neutral900}}
             >
-              Base Price Range
+              {t('base_price_range_table.title')}
             </Text>
             <div id="booking__base-price-range">
               <Table<IBasePriceRange>
@@ -212,7 +221,7 @@ const BookNowScreen = () => {
             <Text
               style={{fontSize: isMobile ? 22 : 26, color: Colors.neutral900}}
             >
-              Extra hours (apply for Adults only)
+              {t('extra_services_table.title')}
             </Text>
             <div>
               <Table<IExtraHours>
@@ -234,7 +243,7 @@ const BookNowScreen = () => {
               type="primary"
               onClick={() => setIsOpenBookingModal(true)}
             >
-              Reserve my seat
+              {t('reserve_button')}
             </ButtonCustom>
           </div>
         </ContentRightWrap>

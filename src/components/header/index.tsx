@@ -1,4 +1,5 @@
 'use client';
+import {useTranslations} from 'next-intl';
 import {useEffect, useState} from 'react';
 import {ReactComponent as KrFlag} from '../../../public/images/countryFlags/krFlag.svg';
 import {ReactComponent as EnFlag} from '../../../public/images/countryFlags/enFlag.svg';
@@ -15,32 +16,38 @@ import type {MenuProps} from 'antd';
 import {useMediaQuery} from 'react-responsive';
 
 type MenuItem = Required<MenuProps>['items'][number];
-const items: MenuItem[] = [
-  {
-    label: 'Introduction',
-    key: 'introduce',
-    icon: <DownOutlined />,
-    children: [{key: 'about1', label: 'About Us'}],
-  },
-  {
-    label: 'Saigon Travel Lounge',
-    key: 'travel-lounge',
-    icon: <DownOutlined />,
-    children: [
-      {key: 'service1', label: 'Service'},
-      {key: 'contact1', label: 'Contact'},
-      {key: 'partnership1', label: 'Partnership'},
-    ],
-  },
-];
 
 const Header = () => {
+  const t = useTranslations('header');
   const [openSideBar, setOpenSideBar] = useState(false);
 
   const [current, setCurrent] = useState('introduce');
   const [showHeader, setShowHeader] = useState(false);
 
   const isTabletOrMobile = useMediaQuery({query: '(max-width: 1023px)'});
+
+  const items: MenuItem[] = [
+    {
+      label: `${t('Nav.intro')}`,
+      key: 'introduce',
+      icon: <DownOutlined />,
+      children: [{key: 'about1', label: 'About Us'}],
+    },
+    {
+      label: `${t('Nav.service')}`,
+      key: 'service',
+      icon: <DownOutlined />,
+      children: [
+        {key: 'faqs', label: 'FAQs'},
+        {key: 'contact', label: 'Contact'},
+        {key: 'partnership', label: 'Partnership'},
+      ],
+    },
+    {
+      label: `${t('Nav.gallery')}`,
+      key: 'gallery',
+    },
+  ];
 
   const showSideBar = () => {
     setOpenSideBar(true);
@@ -116,7 +123,7 @@ const Header = () => {
             style={{maxWidth: '253px', width: '125px', height: '40px'}}
             type="primary"
           >
-            Book Now
+            {t('booking_button')}
           </ButtonCustom>
 
           {/* Mobile */}
