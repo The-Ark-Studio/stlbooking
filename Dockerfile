@@ -6,6 +6,9 @@ FROM base AS deps
 
 RUN apk add --no-cache libc6-compat
 
+# Cài đặt pnpm
+RUN npm install -g pnpm
+
 # Bước 3: Thiết lập thư mục làm việc
 WORKDIR /stl/fe
 
@@ -14,17 +17,14 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
 
 # Bước 5: Cài đặt các dependency
 RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+  if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; \
+  elif [ -f yarn.lock ]; then yarn --frozen-lockfile; \
   elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-# Cài đặt refine
-RUN pnpm install @pankod/refine
-
-# Cài đặt Ant Design (nếu cần)
-RUN pnpm install antd
+# Cài đặt refine và Ant Design
+RUN pnpm install @pankod/refine antd
 
 # Bước 6: Bước xây dựng
 FROM base AS builder
