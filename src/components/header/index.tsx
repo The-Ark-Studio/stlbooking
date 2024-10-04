@@ -1,10 +1,10 @@
 'use client';
-import {useTranslations} from 'next-intl';
-import {useEffect, useState} from 'react';
+import {useLocale, useTranslations} from 'next-intl';
+import {useEffect, useState, useTransition} from 'react';
 import {ReactComponent as KrFlag} from '../../../public/images/countryFlags/krFlag.svg';
 import {ReactComponent as EnFlag} from '../../../public/images/countryFlags/enFlag.svg';
 import ButtonCustom from '@components/buttonCustom/ButtonCustom';
-import {Space, Typography, Menu, Drawer} from 'antd';
+import {Space, Typography, Menu, Drawer, Select} from 'antd';
 import Image from 'next/image';
 import styled from 'styled-components';
 import Logo from '../../../public/images/logo/logo.png';
@@ -12,6 +12,7 @@ import LanguageIcon from '../../../public/images/Language.png';
 import {CloseOutlined, DownOutlined, MenuOutlined} from '@ant-design/icons';
 import Colors from '@constants/Colors';
 import type {MenuProps} from 'antd';
+import {useRouter} from 'next/navigation';
 
 import {useMediaQuery} from 'react-responsive';
 
@@ -19,6 +20,9 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 const Header = () => {
   const t = useTranslations('header');
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const localActive = useLocale();
   const [openSideBar, setOpenSideBar] = useState(false);
 
   const [current, setCurrent] = useState('introduce');
@@ -63,6 +67,14 @@ const Header = () => {
   //   setCollapsed(!collapsed);
   // };
 
+  const handleChangeLanguage = (value: string) => {
+    console.log(`selected ${value}`);
+    const nextLocale = value;
+    startTransition(() => {
+      router.replace(`/${nextLocale}`);
+    });
+  };
+
   const onClick: MenuProps['onClick'] = (e) => {
     console.log('click ', e);
     setCurrent(e.key);
@@ -93,7 +105,17 @@ const Header = () => {
                   height={42}
                   alt="change langs"
                 />
-                <LanguageTextStyle>English</LanguageTextStyle>
+                {/* <LanguageTextStyle>English</LanguageTextStyle> */}
+                <Select
+                  defaultValue={localActive}
+                  style={{width: 100}}
+                  onChange={handleChangeLanguage}
+                  options={[
+                    {value: 'en', label: 'English'},
+                    {value: 'ko', label: 'KOR'},
+                  ]}
+                  disabled={isPending}
+                />
               </LanguageIconWrap>
 
               <MenuWrapStyle>
@@ -147,10 +169,22 @@ const Header = () => {
             >
               <div>
                 <ListItemFlagsStyled>
-                  <li className="country-flag-item">
+                  <li
+                    className="country-flag-item"
+                    style={{
+                      cursor: localActive === 'ko' ? 'not-allowed' : 'pointer',
+                    }}
+                    onClick={() => handleChangeLanguage('ko')}
+                  >
                     <KrFlag />
                   </li>
-                  <li className="country-flag-item">
+                  <li
+                    className="country-flag-item"
+                    style={{
+                      cursor: localActive === 'en' ? 'not-allowed' : 'pointer',
+                    }}
+                    onClick={() => handleChangeLanguage('en')}
+                  >
                     <EnFlag />
                   </li>
                 </ListItemFlagsStyled>

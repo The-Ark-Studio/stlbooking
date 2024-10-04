@@ -1,38 +1,38 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Banner from '@components/banner/Banner';
 import ImageBanner from '../../../public/images/ImageBanner.png';
-import { Image, Typography, Table } from 'antd';
+import {Image, Typography, Table} from 'antd';
 import styled from 'styled-components';
-import BannerBooking from "../../../public/images/bookNow/_ONY9838.jpg";
-import BookNow1 from "../../../public/images/bookNow/_ONY9849.jpg";
-import BookNow2 from "../../../public/images/bookNow/_ONY9861.jpg";
-import BookNow3 from "../../../public/images/bookNow/_ONY9865.jpg";
-import BookNow4 from "../../../public/images/bookNow/_ONY9867.jpg";
-import BookNow5 from "../../../public/images/bookNow/_ONY9872.jpg";
+import BannerBooking from '../../../public/images/bookNow/_ONY9838.jpg';
+import BookNow1 from '../../../public/images/bookNow/_ONY9849.jpg';
+import BookNow2 from '../../../public/images/bookNow/_ONY9861.jpg';
+import BookNow3 from '../../../public/images/bookNow/_ONY9865.jpg';
+import BookNow4 from '../../../public/images/bookNow/_ONY9867.jpg';
+import BookNow5 from '../../../public/images/bookNow/_ONY9872.jpg';
 import {
   basePriceRangeDataMock,
   extraHours as extraHoursMock,
 } from '@app/book-now/partials/dataMock';
 
-import { type TableProps } from 'antd';
+import {type TableProps} from 'antd';
 import ButtonCustom from '@components/buttonCustom/ButtonCustom';
 import Colors from '@constants/Colors';
 import BookingFormModal from '@app/book-now/partials/bookingModal/BookingModal';
-import { IBasePriceRange, IExtraHours } from '@interfaces/booking/booking';
+import {IBasePriceRange, IExtraHours} from '@interfaces/booking/booking';
 import SuccessModal from '@app/book-now/partials/successModal/SuccessModal';
 
-const { Text } = Typography;
-import { useMediaQuery } from 'react-responsive';
-import { useTranslations } from 'next-intl';
-
+const {Text} = Typography;
+import {useMediaQuery} from 'react-responsive';
+import {useTranslations} from 'next-intl';
 
 const BookNowScreen = () => {
   const t = useTranslations('BookingScreen');
   const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
   const [isOpenSuccessModal, setIsOpenSuccessModal] = useState(false);
 
-  const isMobile = useMediaQuery({ query: '(max-width: 576px)' });
+  const isMobile = useMediaQuery({query: '(max-width: 576px)'});
+  const isTabletOrMobile = useMediaQuery({query: '(max-width: 1023px)'});
 
   const [basePriceRangeData, setBasePriceRangeData] = useState<
     IBasePriceRange[]
@@ -117,7 +117,7 @@ const BookNowScreen = () => {
           <ImagePrimary>
             <Image
               width="100%"
-              style={{ height: 400 }}
+              style={{height: isTabletOrMobile ? 500 : 600}}
               preview={true}
               src={BannerBooking.src}
               alt=""
@@ -125,10 +125,10 @@ const BookNowScreen = () => {
           </ImagePrimary>
           <ImageBottomList>
             <div>
-              <Image preview={true} width={150} src={BookNow1.src} />
+              <Image preview={true} width={150} src={BookNow1.src} alt="" />
             </div>
             <div>
-              <Image preview={true} width={150} src={BookNow2.src} />
+              <Image preview={true} width={150} src={BookNow2.src} alt="" />
             </div>
             <div>
               <Image preview={true} width={150} src={BookNow3.src} alt="" />
@@ -137,7 +137,7 @@ const BookNowScreen = () => {
               <Image preview={true} width={150} src={BookNow4.src} alt="" />
             </div>
             <div>
-              <Image preview={true} width={150} src={BookNow5.src} />
+              <Image preview={true} width={150} src={BookNow5.src} alt="" />
             </div>
           </ImageBottomList>
         </ContentLeftWrap>
@@ -145,7 +145,7 @@ const BookNowScreen = () => {
           <ContentRightTop className="content-right__top">
             <div>
               <Text
-                style={{ fontSize: isMobile ? 24 : 34 }}
+                style={{fontSize: isMobile ? 24 : 34}}
                 className="title-text"
               >
                 {t('title_text')}
@@ -158,7 +158,7 @@ const BookNowScreen = () => {
              </Text> */}
             <div>
               <Text
-                style={{ fontSize: isMobile ? 20 : 26 }}
+                style={{fontSize: isMobile ? 20 : 26}}
                 className="sub-title-text"
               >
                 {t('subtitle_text')}
@@ -171,17 +171,17 @@ const BookNowScreen = () => {
 
           {/*Gallery for mobile view  */}
           {isMobile ? (
-            <ContentLeftWrap style={{ width: '100%' }}>
+            <ContentLeftWrap style={{width: '100%'}}>
               <ImagePrimary>
                 <Image
                   width="100%"
-                  style={{ height: 600 }}
+                  style={{height: 300}}
                   preview={true}
                   src={BannerBooking.src}
                   alt=""
                 />
               </ImagePrimary>
-              <ImageBottomList style={{ columnGap: isMobile ? 8 : 20 }}>
+              <ImageBottomList style={{columnGap: isMobile ? 8 : 20}}>
                 <div>
                   <Image
                     preview={true}
@@ -230,7 +230,7 @@ const BookNowScreen = () => {
 
           <div>
             <Text
-              style={{ fontSize: isMobile ? 22 : 26, color: Colors.neutral900 }}
+              style={{fontSize: isMobile ? 22 : 26, color: Colors.neutral900}}
             >
               {t('base_price_range_table.title')}
             </Text>
@@ -249,7 +249,7 @@ const BookNowScreen = () => {
               Extra hours (apply for Adults only) */}
           <div id="booking__extra-hours">
             <Text
-              style={{ fontSize: isMobile ? 22 : 26, color: Colors.neutral900 }}
+              style={{fontSize: isMobile ? 22 : 26, color: Colors.neutral900}}
             >
               {t('extra_services_table.title')}
             </Text>
