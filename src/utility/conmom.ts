@@ -1,2 +1,2 @@
-export const GLOBAL_DATE_FORMAT = 'DD-MM-YYY';
-export const HOUR_FORMAT = 'hh:mm:ss';
+export const GLOBAL_DATE_FORMAT = 'DD-MM-YYYY';
+export const HOUR_FORMAT = 'HH:mm:ss';
