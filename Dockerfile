@@ -13,7 +13,10 @@ RUN npm install -g pnpm
 WORKDIR /stl/fe
 
 # Bước 4: Sao chép các file cấu hình vào thư mục làm việc
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
+COPY package.json pnpm-lock.yaml* yarn.lock* package-lock.json* .npmrc* ./
+
+# Kiểm tra xem package.json có được sao chép hay không
+RUN ls -la /stl/fe
 
 # Bước 5: Cài đặt các dependency
 RUN if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; \
@@ -36,6 +39,9 @@ COPY --from=deps /stl/fe/node_modules ./node_modules
 
 # Bước 7: Sao chép toàn bộ mã nguồn vào thư mục làm việc
 COPY . .
+
+# Kiểm tra xem mã nguồn đã được sao chép chưa
+RUN ls -la /stl/fe
 
 # Bước 8: Xây dựng ứng dụng
 RUN pnpm run build
