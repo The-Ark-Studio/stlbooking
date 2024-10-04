@@ -43,6 +43,9 @@ RUN pnpm run build
 # Bước 9: Bước chạy
 FROM base AS runner
 
+# Cài đặt pnpm trong bước runner
+RUN npm install -g pnpm
+
 ENV NODE_ENV production
 
 # Thiết lập lại thư mục làm việc
