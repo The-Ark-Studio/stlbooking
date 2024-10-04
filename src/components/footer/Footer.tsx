@@ -6,23 +6,35 @@ import {
   HomeOutlined,
   InstagramOutlined,
   MailOutlined,
+  MessageOutlined,
   PhoneOutlined,
   TikTokOutlined,
 } from '@ant-design/icons';
 import styled from 'styled-components';
 import Colors from '@constants/Colors';
 import {EmailField} from '@refinedev/antd';
+import {useMediaQuery} from 'react-responsive';
 
 const Footer = () => {
   const {Item} = List;
   const {Link, Text} = Typography;
+  const isMobile = useMediaQuery({query: '(max-width: 576px)'});
+  const isTablet = useMediaQuery({query: '(max-width: 1023px)'});
 
   return (
-    <SpaceWrap>
-      <Space style={{display: 'flex', alignItems: 'baseline'}}>
+    <SpaceWrap style={{maxHeight: isTablet ? 800 : 345}}>
+      <Space
+        style={{display: 'flex', alignItems: 'baseline', flexWrap: 'wrap'}}
+      >
         {/* Left */}
         <Space>
-          <ListItemStyle align="start">
+          <ListItemStyle
+            style={{padding: isTablet ? '20px 10px' : '40px 20px'}}
+            align="start"
+          >
+            <ItemStyled style={{marginLeft: 0}}>
+              <Text>CONTACT</Text>
+            </ItemStyled>
             <ItemStyled>
               <MailOutlined />
               <EmailField value="support@stl.sg" />
@@ -40,9 +52,36 @@ const Footer = () => {
             </ItemStyled>
           </ListItemStyle>
         </Space>
+        {/* center */}
+        <Space>
+          <ListItemStyle
+            style={{padding: isTablet ? '20px 10px' : '40px 20px'}}
+            align="start"
+          >
+            <ItemStyled style={{marginLeft: 0}}>
+              <Text>TRAVEL BOOK</Text>
+            </ItemStyled>
+            <ItemStyled>
+              <MailOutlined />
+              <EmailField value="kpglee44@naver.com" />
+            </ItemStyled>
+            <ItemStyled>
+              <PhoneOutlined />
+              <Link href="tel:01067352180">01067352180 (KR)</Link>
+            </ItemStyled>
+            <ItemStyled>
+              <MessageOutlined />
+              <Text>kakaotalk ID: kpglee44</Text>
+            </ItemStyled>
+          </ListItemStyle>
+        </Space>
+
         {/* right */}
-        <Space style={{marginLeft: '40px'}}>
-          <ListItemStyle align="start">
+        <Space style={{marginLeft: isTablet ? 0 : '40px'}}>
+          <ListItemStyle
+            style={{padding: isTablet ? '20px 10px' : '40px 20px'}}
+            align="start"
+          >
             <ItemStyled style={{marginLeft: 0}}>
               <Text>STAY IN TOUCH</Text>
             </ItemStyled>
@@ -78,9 +117,10 @@ const Footer = () => {
           alignItems: 'center',
           justifyContent: 'center',
           marginBottom: '20px',
+          textAlign: 'center',
         }}
       >
-        <Text style={{lineHeight: '36px'}}>
+        <Text style={{lineHeight: isMobile ? '18px' : '36px'}}>
           © 2024 Develop by The Ark Studio - Manage by STL Company
         </Text>
       </Space>
@@ -104,7 +144,7 @@ const ListItemStyle = styled(Space)`
   display: flex;
   flex-direction: column;
   row-gap: 20px;
-  padding: 60px 20px 40px 20px;
+  /* padding: 40px 20px 40px 20px; */
 `;
 
 const ItemStyled = styled(List.Item)`

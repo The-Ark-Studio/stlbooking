@@ -20,11 +20,15 @@ import BookingFormModal from '@app/book-now/partials/bookingModal/BookingModal';
 import {IBasePriceRange, IExtraHours} from '@interfaces/booking/booking';
 import SuccessModal from '@app/book-now/partials/successModal/SuccessModal';
 
+import {useMediaQuery} from 'react-responsive';
+
 const {Text} = Typography;
 
 const BookNowScreen = () => {
   const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
   const [isOpenSuccessModal, setIsOpenSuccessModal] = useState(false);
+
+  const isMobile = useMediaQuery({query: '(max-width: 576px)'});
 
   const [basePriceRangeData, setBasePriceRangeData] = useState<
     IBasePriceRange[]
@@ -94,36 +98,47 @@ const BookNowScreen = () => {
       />
       {/* Content */}
       <BookNowContentStyled>
-        <ContentLeftWrap>
+        <ContentLeftWrap id="booking-content-left">
           <ImagePrimary>
             <Image
               width="100%"
               style={{height: 600}}
               preview={true}
               src={BookNow1.src}
+              alt=""
             />
           </ImagePrimary>
           <ImageBottomList>
             <div>
-              <Image preview={true} width={150} src={BookNow2.src} />
+              <Image preview={true} width={150} src={BookNow2.src} alt="" />
             </div>
 
             <div>
-              <Image preview={true} width={150} src={BookNow3.src} />
+              <Image preview={true} width={150} src={BookNow3.src} alt="" />
             </div>
 
             <div>
-              <Image preview={true} width={150} src={BookNow4.src} />
+              <Image preview={true} width={150} src={BookNow4.src} alt="" />
             </div>
           </ImageBottomList>
         </ContentLeftWrap>
-        <ContentRightWrap>
+        <ContentRightWrap id="booking-content-right">
           <ContentRightTop className="content-right__top">
             <div>
-              <Text className="title-text">Lounge Booking</Text>
+              <Text
+                style={{fontSize: isMobile ? 24 : 34}}
+                className="title-text"
+              >
+                Lounge Booking
+              </Text>
             </div>
             <div>
-              <Text className="sub-title-text">from 500,000VND / 5 hours</Text>
+              <Text
+                style={{fontSize: isMobile ? 20 : 26}}
+                className="sub-title-text"
+              >
+                from 500,000VND / 5 hours
+              </Text>
             </div>
             <div>
               <Text className="description-text">
@@ -133,11 +148,57 @@ const BookNowScreen = () => {
               </Text>
             </div>
           </ContentRightTop>
+
+          {/*Gallery for mobile view  */}
+          {isMobile ? (
+            <ContentLeftWrap style={{width: '100%'}}>
+              <ImagePrimary>
+                <Image
+                  width="100%"
+                  style={{height: 600}}
+                  preview={true}
+                  src={BookNow1.src}
+                  alt=""
+                />
+              </ImagePrimary>
+              <ImageBottomList style={{columnGap: isMobile ? 8 : 20}}>
+                <div>
+                  <Image
+                    preview={true}
+                    width={isMobile ? 132 : 150}
+                    src={BookNow2.src}
+                    alt=""
+                  />
+                </div>
+
+                <div>
+                  <Image
+                    preview={true}
+                    width={isMobile ? 132 : 150}
+                    src={BookNow3.src}
+                    alt=""
+                  />
+                </div>
+
+                <div>
+                  <Image
+                    preview={true}
+                    width={isMobile ? 132 : 150}
+                    src={BookNow4.src}
+                    alt=""
+                  />
+                </div>
+              </ImageBottomList>
+            </ContentLeftWrap>
+          ) : null}
+
           <div>
-            <Text style={{fontSize: 26, color: Colors.neutral900}}>
+            <Text
+              style={{fontSize: isMobile ? 22 : 26, color: Colors.neutral900}}
+            >
               Base Price Range
             </Text>
-            <div>
+            <div id="booking__base-price-range">
               <Table<IBasePriceRange>
                 columns={columns}
                 dataSource={basePriceRangeData}
@@ -147,8 +208,10 @@ const BookNowScreen = () => {
             </div>
           </div>
 
-          <div>
-            <Text style={{fontSize: 26, color: Colors.neutral900}}>
+          <div id="booking__extra-hours">
+            <Text
+              style={{fontSize: isMobile ? 22 : 26, color: Colors.neutral900}}
+            >
               Extra hours (apply for Adults only)
             </Text>
             <div>
@@ -163,7 +226,11 @@ const BookNowScreen = () => {
 
           <div className="booking-button">
             <ButtonCustom
-              style={{height: 40, width: 180, padding: 30}}
+              style={{
+                height: isMobile ? 30 : 40,
+                width: 180,
+                padding: isMobile ? 20 : 30,
+              }}
               type="primary"
               onClick={() => setIsOpenBookingModal(true)}
             >
@@ -257,13 +324,13 @@ const ContentRightTop = styled.div`
   row-gap: 8px;
 
   .title-text {
-    font-size: 34px;
+    /* font-size: 34px; */
     font-weight: 500;
     line-height: 40px;
     color: ${Colors.neutral900};
   }
   .sub-title-text {
-    font-size: 26px;
+    /* font-size: 26px; */
     font-weight: 400;
     line-height: 36px;
     color: ${Colors.neutral400};
