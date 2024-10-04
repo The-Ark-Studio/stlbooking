@@ -54,7 +54,7 @@ COPY --from=builder /stl/fe/public ./public
 RUN mkdir .next
 RUN chown refine:nodejs .next
 
-COPY --from=builder --chown=refine:nodejs /stl/fe/.next/standalone ./
+# Chỉ copy thư mục static nếu standalone không tồn tại
 COPY --from=builder --chown=refine:nodejs /stl/fe/.next/static ./.next/static
 
 USER refine
@@ -64,4 +64,4 @@ EXPOSE 2000
 ENV PORT 2000
 ENV HOSTNAME "0.0.0.0"
 
-CMD ["node", "server.js"]
+CMD ["pnpm", "run", "start"]
