@@ -15,7 +15,11 @@ import { dataProvider } from '@providers/data-provider';
 import '@refinedev/antd/dist/reset.css';
 import { ConfigProvider } from 'antd';
 import antdTheme from '@configs/antdTheme';
+
+import './global.css';
+
 import STLIcon from "../../public/images/logo/logo-STL-02.svg"
+
 
 export const metadata: Metadata = {
   title: 'STL | Booking',

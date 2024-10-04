@@ -13,7 +13,7 @@ const MainLayout = ({children}: IMainLayoutProps) => {
   return (
     <SpaceWrap>
       <Header />
-      <Content>{children}</Content>
+      <Content id="body-content">{children}</Content>
       <Footer />
     </SpaceWrap>
   );

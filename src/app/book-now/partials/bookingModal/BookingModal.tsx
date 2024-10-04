@@ -207,7 +207,8 @@ const BookingFormModal = ({
       onCancel={handleCancel}
       footer={null}
     >
-      <Form onFinish={handleSubmit(onSubmit)} layout="vertical">
+      <FromWrapStyled>
+        <Form onFinish={handleSubmit(onSubmit)} layout="vertical">
         {/* Facility Selection */}
         {/* <Form.Item label="Select facility*">
           <Controller
@@ -572,6 +573,15 @@ const BookingFormModal = ({
   );
 };
 
+const FromWrapStyled = styled.div`
+  .ant-form-item {
+    margin-bottom: 8px;
+  }
+  .ant-form-item-control {
+    margin-bottom: 10px;
+  }
+`;
+
 const FormGroup = styled.div`
   display: flex;
   justify-content: space-between;
@@ -579,6 +589,12 @@ const FormGroup = styled.div`
   width: 100%;
   div {
     width: 100%;
+  }
+`;
+
+const FormGroupLeft = styled.div`
+  .ant-form-item-control {
+    margin-bottom: 0;
   }
 `;
 

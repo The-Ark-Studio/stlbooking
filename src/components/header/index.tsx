@@ -1,15 +1,20 @@
 'use client';
 import {useEffect, useState} from 'react';
+import {ReactComponent as KrFlag} from '../../../public/images/countryFlags/krFlag.svg';
+import {ReactComponent as EnFlag} from '../../../public/images/countryFlags/enFlag.svg';
 import ButtonCustom from '@components/buttonCustom/ButtonCustom';
-import {Space, Typography} from 'antd';
+import {Space, Typography, Menu, Drawer} from 'antd';
 import Image from 'next/image';
 import styled from 'styled-components';
 import Logo from '../../../public/images/logo/logo.png';
 import LanguageIcon from '../../../public/images/Language.png';
-import {DownOutlined} from '@ant-design/icons';
+import {CloseOutlined, DownOutlined, MenuOutlined} from '@ant-design/icons';
 import Colors from '@constants/Colors';
 import type {MenuProps} from 'antd';
-import {Menu} from 'antd';
+
+import {useMediaQuery} from 'react-responsive';
+const {Text} = Typography;
+
 type MenuItem = Required<MenuProps>['items'][number];
 const items: MenuItem[] = [
   {
@@ -30,9 +35,46 @@ const items: MenuItem[] = [
   },
 ];
 
+const mobileItems: MenuItem[] = [
+  {
+    label: 'Introduction',
+    key: 'introduce',
+    icon: <DownOutlined />,
+    children: [{key: 'about1', label: 'About Us'}],
+  },
+  {
+    label: 'Saigon Travel Lounge',
+    key: 'travel-lounge',
+    icon: <DownOutlined />,
+    children: [
+      {key: 'service1', label: 'Service'},
+      {key: 'contact1', label: 'Contact'},
+      {key: 'partnership1', label: 'Partnership'},
+    ],
+  },
+];
+
 const Header = () => {
+  const [openSideBar, setOpenSideBar] = useState(false);
+
   const [current, setCurrent] = useState('introduce');
   const [showHeader, setShowHeader] = useState(false);
+
+  const isTabletOrMobile = useMediaQuery({query: '(max-width: 1023px)'});
+
+  const showSideBar = () => {
+    setOpenSideBar(true);
+  };
+
+  const onCloseSideBar = () => {
+    setOpenSideBar(false);
+  };
+
+  const [collapsed, setCollapsed] = useState(false);
+
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
 
   const onClick: MenuProps['onClick'] = (e) => {
     console.log('click ', e);
@@ -45,13 +87,17 @@ const Header = () => {
   }, []);
 
   return (
-    <HeaderWrap>
+    <HeaderWrap id="header">
       <SpaceWrap>
         <Space>
           <Space>
             <Image src={Logo} width={112} height={128} alt="Logo" />
           </Space>
-          <Space>
+
+          <Space
+            id="main-navbar"
+            style={{display: isTabletOrMobile ? 'none' : ''}}
+          >
             <Space>
               <LanguageIconWrap>
                 <Image
@@ -79,12 +125,61 @@ const Header = () => {
             </Space>
           </Space>
         </Space>
-        <ButtonCustom
-          style={{maxWidth: '253px', width: '125px', height: '40px'}}
-          type="primary"
+
+        <div
+          style={{
+            display: isTabletOrMobile ? 'flex' : 'block',
+            alignItems: 'center',
+          }}
         >
-          Book Now
-        </ButtonCustom>
+          <ButtonCustom
+            style={{maxWidth: '253px', width: '125px', height: '40px'}}
+            type="primary"
+          >
+            Book Now
+          </ButtonCustom>
+
+          {/* Mobile */}
+          <div style={{marginLeft: 10, display: 'none'}}>
+            <ButtonCustom onClick={showSideBar}>
+              {openSideBar ? <CloseOutlined /> : <MenuOutlined />}
+            </ButtonCustom>
+            <DrawerStyled
+              style={{background: '#222'}}
+              title="Basic Drawer"
+              placement="left"
+              closable={false}
+              onClose={onCloseSideBar}
+              open={openSideBar}
+              width={290}
+            >
+              <div>
+                <ListItemFlagsStyled>
+                  <li className="country-flag-item">
+                    <KrFlag />
+                  </li>
+                  <li className="country-flag-item">
+                    <EnFlag />
+                  </li>
+                </ListItemFlagsStyled>
+              </div>
+
+              <MobileMenuWrapStyle>
+                <Menu
+                  theme="dark"
+                  className="mobile-menu"
+                  onClick={onClick}
+                  selectedKeys={[current]}
+                  mode="inline"
+                  inlineCollapsed={collapsed}
+                  forceSubMenuRender
+                  overflowedIndicator={false}
+                  items={items}
+                />
+              </MobileMenuWrapStyle>
+            </DrawerStyled>
+          </div>
+        </div>
       </SpaceWrap>
     </HeaderWrap>
   );
@@ -139,6 +234,49 @@ const MenuWrapStyle = styled(Space)`
   .ant-menu-submenu-selected .ant-menu-title-content {
     color: ${Colors.primary500};
     font-weight: 700;
+  }
+`;
+
+const DrawerStyled = styled(Drawer)`
+  background: '#222' !important;
+  .ant-drawer-body {
+    padding-top: 16px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+`;
+
+const MobileMenuWrapStyle = styled.div`
+  .mobile-menu {
+    border-inline-end: none !important;
+  }
+  .mobile-menu .ant-menu-item-icon {
+    display: none !important;
+  }
+`;
+
+const ListItemFlagsStyled = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0;
+
+  .country-flag-item {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding-left: 32px;
+    cursor: pointer;
+  }
+  .country-flag-item:hover {
+    background-color: ${Colors.listHover};
+    border-radius: 8px;
+  }
+  .country-flag-item:first-child {
+    margin-bottom: 10px;
+  }
+  .country-flag-item svg {
+    width: 40px;
+    height: 20px;
   }
 `;
 
