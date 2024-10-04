@@ -18,7 +18,7 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
 # Bước 5: Cài đặt các dependency
 RUN if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; \
   elif [ -f yarn.lock ]; then yarn install --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
+  elif [ -f package-lock.json ]; then pnpm ci; \
   else echo "Lockfile not found." && exit 1; \
   fi
 
@@ -35,7 +35,7 @@ COPY --from=deps /stl/fe/node_modules ./node_modules
 COPY . .
 
 # Bước 8: Xây dựng ứng dụng
-RUN npm run build
+RUN pnpm run build
 
 # Bước 9: Bước chạy
 FROM base AS runner

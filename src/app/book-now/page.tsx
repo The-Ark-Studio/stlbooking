@@ -1,6 +1,8 @@
 'use client';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Banner from '@components/banner/Banner';
+import ImageBanner from '../../../public/images/ImageBanner.png';
+import { Image, Typography, Table } from 'antd';
 import styled from 'styled-components';
 import BannerBooking from "../../../public/images/bookNow/_ONY9838.jpg";
 import BookNow1 from "../../../public/images/bookNow/_ONY9849.jpg";
@@ -13,14 +15,14 @@ import {
   extraHours as extraHoursMock,
 } from '@app/book-now/partials/dataMock';
 
-import type { TableProps } from 'antd';
+import { type TableProps } from 'antd';
 import ButtonCustom from '@components/buttonCustom/ButtonCustom';
 import Colors from '@constants/Colors';
 import BookingFormModal from '@app/book-now/partials/bookingModal/BookingModal';
 import { IBasePriceRange, IExtraHours } from '@interfaces/booking/booking';
 import SuccessModal from '@app/book-now/partials/successModal/SuccessModal';
 
-const {Text} = Typography;
+const { Text } = Typography;
 
 const BookNowScreen = () => {
   const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
@@ -104,6 +106,9 @@ const BookNowScreen = () => {
             />
           </ImagePrimary>
           <ImageBottomList>
+            <div>
+              <Image preview={true} width={150} src={BookNow1.src} />
+            </div>
             <div>
               <Image preview={true} width={150} src={BookNow2.src} />
             </div>
