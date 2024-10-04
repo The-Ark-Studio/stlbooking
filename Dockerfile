@@ -16,7 +16,7 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
   elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
+  elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm install --frozen-lockfile; \
   else echo "Lockfile not found." && exit 1; \
   fi
 
@@ -33,12 +33,10 @@ COPY --from=deps /stl/fe/node_modules ./node_modules
 COPY . .
 
 # Bước 8: Xây dựng ứng dụng
-RUN npm run build
+RUN pnpm run build
 
 # Bước 9: Bước chạy
 FROM base AS runner
-
-ENV NODE_ENV production
 
 # Thiết lập lại thư mục làm việc
 WORKDIR /stl/fe
@@ -46,17 +44,23 @@ WORKDIR /stl/fe
 # Sao chép các file cần thiết vào thư mục làm việc
 COPY --from=builder /stl/fe/public ./public
 
-RUN mkdir .next
-RUN chown refine:nodejs .next
+# Tạo thư mục .next và thay đổi quyền sở hữu
+RUN mkdir -p .next && chown -R refine:nodejs .next
 
+# Sao chép các file cần thiết từ bước builder
 COPY --from=builder --chown=refine:nodejs /stl/fe/.next/standalone ./
 COPY --from=builder --chown=refine:nodejs /stl/fe/.next/static ./.next/static
 
+# Chuyển sang user refine
 USER refine
 
+# Mở port 2000
 EXPOSE 2000
 
+# Thiết lập các biến môi trường
+ENV NODE_ENV production
 ENV PORT 2000
 ENV HOSTNAME "0.0.0.0"
 
+# Lệnh khởi động
 CMD ["node", "server.js"]
