@@ -21,7 +21,10 @@ RUN \
   fi
 
 # Cài đặt refine
-RUN npm install @pankod/refine
+RUN pnpm install @pankod/refine
+
+# Cài đặt Ant Design (nếu cần)
+RUN pnpm install antd
 
 # Bước 6: Bước xây dựng
 FROM base AS builder
@@ -36,7 +39,7 @@ COPY --from=deps /stl/fe/node_modules ./node_modules
 COPY . .
 
 # Bước 8: Xây dựng ứng dụng
-RUN npm run build
+RUN pnpm run build
 
 # Bước 9: Bước chạy
 FROM base AS runner
