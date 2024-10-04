@@ -96,9 +96,11 @@ COPY . .
 # Bước 7: Xây dựng ứng dụng
 RUN pnpm run build
 
-# Bước 8: Chạy ứng dụng
+# Bước 8: Thiết lập biến môi trường và chạy ứng dụng
 ENV NODE_ENV production
 ENV PORT 2000
 EXPOSE 2000
-CMD ["PORT=2000", "pnpm", "run", "start"]
+
+# Chỉ cần chạy lệnh start mà không cần gán PORT trong CMD
+CMD ["pnpm", "run", "start"]
 
