@@ -4,7 +4,7 @@ import MainLayout from '@components/mainLayout/MainLayout';
 interface IHomePageProps {
   children: React.ReactNode;
 }
-const HomePage = ({children}: IHomePageProps) => {
+const HomePage = ({ children }: IHomePageProps) => {
   return <MainLayout>{children}</MainLayout>;
 };
 

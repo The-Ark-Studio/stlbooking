@@ -1,26 +1,28 @@
 'use client';
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Banner from '@components/banner/Banner';
 import ImageBanner from '../../../public/images/ImageBanner.png';
-import {Image, Typography, Table} from 'antd';
-import type {TableColumnsType} from 'antd';
+import { Image, Typography, Table } from 'antd';
+import type { TableColumnsType } from 'antd';
 import styled from 'styled-components';
-import BookNow1 from '../../../public/images/bookNow/bookNow1.webp';
-import BookNow2 from '../../../public/images/bookNow/bookNow2.webp';
-import BookNow3 from '../../../public/images/bookNow/bookNow3.webp';
-import BookNow4 from '../../../public/images/bookNow/bookNow4.webp';
+import BannerBooking from "../../../public/images/bookNow/_ONY9838.jpg";
+import BookNow1 from "../../../public/images/bookNow/_ONY9849.jpg";
+import BookNow2 from "../../../public/images/bookNow/_ONY9861.jpg";
+import BookNow3 from "../../../public/images/bookNow/_ONY9865.jpg";
+import BookNow4 from "../../../public/images/bookNow/_ONY9867.jpg";
+import BookNow5 from "../../../public/images/bookNow/_ONY9872.jpg";
 import {
   basePriceRangeDataMock,
   extraHours as extraHoursMock,
 } from '@app/book-now/partials/dataMock';
 
-import type {TableProps} from 'antd';
+import type { TableProps } from 'antd';
 import ButtonCustom from '@components/buttonCustom/ButtonCustom';
 import Colors from '@constants/Colors';
 import BookingFormModal from '@app/book-now/partials/bookingModal/BookingModal';
-import {IBasePriceRange, IExtraHours} from '@interfaces/booking/booking';
+import { IBasePriceRange, IExtraHours } from '@interfaces/booking/booking';
 import SuccessModal from '@app/book-now/partials/successModal/SuccessModal';
-const {Text} = Typography;
+const { Text } = Typography;
 
 const BookNowScreen = () => {
   const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
@@ -98,9 +100,9 @@ const BookNowScreen = () => {
           <ImagePrimary>
             <Image
               width="100%"
-              style={{height: 600}}
+              style={{ height: 400 }}
               preview={true}
-              src={BookNow1.src}
+              src={BannerBooking.src}
             />
           </ImagePrimary>
           <ImageBottomList>
@@ -114,6 +116,9 @@ const BookNowScreen = () => {
 
             <div>
               <Image preview={true} width={150} src={BookNow4.src} />
+            </div>
+            <div>
+              <Image preview={true} width={150} src={BookNow5.src} />
             </div>
           </ImageBottomList>
         </ContentLeftWrap>
@@ -134,7 +139,7 @@ const BookNowScreen = () => {
             </div>
           </ContentRightTop>
           <div>
-            <Text style={{fontSize: 26, color: Colors.neutral900}}>
+            <Text style={{ fontSize: 26, color: Colors.neutral900 }}>
               Base Price Range
             </Text>
             <div>
@@ -148,7 +153,7 @@ const BookNowScreen = () => {
           </div>
 
           <div>
-            <Text style={{fontSize: 26, color: Colors.neutral900}}>
+            <Text style={{ fontSize: 26, color: Colors.neutral900 }}>
               Extra hours (apply for Adults only)
             </Text>
             <div>
@@ -163,7 +168,7 @@ const BookNowScreen = () => {
 
           <div className="booking-button">
             <ButtonCustom
-              style={{height: 40, width: 180, padding: 30}}
+              style={{ height: 40, width: 180, padding: 30 }}
               type="primary"
               onClick={() => setIsOpenBookingModal(true)}
             >
