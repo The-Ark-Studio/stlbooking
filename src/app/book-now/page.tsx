@@ -1,9 +1,8 @@
 'use client';
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Banner from '@components/banner/Banner';
 import ImageBanner from '../../../public/images/ImageBanner.png';
 import {Image, Typography, Table} from 'antd';
-import type {TableColumnsType} from 'antd';
 import styled from 'styled-components';
 import BookNow1 from '../../../public/images/bookNow/bookNow1.webp';
 import BookNow2 from '../../../public/images/bookNow/bookNow2.webp';
@@ -20,6 +19,7 @@ import Colors from '@constants/Colors';
 import BookingFormModal from '@app/book-now/partials/bookingModal/BookingModal';
 import {IBasePriceRange, IExtraHours} from '@interfaces/booking/booking';
 import SuccessModal from '@app/book-now/partials/successModal/SuccessModal';
+
 const {Text} = Typography;
 
 const BookNowScreen = () => {

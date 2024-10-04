@@ -11,6 +11,7 @@ const Colors = {
   blueDianne: '#1A4A4F',
   outerSpace: '#1E3130',
   shark: '#1F2224',
+  listHover: '#0000000f',
 };
 
 export default Colors;

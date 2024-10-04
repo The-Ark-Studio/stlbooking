@@ -15,6 +15,7 @@ import {dataProvider} from '@providers/data-provider';
 import '@refinedev/antd/dist/reset.css';
 import {ConfigProvider} from 'antd';
 import antdTheme from '@configs/antdTheme';
+import './global.css';
 
 export const metadata: Metadata = {
   title: 'STL',

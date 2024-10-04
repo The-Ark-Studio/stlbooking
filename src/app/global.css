@@ -1,0 +1,13 @@
+/* Tablet and Mobile */
+
+@media (max-width: 1023px) {
+
+    #header,
+    #body-content {
+        padding: 0 30px;
+    }
+
+    #main-navbar {
+        display: none !important;
+    }
+}

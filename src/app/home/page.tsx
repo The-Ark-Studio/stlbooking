@@ -1,11 +1,16 @@
 'use client';
-import React from 'react';
+import React, {FC} from 'react';
 import MainLayout from '@components/mainLayout/MainLayout';
-interface IHomePageProps {
-  children: React.ReactNode;
-}
-const HomePage = ({children}: IHomePageProps) => {
-  return <MainLayout>{children}</MainLayout>;
+// interface IHomePageProps {
+//   children?: React.ReactNode | JSX.Element | JSX.Element[] | string;
+// }
+const HomePage = () => {
+  return (
+    <div>
+      {/* <MainLayout>{children}</MainLayout>; */}
+      <h1>This is Home Page</h1>
+    </div>
+  );
 };
 
 export default HomePage;
