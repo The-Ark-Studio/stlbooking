@@ -99,5 +99,5 @@ RUN pnpm run build
 # Bước 8: Chạy ứng dụng
 ENV NODE_ENV production
 EXPOSE 2000
-CMD ["pnpm", "run", "start"]
+CMD ["PORT=2000", "pnpm", "run", "start"]
 
