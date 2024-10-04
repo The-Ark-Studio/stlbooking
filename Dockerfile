@@ -16,15 +16,11 @@ WORKDIR /stl/fe
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
 
 # Bước 5: Cài đặt các dependency
-RUN \
-  if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; \
-  elif [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+RUN if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; \
+  elif [ -f yarn.lock ]; then yarn install --frozen-lockfile; \
   elif [ -f package-lock.json ]; then npm ci; \
   else echo "Lockfile not found." && exit 1; \
   fi
-
-# Cài đặt refine và Ant Design
-RUN pnpm install @pankod/refine antd
 
 # Bước 6: Bước xây dựng
 FROM base AS builder
@@ -39,7 +35,7 @@ COPY --from=deps /stl/fe/node_modules ./node_modules
 COPY . .
 
 # Bước 8: Xây dựng ứng dụng
-RUN pnpm run build
+RUN npm run build
 
 # Bước 9: Bước chạy
 FROM base AS runner
