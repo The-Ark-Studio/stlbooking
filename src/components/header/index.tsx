@@ -122,12 +122,12 @@ const Header = () => {
   }, []);
 
   return (
-    <HeaderWrap id="header">
+    <HeaderWrap id="header" style={{paddingBottom: '10px'}}>
       <SpaceWrap>
         <Space>
           <Space>
             <a href="https://stl.sg" target="_blank" rel="noopener noreferrer">
-              <Image src={Logo} width={112} height={128} alt="Logo" />
+              <Image src={Logo} width={132} height={128} alt="Logo" />
             </a>
           </Space>
 

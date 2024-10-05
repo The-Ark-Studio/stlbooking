@@ -52,6 +52,12 @@
       "extra_hours": "추가 시간",
       "extra_price": "추가 요금",
       "total": "합계",
+      "this_field_is_required": "이 필드는 필수입니다",
+      "firstname": "이름",
+      "lastname": "성",
+      "email_placeholder": "이메일",
+      "phoneNumber": "전화번호",
+      "selectTime": "시간 선택",
       "payment_method": "결제 방법: 수령 시 현금",
       "calculate_button": "1 추가 시간",
       "send_booking_button": " 2 내 예약을 보냈습니다"

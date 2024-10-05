@@ -1,8 +1,8 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Banner from '@components/banner/Banner';
 import ImageBanner from '../../../../public/images/ImageBanner.png';
-import { Image, Typography, Table } from 'antd';
+import {Image, Typography, Table} from 'antd';
 import styled from 'styled-components';
 import BannerBooking from '../../../../public/images/bookNow/_ONY9838.jpg';
 import BookNow1 from '../../../../public/images/bookNow/_ONY9849.jpg';
@@ -15,24 +15,24 @@ import {
   extraHours as extraHoursMock,
 } from '@app/[locale]/book-now/partials/dataMock';
 
-import { type TableProps } from 'antd';
+import {type TableProps} from 'antd';
 import ButtonCustom from '@components/buttonCustom/ButtonCustom';
 import Colors from '@constants/Colors';
 import BookingFormModal from '@app/[locale]/book-now/partials/bookingModal/BookingModal';
-import { IBasePriceRange, IExtraHours } from '@interfaces/booking/booking';
+import {IBasePriceRange, IExtraHours} from '@interfaces/booking/booking';
 import SuccessModal from '@app/[locale]/book-now/partials/successModal/SuccessModal';
 
-const { Text } = Typography;
-import { useMediaQuery } from 'react-responsive';
-import { useTranslations } from 'next-intl';
+const {Text} = Typography;
+import {useMediaQuery} from 'react-responsive';
+import {useTranslations} from 'next-intl';
 
 const BookNowScreen = () => {
   const t = useTranslations('BookingScreen');
   const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
   const [isOpenSuccessModal, setIsOpenSuccessModal] = useState(false);
 
-  const isMobile = useMediaQuery({ query: '(max-width: 576px)' });
-  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1023px)' });
+  const isMobile = useMediaQuery({query: '(max-width: 576px)'});
+  const isTabletOrMobile = useMediaQuery({query: '(max-width: 1023px)'});
 
   const [basePriceRangeData, setBasePriceRangeData] = useState<
     IBasePriceRange[]
@@ -117,27 +117,27 @@ const BookNowScreen = () => {
           <ImagePrimary>
             <Image
               width="100%"
-              style={{ height: isTabletOrMobile ? 500 : 600 }}
+              style={{height: isTabletOrMobile ? 500 : 600}}
               preview={true}
               src={BannerBooking.src}
               alt=""
             />
           </ImagePrimary>
-          <ImageBottomList>
-            <div>
-              <Image preview={true} width={150} src={BookNow1.src} alt="" />
+          <ImageBottomList style={{width: '100%'}}>
+            <div className="image-list-item">
+              <Image preview={true} width="100%" src={BookNow1.src} alt="" />
             </div>
-            <div>
-              <Image preview={true} width={150} src={BookNow2.src} alt="" />
+            <div className="image-list-item">
+              <Image preview={true} width="100%" src={BookNow2.src} alt="" />
             </div>
-            <div>
-              <Image preview={true} width={150} src={BookNow3.src} alt="" />
+            <div className="image-list-item">
+              <Image preview={true} width="100%" src={BookNow3.src} alt="" />
             </div>
-            <div>
-              <Image preview={true} width={150} src={BookNow4.src} alt="" />
+            <div className="image-list-item">
+              <Image preview={true} width="100%" src={BookNow4.src} alt="" />
             </div>
-            <div>
-              <Image preview={true} width={150} src={BookNow5.src} alt="" />
+            <div className="image-list-item">
+              <Image preview={true} width="100%" src={BookNow5.src} alt="" />
             </div>
           </ImageBottomList>
         </ContentLeftWrap>
@@ -145,7 +145,7 @@ const BookNowScreen = () => {
           <ContentRightTop className="content-right__top">
             <div>
               <Text
-                style={{ fontSize: isMobile ? 24 : 34 }}
+                style={{fontSize: isMobile ? 24 : 34}}
                 className="title-text"
               >
                 {t('title_text')}
@@ -158,7 +158,7 @@ const BookNowScreen = () => {
              </Text> */}
             <div>
               <Text
-                style={{ fontSize: isMobile ? 20 : 26 }}
+                style={{fontSize: isMobile ? 20 : 26}}
                 className="sub-title-text"
               >
                 {t('subtitle_text')}
@@ -171,55 +171,53 @@ const BookNowScreen = () => {
 
           {/*Gallery for mobile view  */}
           {isMobile ? (
-            <ContentLeftWrap style={{ width: '100%' }}>
+            <ContentLeftWrap style={{width: '100%'}}>
               <ImagePrimary>
                 <Image
                   width="100%"
-                  style={{ height: 300 }}
+                  style={{height: 300}}
                   preview={true}
                   src={BannerBooking.src}
                   alt=""
                 />
               </ImagePrimary>
-              <ImageBottomList style={{ columnGap: isMobile ? 8 : 20 }}>
-                <div>
+              <ImageBottomList>
+                <div className="image-list-item">
                   <Image
                     preview={true}
-                    width={isMobile ? 132 : 150}
+                    width="100%"
                     src={BookNow1.src}
                     alt=""
                   />
                 </div>
-
-                <div>
+                <div className="image-list-item">
                   <Image
                     preview={true}
-                    width={isMobile ? 132 : 150}
+                    width="100%"
                     src={BookNow2.src}
                     alt=""
                   />
                 </div>
-
-                <div>
+                <div className="image-list-item">
                   <Image
                     preview={true}
-                    width={isMobile ? 132 : 150}
+                    width="100%"
                     src={BookNow3.src}
                     alt=""
                   />
                 </div>
-                <div>
+                <div className="image-list-item">
                   <Image
                     preview={true}
-                    width={isMobile ? 132 : 150}
+                    width="100%"
                     src={BookNow4.src}
                     alt=""
                   />
                 </div>
-                <div>
+                <div className="image-list-item">
                   <Image
                     preview={true}
-                    width={isMobile ? 132 : 150}
+                    width="100%"
                     src={BookNow5.src}
                     alt=""
                   />
@@ -230,7 +228,7 @@ const BookNowScreen = () => {
 
           <div>
             <Text
-              style={{ fontSize: isMobile ? 22 : 26, color: Colors.neutral900 }}
+              style={{fontSize: isMobile ? 22 : 26, color: Colors.neutral900}}
             >
               {t('base_price_range_table.title')}
             </Text>
@@ -249,7 +247,7 @@ const BookNowScreen = () => {
               Extra hours (apply for Adults only) */}
           <div id="booking__extra-hours">
             <Text
-              style={{ fontSize: isMobile ? 22 : 26, color: Colors.neutral900 }}
+              style={{fontSize: isMobile ? 22 : 26, color: Colors.neutral900}}
             >
               {t('extra_services_table.title')}
             </Text>
@@ -309,7 +307,7 @@ const BookNowContentStyled = styled.div`
 `;
 
 const ContentLeftWrap = styled.div`
-  width: 40%;
+  width: 45%;
   display: flex;
   flex-direction: column;
   .ant-image-mask {
@@ -337,9 +335,14 @@ const ImageBottomList = styled.div`
   flex-direction: row;
   flex-wrap: wrap; // TODO maybe update Swipe or slider
   justify-content: space-between;
-  column-gap: 20px;
+  /* column-gap: 8px; */
+
   margin-top: 10px;
   row-gap: 10px;
+  div.image-list-item {
+    margin-left: 5px;
+    width: calc(33.333% - 5px);
+  }
   div {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     cursor: pointer;
