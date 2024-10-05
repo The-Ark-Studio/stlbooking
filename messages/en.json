@@ -50,12 +50,7 @@
       "total": "Total",
       "payment_method": "Payment method: Cash on Receipt",
       "calculate_button": "1 Calculate price",
-      "send_booking_button": " 2 Send my booking",
-      "this_field_is_required": "This field is required.",
-      "firstname": "First Name",
-      "lastname": "Last Name",
-      "phoneNumber": "Phone Number",
-      "selectTime": "Choose the time"
+      "send_booking_button": " 2 Send my booking"
     }
   }
 }
