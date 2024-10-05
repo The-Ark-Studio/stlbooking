@@ -127,7 +127,7 @@ const Footer = () => {
           }}
         >
           <Text style={{lineHeight: isMobile ? '18px' : '36px'}}>
-            © 2024 Develop by The Ark Studio - Manage by STL Company
+            © 2024 Developed by The Ark Studio - Manage by STL Company
           </Text>
         </Space>
       </SpaceWrap>
