@@ -9,7 +9,7 @@ import {Suspense} from 'react';
 // import {NavigateToResource} from '@refinedev/nextjs-router';
 import HomePage from '@app/home/page';
 import MainLayout from '@components/mainLayout/MainLayout';
-import BookNowScreen from '@app/book-now/page';
+import BookNowScreen from '@app/[locale]/book-now/page';
 
 export default function IndexPage() {
   return (
