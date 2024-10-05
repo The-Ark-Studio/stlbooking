@@ -3,8 +3,12 @@
     "booking_button": "지금 예약하세요",
     "Nav": {
       "intro": "소개",
+      "about": "회사 소개",
       "service": "서비스",
-      "gallery": "갱도"
+      "gallery": "갱도",
+      "contact": "연락하다",
+      "partnerShip": "공동",
+      "faqs": "자주 묻는 질문"
     }
   },
   "BookingScreen": {
@@ -51,6 +55,12 @@
       "payment_method": "결제 방법: 수령 시 현금",
       "calculate_button": "1 추가 시간",
       "send_booking_button": " 2 내 예약을 보냈습니다"
+    },
+    "success_modal": {
+      "title": "STL에서",
+      "description_one": "\"우리와 함께 머물기를 선택해 주셔서 감사합니다! 우리는 귀하를 모시게 되어 기쁘게 생각하며 이곳에서 즐거운 시간을 보내시기를 바랍니다. 숙박에 관한 중요한 정보는 우편함을 확인하시기 바랍니다.",
+      "description_two": "도움이 필요하거나 질문이 있는 경우 언제든지 저희 팀에 문의해 주세요. 우리는 귀하가 편안하고 기억에 남는 경험을 할 수 있도록 최선을 다하고 있습니다.\"",
+      "ok_button": "좋아요!"
     }
   }
 }

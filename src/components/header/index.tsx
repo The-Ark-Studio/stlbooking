@@ -1,20 +1,20 @@
 'use client';
-import { useLocale, useTranslations } from 'next-intl';
-import { useEffect, useState, useTransition } from 'react';
-import { ReactComponent as KrFlag } from '../../../public/images/countryFlags/krFlag.svg';
-import { ReactComponent as EnFlag } from '../../../public/images/countryFlags/enFlag.svg';
+import {useLocale, useTranslations} from 'next-intl';
+import {useEffect, useState, useTransition} from 'react';
+import {ReactComponent as KrFlag} from '../../../public/images/countryFlags/krFlag.svg';
+import {ReactComponent as EnFlag} from '../../../public/images/countryFlags/enFlag.svg';
 import ButtonCustom from '@components/buttonCustom/ButtonCustom';
-import { Space, Typography, Menu, Drawer, Select } from 'antd';
+import {Space, Typography, Menu, Drawer, Select} from 'antd';
 import Image from 'next/image';
 import styled from 'styled-components';
 import Logo from '../../../public/images/logo/logo.png';
 import LanguageIcon from '../../../public/images/Language.png';
-import { CloseOutlined, DownOutlined, MenuOutlined } from '@ant-design/icons';
+import {CloseOutlined, DownOutlined, MenuOutlined} from '@ant-design/icons';
 import Colors from '@constants/Colors';
-import type { MenuProps } from 'antd';
-import { useRouter } from 'next/navigation';
+import type {MenuProps} from 'antd';
+import {useRouter} from 'next/navigation';
 
-import { useMediaQuery } from 'react-responsive';
+import {useMediaQuery} from 'react-responsive';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -28,20 +28,22 @@ const Header = () => {
   const [current, setCurrent] = useState('introduce');
   const [showHeader, setShowHeader] = useState(false);
 
-  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1023px)' });
+  const isTabletOrMobile = useMediaQuery({query: '(max-width: 1023px)'});
 
   const items: MenuItem[] = [
     {
       label: `${t('Nav.intro')}`,
       key: 'introduce',
       icon: <DownOutlined />,
-      children: [{
-        key: 'about1',
-        label: 'About Us',
-        onClick: () => {
-          window.location.href = 'https://stl.sg/about-us'; // Domain about-us
+      children: [
+        {
+          key: 'about1',
+          label: `${t('Nav.about')}`,
+          onClick: () => {
+            window.location.href = 'https://stl.sg/about-us'; // Domain about-us
+          },
         },
-      }],
+      ],
       onClick: () => {
         window.location.href = 'https://stl.sg/'; // Domain home
       },
@@ -53,23 +55,24 @@ const Header = () => {
       children: [
         {
           key: 'faqs',
-          label: 'FAQs',
+          label: `${t('Nav.faqs')}`,
           onClick: () => {
             window.location.href = 'https://stl.sg/saigon-travel-lounge/'; // Domain faqs
           },
         },
         {
           key: 'contact',
-          label: 'Contact',
+          label: `${t('Nav.contact')}`,
           onClick: () => {
             window.location.href = 'https://stl.sg/contact/'; // Domain contact
           },
         },
         {
           key: 'partnership',
-          label: 'Partnership',
+          label: `${t('Nav.partnerShip')}`,
           onClick: () => {
-            window.location.href = 'https://stl.sg/elementor-page-4428/stl-partnership/'; // Domain partnership
+            window.location.href =
+              'https://stl.sg/elementor-page-4428/stl-partnership/'; // Domain partnership
           },
         },
       ],
@@ -128,10 +131,9 @@ const Header = () => {
             </a>
           </Space>
 
-
           <Space
             id="main-navbar"
-            style={{ display: isTabletOrMobile ? 'none' : '' }}
+            style={{display: isTabletOrMobile ? 'none' : ''}}
           >
             <Space>
               <LanguageIconWrap>
@@ -144,11 +146,11 @@ const Header = () => {
                 {/* <LanguageTextStyle>English</LanguageTextStyle> */}
                 <Select
                   defaultValue={localActive}
-                  style={{ width: 100 }}
+                  style={{width: 100}}
                   onChange={handleChangeLanguage}
                   options={[
-                    { value: 'en', label: 'English' },
-                    { value: 'ko', label: 'Korean' },
+                    {value: 'en', label: 'English'},
+                    {value: 'ko', label: 'Korean'},
                   ]}
                   disabled={isPending}
                 />
@@ -162,7 +164,7 @@ const Header = () => {
                     mode="horizontal"
                     forceSubMenuRender
                     overflowedIndicator={false}
-                    style={{ minWidth: '443px' }}
+                    style={{minWidth: '443px'}}
                     items={items}
                   />
                 )}
@@ -178,14 +180,14 @@ const Header = () => {
           }}
         >
           <ButtonCustom
-            style={{ maxWidth: '253px', width: '125px', height: '40px' }}
+            style={{maxWidth: '253px', width: '125px', height: '40px'}}
             type="primary"
           >
             {t('booking_button')}
           </ButtonCustom>
 
           {/* Mobile */}
-          <div id="mobile-menu" style={{ marginLeft: 10 }}>
+          <div id="mobile-menu" style={{marginLeft: 10}}>
             <ButtonCustom onClick={showSideBar}>
               {openSideBar ? <CloseOutlined /> : <MenuOutlined />}
             </ButtonCustom>

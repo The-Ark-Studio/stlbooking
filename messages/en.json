@@ -3,6 +3,10 @@
     "booking_button": "Book Now",
     "Nav": {
       "intro": "Introduction",
+      "about": "About Us",
+      "contact": "Contact",
+      "partnerShip": "Partnership",
+      "faqs": "FAQs",
       "service": "Service",
       "gallery": "Gallery"
     }
@@ -51,6 +55,12 @@
       "payment_method": "Payment method: Cash on Receipt",
       "calculate_button": "1 Calculate price",
       "send_booking_button": " 2 Send my booking"
+    },
+    "success_modal": {
+      "title": "From STL",
+      "description_one": "Thank you for choosing to stay with us! We are delighted to have you and hope you enjoy your time here. Please check your mailbox for important information regarding your stay. If you need any assistance or have any questions, feel free to reach out to our team. We are here to ensure you have a comfortable and memorable experience.",
+      "description_two": "If you need any assistance or have any questions, feel free to reach out to our team. We are here to ensure you have a comfortable and memorable experience.",
+      "ok_button": "Ok!"
     }
   }
 }
