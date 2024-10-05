@@ -216,7 +216,7 @@ const BookingFormModal = ({
             )}
             rules={{ required: true }}
           />
-          {errors.facility && <Text type="danger">This is required.</Text>}
+          {errors.facility && <Text type="danger">{t('modal_booking.this_field_is_required')}</Text>}
         </Form.Item> */}
 
             {/* Date Selection */}
@@ -243,7 +243,7 @@ const BookingFormModal = ({
                 )}
                 rules={{ required: true }}
               />
-              {errors.date && <Text type="danger">This is required.</Text>}
+              {errors.date && <Text type="danger">{t('modal_booking.this_field_is_required')}</Text>}
             </Form.Item>
 
             <Row gutter={[16, 16]}>
@@ -329,12 +329,12 @@ const BookingFormModal = ({
                   name="firstName"
                   control={control}
                   render={({ field }) => (
-                    <Input size="large" {...field} placeholder="First name" />
+                    <Input size="large" {...field} placeholder={t('modal_booking.firstname')} />
                   )}
                   rules={{ required: true }}
                 />
                 {errors.firstName && (
-                  <Text type="danger">This is required.</Text>
+                  <Text type="danger">{t('modal_booking.this_field_is_required')}</Text>
                 )}
               </Form.Item>
 
@@ -344,12 +344,12 @@ const BookingFormModal = ({
                   name="lastName"
                   control={control}
                   render={({ field }) => (
-                    <Input size="large" {...field} placeholder="Last name" />
+                    <Input size="large" {...field} placeholder={t('modal_booking.lastname')} />
                   )}
                   rules={{ required: true }}
                 />
                 {errors.lastName && (
-                  <Text type="danger">This is required.</Text>
+                  <Text type="danger">{t('modal_booking.this_field_is_required')}</Text>
                 )}
               </Form.Item>
             </FormGroup>
@@ -365,7 +365,7 @@ const BookingFormModal = ({
                   )}
                   rules={{ required: true }}
                 />
-                {errors.email && <Text type="danger">This is required.</Text>}
+                {errors.email && <Text type="danger">{t('modal_booking.this_field_is_required')}</Text>}
               </Form.Item>
 
               {/* Phone Number */}
@@ -374,11 +374,11 @@ const BookingFormModal = ({
                   name="phone"
                   control={control}
                   render={({ field }) => (
-                    <Input size="large" {...field} placeholder="Phone number" />
+                    <Input size="large" {...field} placeholder={t('modal_booking.phoneNumber')} />
                   )}
                   rules={{ required: true }}
                 />
-                {errors.phone && <Text type="danger">This is required.</Text>}
+                {errors.phone && <Text type="danger">{t('modal_booking.this_field_is_required')}</Text>}
               </Form.Item>
             </FormGroup>
 
@@ -398,21 +398,14 @@ const BookingFormModal = ({
                         setValue('checkinTime', dayjs(time));
                         handleFormChange();
                       }}
-                      disabledMinutes={() => {
-                        const disabledMinutes = [];
-                        for (let i = 0; i < 60; i++) {
-                          if (i !== 0 && i !== 30) {
-                            disabledMinutes.push(i);
-                          }
-                        }
-                        return disabledMinutes;
-                      }}
+                      minuteStep={30}
+                      placeholder={t('modal_booking.selectTime')}
                     />
                   )}
                   rules={{ required: true }}
                 />
                 {errors.checkinTime && (
-                  <Text type="danger">This is required.</Text>
+                  <Text type="danger">{t('modal_booking.this_field_is_required')}</Text>
                 )}
               </Form.Item>
 
@@ -431,21 +424,14 @@ const BookingFormModal = ({
                         setValue('checkoutTime', dayjs(time));
                         handleFormChange();
                       }}
-                      disabledMinutes={() => {
-                        const disabledMinutes = [];
-                        for (let i = 0; i < 60; i++) {
-                          if (i !== 0 && i !== 30) {
-                            disabledMinutes.push(i);
-                          }
-                        }
-                        return disabledMinutes;
-                      }}
+                      minuteStep={30}
+                      placeholder={t('modal_booking.selectTime')}
                     />
                   )}
                   rules={{ required: true }}
                 />
                 {errors.checkoutTime && (
-                  <Text type="danger">This is required.</Text>
+                  <Text type="danger">{t('modal_booking.this_field_is_required')}</Text>
                 )}
               </Form.Item>
             </FormGroup>
