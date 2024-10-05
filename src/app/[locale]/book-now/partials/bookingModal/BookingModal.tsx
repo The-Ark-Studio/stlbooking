@@ -79,6 +79,8 @@ const BookingFormModal = ({
   const [isCalculateDisabled, setIsCalculateDisabled] = useState(false);
   const [isSendBookingDisabled, setIsSendBookingDisabled] = useState(true);
   const [isLoadingCalculate, setIsLoadingCalculate] = useState(false);
+  const [openCheckInTime, setOpenCheckInTime] = useState(false);
+  const [openCheckOutTime, setOpenCheckOutTime] = useState(false);
 
   const {mutate: sendBooking, isLoading} = useCustomMutation();
 
@@ -262,7 +264,6 @@ const BookingFormModal = ({
                         size="large"
                         {...field}
                         min={1}
-                        max={10}
                         style={{width: '100%'}}
                         onChange={(value) => {
                           field.onChange(value);
@@ -286,7 +287,6 @@ const BookingFormModal = ({
                         size="large"
                         {...field}
                         min={0}
-                        max={10}
                         style={{width: '100%'}}
                         onChange={(value) => {
                           field.onChange(value);
@@ -310,7 +310,6 @@ const BookingFormModal = ({
                         size="large"
                         {...field}
                         min={0}
-                        max={10}
                         style={{width: '100%'}}
                         onChange={(value) => {
                           field.onChange(value);
@@ -419,6 +418,26 @@ const BookingFormModal = ({
                   control={control}
                   render={({field}) => (
                     <TimePicker
+                      needConfirm={false}
+                      allowClear={false}
+                      showNow={false}
+                      open={openCheckInTime}
+                      onCalendarChange={(time, _) => {
+                        if (Array.isArray(time)) {
+                          // Handle multiple selected times
+                          time.forEach((selectedTime) => {
+                            setValue(
+                              'checkinTime',
+                              dayjs(selectedTime.toDate())
+                            );
+                          });
+                          setOpenCheckInTime(false);
+                        } else {
+                          // Handle single selected time
+                          setValue('checkinTime', dayjs(time.toDate()));
+                          setOpenCheckInTime(false);
+                        }
+                      }}
                       size="large"
                       {...field}
                       format={TIME_CHECK_IN_OUT_FORMAT}
@@ -426,8 +445,14 @@ const BookingFormModal = ({
                       onChange={(time, _) => {
                         setValue('checkinTime', dayjs(time));
                         handleFormChange();
+                        if (time) {
+                          setOpenCheckInTime(false);
+                        }
                       }}
                       minuteStep={30}
+                      onClick={() => {
+                        setOpenCheckInTime(true);
+                      }}
                     />
                   )}
                   rules={{required: true}}
@@ -446,6 +471,26 @@ const BookingFormModal = ({
                   control={control}
                   render={({field}) => (
                     <TimePicker
+                      needConfirm={false}
+                      allowClear={false}
+                      showNow={false}
+                      open={openCheckOutTime}
+                      onCalendarChange={(time, _) => {
+                        if (Array.isArray(time)) {
+                          // Handle multiple selected times
+                          time.forEach((selectedTime) => {
+                            setValue(
+                              'checkoutTime',
+                              dayjs(selectedTime.toDate())
+                            );
+                          });
+                          setOpenCheckOutTime(false);
+                        } else {
+                          // Handle single selected time
+                          setValue('checkoutTime', dayjs(time.toDate()));
+                          setOpenCheckOutTime(false);
+                        }
+                      }}
                       size="large"
                       {...field}
                       format={TIME_CHECK_IN_OUT_FORMAT}
@@ -453,8 +498,14 @@ const BookingFormModal = ({
                       onChange={(time, _) => {
                         setValue('checkoutTime', dayjs(time));
                         handleFormChange();
+                        if (time) {
+                          setOpenCheckOutTime(false);
+                        }
                       }}
                       minuteStep={30}
+                      onClick={() => {
+                        setOpenCheckOutTime(true);
+                      }}
                     />
                   )}
                   rules={{required: true}}

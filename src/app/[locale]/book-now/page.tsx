@@ -340,9 +340,17 @@ const ImageBottomList = styled.div`
   margin-top: 10px;
   row-gap: 10px;
   div.image-list-item {
-    margin-left: 5px;
     width: calc(33.333% - 5px);
   }
+
+  div.image-list-item:nth-child(-n + 3) {
+    margin-left: 0;
+  }
+
+  div.image-list-item:nth-child(-n + 3):not(:first-child) {
+    margin-left: 5px;
+  }
+
   div {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     cursor: pointer;
