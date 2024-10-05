@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import {Space, Divider, List, Typography} from 'antd';
+import { Space, Divider, List, Typography } from 'antd';
 import {
   FacebookOutlined,
   HomeOutlined,
@@ -12,18 +12,20 @@ import {
 } from '@ant-design/icons';
 import styled from 'styled-components';
 import Colors from '@constants/Colors';
-import {EmailField} from '@refinedev/antd';
-import {useMediaQuery} from 'react-responsive';
+import { EmailField } from '@refinedev/antd';
+import { useMediaQuery } from 'react-responsive';
+import { useTranslations } from 'next-intl';
 
 const Footer = () => {
-  const {Item} = List;
-  const {Link, Text} = Typography;
-  const isMobile = useMediaQuery({query: '(max-width: 576px)'});
-  const isTablet = useMediaQuery({query: '(max-width: 1023px)'});
+  const t = useTranslations('footer');
+  const { Item } = List;
+  const { Link, Text } = Typography;
+  const isMobile = useMediaQuery({ query: '(max-width: 576px)' });
+  const isTablet = useMediaQuery({ query: '(max-width: 1023px)' });
 
   return (
     <FooterWrapStyled>
-      <SpaceWrap style={{maxHeight: isTablet ? 800 : 345}}>
+      <SpaceWrap style={{ maxHeight: isTablet ? 800 : 345 }}>
         <Space
           style={{
             display: 'flex',
@@ -35,79 +37,85 @@ const Footer = () => {
           {/* Left */}
           <Space>
             <ListItemStyle
-              style={{padding: isTablet ? '20px 10px' : '40px 0'}}
+              style={{ padding: isTablet ? '20px 10px' : '40px 0' }}
               align="start"
             >
-              <ItemStyled style={{marginLeft: 0}}>
-                <Text>CONTACT</Text>
+              <ItemStyled style={{ marginLeft: 0 }}>
+                <Text>{t('contact.title')}</Text>
               </ItemStyled>
               <ItemStyled>
                 <MailOutlined />
-                <EmailField value="support@stl.sg" />
+                <EmailField value={t('contact.email')} />
               </ItemStyled>
               <ItemStyled>
                 <PhoneOutlined />
-                <Link href="tel:+84 901 820 196 ">+84 901 820 196</Link>
+                <Link href={"tel: " + t('contact.phone')}>{t('contact.phone')}</Link>
               </ItemStyled>
               <ItemStyled>
                 <HomeOutlined />
                 <Text>
-                  95 Võ Thị Sáu street, Ward 6, District 3, Hồ Chí Minh 70000,
-                  Việt Nam
+                  {t('contact.address')}
                 </Text>
+              </ItemStyled>
+              <ItemStyled>
+                <Link href={t('contact.check_map.link')} target="_blank" rel="noopener noreferrer">
+                  <u>
+                    {t('contact.check_map.title')}
+                  </u>
+                </Link>
               </ItemStyled>
             </ListItemStyle>
           </Space>
           {/* center */}
           <Space>
             <ListItemStyle
-              style={{padding: isTablet ? '20px 10px' : '40px 0'}}
+              style={{ padding: isTablet ? '20px 10px' : '40px 0' }}
               align="start"
             >
-              <ItemStyled style={{marginLeft: 0}}>
-                <Text>TRAVEL BOOK</Text>
+              <ItemStyled style={{ marginLeft: 0 }}>
+                <Text>{t('travel_booking.title')}</Text>
               </ItemStyled>
               <ItemStyled>
                 <MailOutlined />
-                <EmailField value="kpglee44@naver.com" />
+                <EmailField value={t('travel_booking.email')} />
               </ItemStyled>
               <ItemStyled>
                 <PhoneOutlined />
-                <Link href="tel:01067352180">01067352180 (KR)</Link>
+                <Link href={"tel: " + t('travel_booking.phone')}>{t('travel_booking.phone')}</Link>
               </ItemStyled>
               <ItemStyled>
                 <MessageOutlined />
-                <Text>kakaotalk ID: kpglee44</Text>
+                <Text>{t('travel_booking.kakao')}</Text>
               </ItemStyled>
             </ListItemStyle>
           </Space>
 
           {/* right */}
-          <Space style={{marginLeft: isTablet ? 0 : '40px'}}>
+          <Space style={{ marginLeft: isTablet ? 0 : '40px' }}>
             <ListItemStyle
-              style={{padding: isTablet ? '20px 10px' : '40px 0'}}
+              style={{ padding: isTablet ? '20px 10px' : '40px 0' }}
               align="start"
             >
-              <ItemStyled style={{marginLeft: 0}}>
-                <Text>STAY IN TOUCH</Text>
+              <ItemStyled style={{ marginLeft: 0 }}>
+                <Text>{t('stay_in_touch.title')}</Text>
               </ItemStyled>
               <SocialListIconStyle>
                 <Link
-                  href="https://www.facebook.com/saigontravellounge/"
+                  href={t('stay_in_touch.facebook')}
                   target="_blank"
                 >
                   <FacebookOutlined />
                 </Link>
 
                 <Link
-                  href="https://www.instagram.com/saigontravellounge/"
+                  href={t('stay_in_touch.instagram')}
                   target="_blank"
                 >
                   <InstagramOutlined />
                 </Link>
 
                 <Link
-                  href="https://www.tiktok.com/@saigontravellounge"
+                  href={t('stay_in_touch.tiktok')}
                   target="_blank"
                 >
                   <TikTokOutlined />
@@ -116,7 +124,7 @@ const Footer = () => {
             </ListItemStyle>
           </Space>
         </Space>
-        <Divider style={{borderBlockColor: Colors.neutral400}} />
+        <Divider style={{ borderBlockColor: Colors.neutral400 }} />
         <Space
           style={{
             display: 'flex',
@@ -126,7 +134,7 @@ const Footer = () => {
             textAlign: 'center',
           }}
         >
-          <Text style={{lineHeight: isMobile ? '18px' : '36px'}}>
+          <Text style={{ lineHeight: isMobile ? '18px' : '36px' }}>
             © 2024 Developed by The Ark Studio - Manage by STL Company
           </Text>
         </Space>

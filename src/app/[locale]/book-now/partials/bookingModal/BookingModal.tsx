@@ -1,10 +1,9 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { useForm, Controller, useWatch } from 'react-hook-form';
+import React, { Fragment, useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import dayjs from 'dayjs';
 import {
   Form,
   Input,
-  Select,
   DatePicker,
   TimePicker,
   InputNumber,
@@ -17,7 +16,11 @@ import {
 import styled from 'styled-components';
 import Colors from '@constants/Colors';
 import { useCustomMutation } from '@refinedev/core';
-import { GLOBAL_DATE_FORMAT, HOUR_FORMAT } from '@utility/conmom';
+import {
+  GLOBAL_DATE_FORMAT,
+  HOUR_FORMAT,
+  TIME_CHECK_IN_OUT_FORMAT,
+} from '@utility/conmom';
 import { IDataFormType } from '@interfaces/booking/booking';
 import ButtonCustom from '@components/buttonCustom/ButtonCustom';
 import { axiosInstance } from '@utility/axios-instance';
@@ -76,6 +79,8 @@ const BookingFormModal = ({
   const [isCalculateDisabled, setIsCalculateDisabled] = useState(false);
   const [isSendBookingDisabled, setIsSendBookingDisabled] = useState(true);
   const [isLoadingCalculate, setIsLoadingCalculate] = useState(false);
+  const [openCheckInTime, setOpenCheckInTime] = useState(false);
+  const [openCheckOutTime, setOpenCheckOutTime] = useState(false);
 
   const { mutate: sendBooking, isLoading } = useCustomMutation();
 
@@ -120,7 +125,7 @@ const BookingFormModal = ({
       setIsLoadingCalculate(false);
     } catch (error) {
       setIsLoadingCalculate(false);
-      console.log('🚀 ~ handleCalculatePrice ~ error:', error);
+      console.log('🚀 ~  error:', error);
     }
   };
 
@@ -183,14 +188,10 @@ const BookingFormModal = ({
   };
 
   const onSubmit = async (data: IDataFormType) => {
-    console.log('Submitted:', data);
     if (!isValid) return;
-
     if (isSendBookingDisabled) await handleCalculatePrice(data);
     else await handleSendBooking(data);
   };
-
-  const handleOk = () => { };
 
   return (
     <Fragment>
@@ -243,7 +244,11 @@ const BookingFormModal = ({
                 )}
                 rules={{ required: true }}
               />
-              {errors.date && <Text type="danger">This is required.</Text>}
+              {errors.date && (
+                <Text type="danger">
+                  {t('modal_booking.this_field_is_required')}
+                </Text>
+              )}
             </Form.Item>
 
             <Row gutter={[16, 16]}>
@@ -259,7 +264,6 @@ const BookingFormModal = ({
                         size="large"
                         {...field}
                         min={1}
-                        max={10}
                         style={{ width: '100%' }}
                         onChange={(value) => {
                           field.onChange(value);
@@ -283,7 +287,6 @@ const BookingFormModal = ({
                         size="large"
                         {...field}
                         min={0}
-                        max={10}
                         style={{ width: '100%' }}
                         onChange={(value) => {
                           field.onChange(value);
@@ -307,7 +310,6 @@ const BookingFormModal = ({
                         size="large"
                         {...field}
                         min={0}
-                        max={10}
                         style={{ width: '100%' }}
                         onChange={(value) => {
                           field.onChange(value);
@@ -320,8 +322,6 @@ const BookingFormModal = ({
               </Col>
             </Row>
 
-
-
             <FormGroup>
               {/* First Name */}
               <Form.Item label={t('modal_booking.first_name')}>
@@ -329,29 +329,41 @@ const BookingFormModal = ({
                   name="firstName"
                   control={control}
                   render={({ field }) => (
-                    <Input size="large" {...field} placeholder="First name" />
+                    <Input
+                      size="large"
+                      {...field}
+                      placeholder={t('modal_booking.first_name')}
+                    />
                   )}
                   rules={{ required: true }}
                 />
                 {errors.firstName && (
-                  <Text type="danger">This is required.</Text>
+                  <Text type="danger">
+                    {t('modal_booking.this_field_is_required')}
+                  </Text>
                 )}
               </Form.Item>
 
               {/* Last Name */}
-              <Form.Item label={t('modal_booking.last_name')}>
+              {/* <Form.Item label={t('modal_booking.last_name')}>
                 <Controller
                   name="lastName"
                   control={control}
-                  render={({ field }) => (
-                    <Input size="large" {...field} placeholder="Last name" />
+                  render={({field}) => (
+                    <Input
+                      size="large"
+                      {...field}
+                      placeholder={t('modal_booking.lastname')}
+                    />
                   )}
-                  rules={{ required: true }}
+                  rules={{required: true}}
                 />
                 {errors.lastName && (
-                  <Text type="danger">This is required.</Text>
+                  <Text type="danger">
+                    {t('modal_booking.this_field_is_required')}
+                  </Text>
                 )}
-              </Form.Item>
+              </Form.Item> */}
             </FormGroup>
 
             <FormGroup>
@@ -361,11 +373,19 @@ const BookingFormModal = ({
                   name="email"
                   control={control}
                   render={({ field }) => (
-                    <Input size="large" {...field} placeholder="Email" />
+                    <Input
+                      size="large"
+                      {...field}
+                      placeholder={t('modal_booking.email_placeholder')}
+                    />
                   )}
                   rules={{ required: true }}
                 />
-                {errors.email && <Text type="danger">This is required.</Text>}
+                {errors.email && (
+                  <Text type="danger">
+                    {t('modal_booking.this_field_is_required')}
+                  </Text>
+                )}
               </Form.Item>
 
               {/* Phone Number */}
@@ -374,11 +394,19 @@ const BookingFormModal = ({
                   name="phone"
                   control={control}
                   render={({ field }) => (
-                    <Input size="large" {...field} placeholder="Phone number" />
+                    <Input
+                      size="large"
+                      {...field}
+                      placeholder={t('modal_booking.phoneNumber')}
+                    />
                   )}
                   rules={{ required: true }}
                 />
-                {errors.phone && <Text type="danger">This is required.</Text>}
+                {errors.phone && (
+                  <Text type="danger">
+                    {t('modal_booking.this_field_is_required')}
+                  </Text>
+                )}
               </Form.Item>
             </FormGroup>
 
@@ -390,29 +418,50 @@ const BookingFormModal = ({
                   control={control}
                   render={({ field }) => (
                     <TimePicker
+                      needConfirm={false}
+                      allowClear={false}
+                      showNow={false}
+                      placeholder={t('modal_booking.check_in_time')}
+                      open={openCheckInTime}
+                      onCalendarChange={(time, _) => {
+                        if (Array.isArray(time)) {
+                          // Handle multiple selected times
+                          time.forEach((selectedTime) => {
+                            setValue(
+                              'checkinTime',
+                              dayjs(selectedTime.toDate())
+                            );
+                          });
+                          setOpenCheckInTime(false);
+                        } else {
+                          // Handle single selected time
+                          setValue('checkinTime', dayjs(time.toDate()));
+                          setOpenCheckInTime(false);
+                        }
+                      }}
                       size="large"
                       {...field}
-                      format="HH:mm"
+                      format={TIME_CHECK_IN_OUT_FORMAT}
                       style={{ width: '100%' }}
                       onChange={(time, _) => {
                         setValue('checkinTime', dayjs(time));
                         handleFormChange();
-                      }}
-                      disabledMinutes={() => {
-                        const disabledMinutes = [];
-                        for (let i = 0; i < 60; i++) {
-                          if (i !== 0 && i !== 30) {
-                            disabledMinutes.push(i);
-                          }
+                        if (time) {
+                          setOpenCheckInTime(false);
                         }
-                        return disabledMinutes;
+                      }}
+                      minuteStep={30}
+                      onClick={() => {
+                        setOpenCheckInTime(true);
                       }}
                     />
                   )}
                   rules={{ required: true }}
                 />
                 {errors.checkinTime && (
-                  <Text type="danger">This is required.</Text>
+                  <Text type="danger">
+                    {t('modal_booking.this_field_is_required')}
+                  </Text>
                 )}
               </Form.Item>
 
@@ -423,29 +472,50 @@ const BookingFormModal = ({
                   control={control}
                   render={({ field }) => (
                     <TimePicker
+                      needConfirm={false}
+                      allowClear={false}
+                      showNow={false}
+                      placeholder={t('modal_booking.check_out_time')}
+                      open={openCheckOutTime}
+                      onCalendarChange={(time, _) => {
+                        if (Array.isArray(time)) {
+                          // Handle multiple selected times
+                          time.forEach((selectedTime) => {
+                            setValue(
+                              'checkoutTime',
+                              dayjs(selectedTime.toDate())
+                            );
+                          });
+                          setOpenCheckOutTime(false);
+                        } else {
+                          // Handle single selected time
+                          setValue('checkoutTime', dayjs(time.toDate()));
+                          setOpenCheckOutTime(false);
+                        }
+                      }}
                       size="large"
                       {...field}
-                      format="HH:mm"
+                      format={TIME_CHECK_IN_OUT_FORMAT}
                       style={{ width: '100%' }}
                       onChange={(time, _) => {
                         setValue('checkoutTime', dayjs(time));
                         handleFormChange();
-                      }}
-                      disabledMinutes={() => {
-                        const disabledMinutes = [];
-                        for (let i = 0; i < 60; i++) {
-                          if (i !== 0 && i !== 30) {
-                            disabledMinutes.push(i);
-                          }
+                        if (time) {
+                          setOpenCheckOutTime(false);
                         }
-                        return disabledMinutes;
+                      }}
+                      minuteStep={30}
+                      onClick={() => {
+                        setOpenCheckOutTime(true);
                       }}
                     />
                   )}
                   rules={{ required: true }}
                 />
                 {errors.checkoutTime && (
-                  <Text type="danger">This is required.</Text>
+                  <Text type="danger">
+                    {t('modal_booking.this_field_is_required')}
+                  </Text>
                 )}
               </Form.Item>
             </FormGroup>

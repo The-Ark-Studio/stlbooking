@@ -3,6 +3,7 @@ import {Modal, Typography} from 'antd';
 import Colors from '@constants/Colors';
 import ButtonCustom from '@components/buttonCustom/ButtonCustom';
 import styled from 'styled-components';
+import {useTranslations} from 'next-intl';
 
 interface ISuccessModalProps {
   open: boolean;
@@ -11,6 +12,8 @@ interface ISuccessModalProps {
 const {Text} = Typography;
 
 const SuccessModal = ({open, handleCancel}: ISuccessModalProps) => {
+  const t = useTranslations('BookingScreen');
+
   return (
     <Modal
       maskClosable={false}
@@ -24,16 +27,14 @@ const SuccessModal = ({open, handleCancel}: ISuccessModalProps) => {
           <Text
             style={{fontSize: 32, color: Colors.neutral900, fontWeight: 400}}
           >
-            From STL
+            {t('success_modal.title')}
           </Text>
         </div>
         <div>
           <Text
             style={{fontSize: 22, color: Colors.neutral900, fontWeight: 400}}
           >
-            Thank you for choosing to stay with us! We are delighted to have you
-            and hope you enjoy your time here. Please check your mailbox for
-            important information regarding your stay.
+            {t('success_modal.description_one')}
           </Text>
         </div>
 
@@ -41,9 +42,7 @@ const SuccessModal = ({open, handleCancel}: ISuccessModalProps) => {
           <Text
             style={{fontSize: 22, color: Colors.neutral900, fontWeight: 400}}
           >
-            If you need any assistance or have any questions, feel free to reach
-            out to our team. We are here to ensure you have a comfortable and
-            memorable experience.
+            {t('success_modal.description_two')}
           </Text>
         </div>
         <ButtonWrapStyled>
@@ -52,7 +51,7 @@ const SuccessModal = ({open, handleCancel}: ISuccessModalProps) => {
             type="primary"
             onClick={handleCancel}
           >
-            Ok!
+            {t('success_modal.ok_button')}
           </ButtonCustom>
         </ButtonWrapStyled>
       </ContentWrapStyled>

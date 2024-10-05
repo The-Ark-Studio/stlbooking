@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { TOKEN_KEY } from "@utility/constants";
-import axios from "axios";
-import Cookies from "js-cookie";
+import {TOKEN_KEY} from '@utility/constants';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 export const axiosInstance = axios.create();
 
@@ -10,7 +10,7 @@ axiosInstance.interceptors.request.use((config) => {
   const token = Cookies.get(TOKEN_KEY);
 
   if (token && config.headers) {
-    config.headers["Authorization"] = `Bearer ${token}`;
+    // config.headers["Authorization"] = `Bearer ${token}`; TODO: Now we using Public API Key instead of JWT token
   }
   return config;
 });

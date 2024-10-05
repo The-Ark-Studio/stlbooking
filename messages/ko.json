@@ -3,8 +3,12 @@
     "booking_button": "지금 예약하세요",
     "Nav": {
       "intro": "소개",
+      "about": "회사 소개",
       "service": "서비스",
-      "gallery": "갱도"
+      "gallery": "갱도",
+      "contact": "연락하다",
+      "partnerShip": "공동",
+      "faqs": "자주 묻는 질문"
     }
   },
   "BookingScreen": {
@@ -48,9 +52,45 @@
       "extra_hours": "추가 시간",
       "extra_price": "추가 요금",
       "total": "합계",
+      "this_field_is_required": "이 필드는 필수입니다",
+      "firstname": "이름",
+      "lastname": "성",
+      "email_placeholder": "이메일",
+      "phoneNumber": "전화번호",
+      "selectTime": "시간 선택",
       "payment_method": "결제 방법: 수령 시 현금",
       "calculate_button": "1 추가 시간",
       "send_booking_button": " 2 내 예약을 보냈습니다"
+    },
+    "success_modal": {
+      "title": "STL에서",
+      "description_one": "\"우리와 함께 머물기를 선택해 주셔서 감사합니다! 우리는 귀하를 모시게 되어 기쁘게 생각하며 이곳에서 즐거운 시간을 보내시기를 바랍니다. 숙박에 관한 중요한 정보는 우편함을 확인하시기 바랍니다.",
+      "description_two": "도움이 필요하거나 질문이 있는 경우 언제든지 저희 팀에 문의해 주세요. 우리는 귀하가 편안하고 기억에 남는 경험을 할 수 있도록 최선을 다하고 있습니다.\"",
+      "ok_button": "좋아요!"
+    }
+  },
+  "footer": {
+    "contact": {
+      "title": "연락처",
+      "email": "support@stl.sg",
+      "phone": "02836223390",
+      "address": "95 Vo Thi Sau길, 6등, 3군, 호치민 시, 베트남",
+      "check_map": {
+        "title": "지도 확인",
+        "link": "https://www.google.com/maps/place/95+%C4%90.+V%C3%B5+Th%E1%BB%8B+S%C3%A1u,+Ph%C6%B0%E1%BB%9Dng+6,+Qu%E1%BA%ADn+3,+H%E1%BB%93+Ch%C3%AD+Minh+70000/@10.7866873,106.6884141,17z/data=!4m6!3m5!1s0x31752f3254c86d61:0x31fa21392192d696!8m2!3d10.786682!4d106.690989!16s%2Fg%2F11c20vt2hx?entry=ttu&g_ep=EgoyMDI0MTAwMi4xIKXMDSoASAFQAw%3D%3D"
+      }
+    },
+    "travel_booking": {
+      "title": "여행 예약",
+      "email": "kpglee44@naver.com",
+      "phone": "01067352180 (한국 전화번호)",
+      "kakao": "카카오톡 아이디: kpglee44"
+    },
+    "stay_in_touch": {
+      "title": "소셜 네트워크 서비스",
+      "facebook": "https://www.facebook.com/saigontravellounge.kr",
+      "instagram": "https://www.instagram.com/saigontravellounge.kr/",
+      "tiktok": "https://www.tiktok.com/@saigontravellounge.kr"
     }
   }
 }

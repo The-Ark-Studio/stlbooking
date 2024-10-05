@@ -35,13 +35,15 @@ const Header = () => {
       label: `${t('Nav.intro')}`,
       key: 'introduce',
       icon: <DownOutlined />,
-      children: [{
-        key: 'about1',
-        label: 'About Us',
-        onClick: () => {
-          window.location.href = 'https://stl.sg/about-us'; // Domain about-us
+      children: [
+        {
+          key: 'about1',
+          label: `${t('Nav.about')}`,
+          onClick: () => {
+            window.location.href = 'https://stl.sg/about-us'; // Domain about-us
+          },
         },
-      }],
+      ],
       onClick: () => {
         window.location.href = 'https://stl.sg/'; // Domain home
       },
@@ -53,23 +55,24 @@ const Header = () => {
       children: [
         {
           key: 'faqs',
-          label: 'FAQs',
+          label: `${t('Nav.faqs')}`,
           onClick: () => {
             window.location.href = 'https://stl.sg/saigon-travel-lounge/'; // Domain faqs
           },
         },
         {
           key: 'contact',
-          label: 'Contact',
+          label: `${t('Nav.contact')}`,
           onClick: () => {
             window.location.href = 'https://stl.sg/contact/'; // Domain contact
           },
         },
         {
           key: 'partnership',
-          label: 'Partnership',
+          label: `${t('Nav.partnerShip')}`,
           onClick: () => {
-            window.location.href = 'https://stl.sg/elementor-page-4428/stl-partnership/'; // Domain partnership
+            window.location.href =
+              'https://stl.sg/elementor-page-4428/stl-partnership/'; // Domain partnership
           },
         },
       ],
@@ -119,15 +122,14 @@ const Header = () => {
   }, []);
 
   return (
-    <HeaderWrap id="header">
+    <HeaderWrap id="header" style={{ paddingBottom: '10px' }}>
       <SpaceWrap>
         <Space>
           <Space>
             <a href="https://stl.sg" target="_blank" rel="noopener noreferrer">
-              <Image src={Logo} width={112} height={128} alt="Logo" />
+              <Image src={Logo} width={132} height={128} alt="Logo" />
             </a>
           </Space>
-
 
           <Space
             id="main-navbar"
@@ -177,12 +179,12 @@ const Header = () => {
             alignItems: 'center',
           }}
         >
-          <ButtonCustom
-            style={{ maxWidth: '253px', width: '125px', height: '40px' }}
+          {/* <ButtonCustom
+            style={{maxWidth: '253px', width: '125px', height: '40px'}}
             type="primary"
           >
             {t('booking_button')}
-          </ButtonCustom>
+          </ButtonCustom> */}
 
           {/* Mobile */}
           <div id="mobile-menu" style={{ marginLeft: 10 }}>
