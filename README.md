@@ -1,42 +1,47 @@
-## Docker Environment Setup
+# refine-project
 
-Creating separate Docker environments for local development, testing, staging, and production is a smart way to manage your projects. It keeps each environment isolated, ensuring consistency and stability across the development lifecycle.
+<div align="center" style="margin: 30px;">
+    <a href="https://refine.dev">
+    <img alt="refine logo" src="https://refine.ams3.cdn.digitaloceanspaces.com/readme/refine-readme-banner.png">
+    </a>
+</div>
+<br/>
 
-### Local Docker
-- **Purpose**: Local development and debugging.
-- **Configuration**: Includes all necessary dependencies for development, such as debugging tools and code editors.
-- **Docker Compose File**: `docker-compose.local.yml`
+This [Refine](https://github.com/refinedev/refine) project was generated with [create refine-app](https://github.com/refinedev/refine/tree/master/packages/create-refine-app).
 
-### Development Docker
-- **Purpose**: Integration testing and continuous integration (CI).
-- **Configuration**: Similar to the local environment but optimized for automated testing and integration processes.
-- **Docker Compose File**: `docker-compose.dev.yml`
+## Getting Started
 
-### Staging Docker
-- **Purpose**: Pre-production environment to test features before release.
-- **Configuration**: Mirrors the production environment as closely as possible.
-- **Docker Compose File**: `docker-compose.staging.yml`
+A React Framework for building internal tools, admin panels, dashboards & B2B apps with unmatched flexibility ✨
 
-### Production Docker
-- **Purpose**: Live environment serving end-users.
-- **Configuration**: Optimized for performance, security, and scalability.
-- **Docker Compose File**: `docker-compose.prod.yml`
+Refine's hooks and components simplifies the development process and eliminates the repetitive tasks by providing industry-standard solutions for crucial aspects of a project, including authentication, access control, routing, networking, state management, and i18n.
 
-### Implementation Steps
+## Available Scripts
 
-1. **Separate Configuration Files**: Maintain separate Docker Compose files for each environment. This keeps your configurations clean and environment-specific.
-    ```sh
-    # Local environment
-    docker-compose -f docker-compose.local.yml up
-    
-    # Development environment
-    docker-compose -f docker-compose.dev.yml up
-    
-    # Staging environment
-    docker-compose -f docker-compose.staging.yml up
-    
-    # Production environment
-    docker-compose -f docker-compose.prod.yml up
-    ```
+### Running the development server.
 
-2. **Environment Variables**: Use environment-specific
+```bash
+    npm run dev
+```
+
+### Building for production.
+
+```bash
+    npm run build
+```
+
+### Running the production server.
+
+```bash
+    npm run start
+```
+
+## Learn More
+
+To learn more about **Refine**, please check out the [Documentation](https://refine.dev/docs)
+
+- **Strapi v4 Data Provider** [Docs](https://refine.dev/docs/core/providers/data-provider/#overview)
+- **Ant Design** [Docs](https://refine.dev/docs/ui-frameworks/antd/tutorial/)
+
+## License
+
+MIT
