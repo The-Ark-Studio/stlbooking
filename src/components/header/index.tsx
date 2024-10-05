@@ -148,7 +148,7 @@ const Header = () => {
                   onChange={handleChangeLanguage}
                   options={[
                     { value: 'en', label: 'English' },
-                    { value: 'ko', label: 'KOR' },
+                    { value: 'ko', label: 'Korean' },
                   ]}
                   disabled={isPending}
                 />
