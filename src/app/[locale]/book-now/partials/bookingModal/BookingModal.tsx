@@ -1,5 +1,5 @@
-import React, {Fragment, useState} from 'react';
-import {useForm, Controller} from 'react-hook-form';
+import React, { Fragment, useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import dayjs from 'dayjs';
 import {
   Form,
@@ -15,21 +15,21 @@ import {
 } from 'antd';
 import styled from 'styled-components';
 import Colors from '@constants/Colors';
-import {useCustomMutation} from '@refinedev/core';
+import { useCustomMutation } from '@refinedev/core';
 import {
   GLOBAL_DATE_FORMAT,
   HOUR_FORMAT,
   TIME_CHECK_IN_OUT_FORMAT,
 } from '@utility/conmom';
-import {IDataFormType} from '@interfaces/booking/booking';
+import { IDataFormType } from '@interfaces/booking/booking';
 import ButtonCustom from '@components/buttonCustom/ButtonCustom';
-import {axiosInstance} from '@utility/axios-instance';
+import { axiosInstance } from '@utility/axios-instance';
 
 // const {Option} = Select;
-const {Text} = Typography;
+const { Text } = Typography;
 
 // import {useMediaQuery} from 'react-responsive';
-import {useTranslations} from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 interface IBookingFormModalProps {
   isModalOpen: boolean;
@@ -59,7 +59,7 @@ const BookingFormModal = ({
     control,
     handleSubmit,
     setValue,
-    formState: {errors, isValid},
+    formState: { errors, isValid },
   } = useForm<IDataFormType>({
     defaultValues: {
       adults: 1,
@@ -82,7 +82,7 @@ const BookingFormModal = ({
   const [openCheckInTime, setOpenCheckInTime] = useState(false);
   const [openCheckOutTime, setOpenCheckOutTime] = useState(false);
 
-  const {mutate: sendBooking, isLoading} = useCustomMutation();
+  const { mutate: sendBooking, isLoading } = useCustomMutation();
 
   const today = dayjs().format(GLOBAL_DATE_FORMAT);
 
@@ -111,7 +111,7 @@ const BookingFormModal = ({
     try {
       const response = await axiosInstance.post(
         url,
-        {data: payload},
+        { data: payload },
         {
           headers: {
             'Content-Type': 'application/json',
@@ -154,7 +154,7 @@ const BookingFormModal = ({
       {
         method: 'post',
         url: url,
-        values: {data: payload},
+        values: { data: payload },
         config: {
           headers: {
             'Content-Type': 'application/json',
@@ -225,12 +225,12 @@ const BookingFormModal = ({
               <Controller
                 name="date"
                 control={control}
-                render={({field}) => (
+                render={({ field }) => (
                   <DatePicker
                     size="large"
                     {...field}
                     format="DD-MM-YYYY" // Định dạng cho UI
-                    style={{width: '100%'}}
+                    style={{ width: '100%' }}
                     placeholder="DD - MMM - YYYY"
                     minDate={dayjs(today, GLOBAL_DATE_FORMAT)}
                     value={
@@ -242,7 +242,7 @@ const BookingFormModal = ({
                     }} // Định dạng giá trị được chọn
                   />
                 )}
-                rules={{required: true}}
+                rules={{ required: true }}
               />
               {errors.date && (
                 <Text type="danger">
@@ -259,12 +259,12 @@ const BookingFormModal = ({
                     name="adults"
                     control={control}
                     defaultValue={1}
-                    render={({field}) => (
+                    render={({ field }) => (
                       <InputNumber
                         size="large"
                         {...field}
                         min={1}
-                        style={{width: '100%'}}
+                        style={{ width: '100%' }}
                         onChange={(value) => {
                           field.onChange(value);
                           handleFormChange();
@@ -282,12 +282,12 @@ const BookingFormModal = ({
                     name="children"
                     control={control}
                     defaultValue={0}
-                    render={({field}) => (
+                    render={({ field }) => (
                       <InputNumber
                         size="large"
                         {...field}
                         min={0}
-                        style={{width: '100%'}}
+                        style={{ width: '100%' }}
                         onChange={(value) => {
                           field.onChange(value);
                           handleFormChange();
@@ -305,12 +305,12 @@ const BookingFormModal = ({
                     name="infants"
                     control={control}
                     defaultValue={0}
-                    render={({field}) => (
+                    render={({ field }) => (
                       <InputNumber
                         size="large"
                         {...field}
                         min={0}
-                        style={{width: '100%'}}
+                        style={{ width: '100%' }}
                         onChange={(value) => {
                           field.onChange(value);
                           handleFormChange();
@@ -328,14 +328,14 @@ const BookingFormModal = ({
                 <Controller
                   name="firstName"
                   control={control}
-                  render={({field}) => (
+                  render={({ field }) => (
                     <Input
                       size="large"
                       {...field}
-                      placeholder={t('modal_booking.firstname')}
+                      placeholder={t('modal_booking.first_name')}
                     />
                   )}
-                  rules={{required: true}}
+                  rules={{ required: true }}
                 />
                 {errors.firstName && (
                   <Text type="danger">
@@ -345,7 +345,7 @@ const BookingFormModal = ({
               </Form.Item>
 
               {/* Last Name */}
-              <Form.Item label={t('modal_booking.last_name')}>
+              {/* <Form.Item label={t('modal_booking.last_name')}>
                 <Controller
                   name="lastName"
                   control={control}
@@ -363,7 +363,7 @@ const BookingFormModal = ({
                     {t('modal_booking.this_field_is_required')}
                   </Text>
                 )}
-              </Form.Item>
+              </Form.Item> */}
             </FormGroup>
 
             <FormGroup>
@@ -372,14 +372,14 @@ const BookingFormModal = ({
                 <Controller
                   name="email"
                   control={control}
-                  render={({field}) => (
+                  render={({ field }) => (
                     <Input
                       size="large"
                       {...field}
                       placeholder={t('modal_booking.email_placeholder')}
                     />
                   )}
-                  rules={{required: true}}
+                  rules={{ required: true }}
                 />
                 {errors.email && (
                   <Text type="danger">
@@ -393,14 +393,14 @@ const BookingFormModal = ({
                 <Controller
                   name="phone"
                   control={control}
-                  render={({field}) => (
+                  render={({ field }) => (
                     <Input
                       size="large"
                       {...field}
                       placeholder={t('modal_booking.phoneNumber')}
                     />
                   )}
-                  rules={{required: true}}
+                  rules={{ required: true }}
                 />
                 {errors.phone && (
                   <Text type="danger">
@@ -416,11 +416,12 @@ const BookingFormModal = ({
                 <Controller
                   name="checkinTime"
                   control={control}
-                  render={({field}) => (
+                  render={({ field }) => (
                     <TimePicker
                       needConfirm={false}
                       allowClear={false}
                       showNow={false}
+                      placeholder={t('modal_booking.check_in_time')}
                       open={openCheckInTime}
                       onCalendarChange={(time, _) => {
                         if (Array.isArray(time)) {
@@ -441,7 +442,7 @@ const BookingFormModal = ({
                       size="large"
                       {...field}
                       format={TIME_CHECK_IN_OUT_FORMAT}
-                      style={{width: '100%'}}
+                      style={{ width: '100%' }}
                       onChange={(time, _) => {
                         setValue('checkinTime', dayjs(time));
                         handleFormChange();
@@ -455,7 +456,7 @@ const BookingFormModal = ({
                       }}
                     />
                   )}
-                  rules={{required: true}}
+                  rules={{ required: true }}
                 />
                 {errors.checkinTime && (
                   <Text type="danger">
@@ -469,11 +470,12 @@ const BookingFormModal = ({
                 <Controller
                   name="checkoutTime"
                   control={control}
-                  render={({field}) => (
+                  render={({ field }) => (
                     <TimePicker
                       needConfirm={false}
                       allowClear={false}
                       showNow={false}
+                      placeholder={t('modal_booking.check_out_time')}
                       open={openCheckOutTime}
                       onCalendarChange={(time, _) => {
                         if (Array.isArray(time)) {
@@ -494,7 +496,7 @@ const BookingFormModal = ({
                       size="large"
                       {...field}
                       format={TIME_CHECK_IN_OUT_FORMAT}
-                      style={{width: '100%'}}
+                      style={{ width: '100%' }}
                       onChange={(time, _) => {
                         setValue('checkoutTime', dayjs(time));
                         handleFormChange();
@@ -508,7 +510,7 @@ const BookingFormModal = ({
                       }}
                     />
                   )}
-                  rules={{required: true}}
+                  rules={{ required: true }}
                 />
                 {errors.checkoutTime && (
                   <Text type="danger">
@@ -521,14 +523,14 @@ const BookingFormModal = ({
             {/* TODO For requesting Note is Disabled */}
             <NoteStyled>
               {/* note */}
-              <div style={{padding: '16px'}}>
+              <div style={{ padding: '16px' }}>
                 <Form.Item>
                   <div className="notes-label">Notes for extra services</div>
-                  <div style={{margin: '10px 0'}}>
+                  <div style={{ margin: '10px 0' }}>
                     <Controller
                       name="extraServices.airportPickup"
                       control={control}
-                      render={({field}) => (
+                      render={({ field }) => (
                         <Checkbox {...field} checked={field.value}>
                           <Text className="checkbox-label">Airport pickup</Text>
                         </Checkbox>
@@ -538,9 +540,9 @@ const BookingFormModal = ({
                     <Controller
                       name="extraServices.spaManicure"
                       control={control}
-                      render={({field}) => (
+                      render={({ field }) => (
                         <Checkbox
-                          style={{marginLeft: '10px'}}
+                          style={{ marginLeft: '10px' }}
                           {...field}
                           checked={field.value}
                         >
@@ -552,9 +554,9 @@ const BookingFormModal = ({
                     <Controller
                       name="extraServices.tourPackage"
                       control={control}
-                      render={({field}) => (
+                      render={({ field }) => (
                         <Checkbox
-                          style={{marginLeft: '10px'}}
+                          style={{ marginLeft: '10px' }}
                           {...field}
                           checked={field.value}
                         >
@@ -567,7 +569,7 @@ const BookingFormModal = ({
                   <Controller
                     name="notes"
                     control={control}
-                    render={({field}) => (
+                    render={({ field }) => (
                       <Input.TextArea
                         {...field}
                         rows={4}
@@ -583,45 +585,39 @@ const BookingFormModal = ({
                 <FormGroup>
                   {/* Total Guests */}
                   <Form.Item>
-                    <Text>{`${t('modal_booking.total_guests')}: ${
-                      calculationData?.totalGuests || 0
-                    }`}</Text>
+                    <Text>{`${t('modal_booking.total_guests')}: ${calculationData?.totalGuests || 0
+                      }`}</Text>
                   </Form.Item>
                   {/* Total Stay Time */}
                   <Form.Item>
-                    <Text>{`${t('modal_booking.total_stay_hours')}: ${
-                      Math.round((calculationData?.totalDurations || 0) * 10) /
+                    <Text>{`${t('modal_booking.total_stay_hours')}: ${Math.round((calculationData?.totalDurations || 0) * 10) /
                       10
-                    } hour(s)`}</Text>
+                      } hour(s)`}</Text>
                   </Form.Item>
                 </FormGroup>
                 <FormGroup>
                   {/* Extra hours */}
                   <Form.Item>
-                    <Text>{`${t('modal_booking.extra_hours')}: ${
-                      calculationData?.extraHour || 0
-                    } hour(s)`}</Text>
+                    <Text>{`${t('modal_booking.extra_hours')}: ${calculationData?.extraHour || 0
+                      } hour(s)`}</Text>
                   </Form.Item>
                   {/* Extra price */}
                   <Form.Item>
-                    <Text>{`${t('modal_booking.extra_price')}: ${
-                      calculationData?.extraPrice.toLocaleString() ?? 0
-                    } VND`}</Text>
+                    <Text>{`${t('modal_booking.extra_price')}: ${calculationData?.extraPrice.toLocaleString() ?? 0
+                      } VND`}</Text>
                   </Form.Item>
                 </FormGroup>
                 <FormGroup>
                   {/* Sub Total */}
                   <Form.Item>
                     {/* <Text>Sub total: 500,000 VND</Text> */}
-                    <Text>{`${t('modal_booking.sub_total_price')}: ${
-                      calculationData?.subtotalCost.toLocaleString() ?? 0
-                    } VND`}</Text>
+                    <Text>{`${t('modal_booking.sub_total_price')}: ${calculationData?.subtotalCost.toLocaleString() ?? 0
+                      } VND`}</Text>
                   </Form.Item>
                   {/* Total price */}
                   <Form.Item>
-                    <Text>{`${t('modal_booking.total')}: ${
-                      calculationData?.totalCost.toLocaleString() ?? 0
-                    } VND`}</Text>
+                    <Text>{`${t('modal_booking.total')}: ${calculationData?.totalCost.toLocaleString() ?? 0
+                      } VND`}</Text>
                   </Form.Item>
                 </FormGroup>
                 <FormGroup>
@@ -642,7 +638,7 @@ const BookingFormModal = ({
                   <Col xs={24} sm={9}>
                     <ButtonCustom
                       loading={isLoadingCalculate}
-                      style={{width: '100%', height: 40}}
+                      style={{ width: '100%', height: 40 }}
                       type="primary"
                       disabled={isCalculateDisabled}
                       htmlType="submit"
@@ -656,7 +652,7 @@ const BookingFormModal = ({
                   <Col xs={24} sm={9}>
                     <ButtonCustom
                       loading={isLoading}
-                      style={{width: '100%', height: 40}}
+                      style={{ width: '100%', height: 40 }}
                       type="primary"
                       htmlType="submit"
                       disabled={isSendBookingDisabled}
