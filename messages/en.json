@@ -34,6 +34,7 @@
       "elevenHours_row_cell": "Adult: 800,000VND"
     },
     "reserve_button": "Reserve My Seat",
+    "hours": "Hour(s)",
     "modal_booking": {
       "facility": "Select facility*",
       "date": "Select Date*",
