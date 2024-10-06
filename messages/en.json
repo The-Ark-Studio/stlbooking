@@ -61,7 +61,7 @@
       "selectTime": "Choose the time",
       "payment_method": "Payment method: Cash on Receipt",
       "calculate_button": "1 Total",
-      "send_booking_button": " 2 Submit"
+      "send_booking_button": " 2 Submit",
       "calc_error_common": "Cannot calculation at this time, please try again later."
     },
     "success_modal": {
