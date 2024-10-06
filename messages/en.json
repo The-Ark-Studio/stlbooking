@@ -60,7 +60,8 @@
       "selectTime": "Choose the time",
       "payment_method": "Payment method: Cash on Receipt",
       "calculate_button": "1 Calculate price",
-      "send_booking_button": " 2 Send my booking"
+      "send_booking_button": " 2 Send my booking",
+      "calc_error_common": "Cannot calculation at this time, please try again later."
     },
     "success_modal": {
       "title": "From STL",
