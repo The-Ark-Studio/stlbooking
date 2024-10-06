@@ -1,0 +1,27 @@
+# Dockerfile.dev
+
+# Bước 1: Sử dụng image refinedev/node:18
+FROM refinedev/node:18
+
+# Bước 2: Cài đặt pnpm
+RUN npm install -g pnpm
+
+# Bước 3: Thiết lập thư mục làm việc
+WORKDIR /stl/fe
+
+# Bước 4: Sao chép các file cấu hình vào thư mục làm việc
+COPY package.json pnpm-lock.yaml* yarn.lock* package-lock.json* .npmrc* ./
+
+# Bước 5: Cài đặt các dependency
+RUN pnpm install
+
+# Bước 6: Sao chép toàn bộ mã nguồn vào thư mục làm việc
+COPY . .
+
+# Bước 7: Thiết lập biến môi trường và chạy ứng dụng trong chế độ phát triển
+ENV NODE_ENV development
+ENV PORT 2005
+EXPOSE 2005
+
+# Chạy ứng dụng trong chế độ phát triển (có thể là pnpm run dev hoặc lệnh khác)
+CMD ["pnpm", "run", "dev"]
