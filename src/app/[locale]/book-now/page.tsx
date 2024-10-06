@@ -117,7 +117,7 @@ const BookNowScreen = () => {
           <ImagePrimary>
             <Image
               width="100%"
-              style={{height: isTabletOrMobile ? 500 : 600}}
+              style={{height: '100%'}}
               preview={true}
               src={BannerBooking.src}
               alt=""
@@ -175,7 +175,7 @@ const BookNowScreen = () => {
               <ImagePrimary>
                 <Image
                   width="100%"
-                  style={{height: 300}}
+                  style={{height: '100%'}}
                   preview={true}
                   src={BannerBooking.src}
                   alt=""
