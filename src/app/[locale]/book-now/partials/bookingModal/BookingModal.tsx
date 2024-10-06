@@ -612,14 +612,14 @@ const BookingFormModal = ({
                   <Form.Item>
                     <Text>{`${t('modal_booking.total_stay_hours')}: ${Math.round((calculationData?.totalDurations || 0) * 10) /
                       10
-                      } hour(s)`}</Text>
+                      } ${t('hours')}`}</Text>
                   </Form.Item>
                 </FormGroup>
                 <FormGroup>
                   {/* Extra hours */}
                   <Form.Item>
                     <Text>{`${t('modal_booking.extra_hours')}: ${calculationData?.extraHour || 0
-                      } hour(s)`}</Text>
+                      } ${t('hours')}`}</Text>
                   </Form.Item>
                   {/* Extra price */}
                   <Form.Item>

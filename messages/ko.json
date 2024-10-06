@@ -5,7 +5,7 @@
       "intro": "소개",
       "about": "회사 소개",
       "service": "서비스",
-      "gallery": "갱도",
+      "gallery": "갤러리",
       "contact": "연락하다",
       "partnerShip": "공동",
       "faqs": "자주 묻는 질문"
@@ -16,14 +16,14 @@
     "subtitle_text": "500,000VND부터 / 5시간",
     "description_text": "전용 발코니를 이용하실 수 있으며, 객실에는 현대적이고 고급스러운 장비가 갖추어져 있어 가장 멋진 시간을 보내실 수 있습니다.",
     "base_price_range_table": {
-      "title": "기본 가격대",
+      "title": "가격표",
       "adult_column_header": "성인",
       "children_column_header": "7~12세 어린이",
-      "babies_column_header": "7세 미만",
+      "babies_column_header": "7세 미만 어린이",
       "babies_column_row_cell": "무료"
     },
     "extra_services_table": {
-      "title": "추가 시간(성인에게만 적용)",
+      "title": "추가 이용 시간 (성인만 적용, 12세 미만 무료)",
       "fiveHours_column_header": "5시간",
       "sevenHours_column_header": "7시간",
       "nineHours_column_header": "9시간",
@@ -33,21 +33,22 @@
       "nineHours_row_cell": "성인 700,000VND",
       "elevenHours_row_cell": "성인 800,000VND"
     },
-    "reserve_button": "내 자리를 예약하세요",
+    "reserve_button": "예약하기",
+    "hours": "시간",
     "modal_booking": {
       "facility": "시설 선택*",
-      "date": "날짜를 선택하세요*",
+      "date": "방문날짜*",
       "adults": "성인",
       "children": "7~12세 어린이",
-      "infants": "7세 미만",
+      "infants": "7세 미만 어린이",
       "first_name": "이름*",
       "last_name": "성*",
       "email": "이메일*",
       "phone_number": "전화 번호*",
       "check_in_time": "체크인 시간*",
       "check_out_time": "체크아웃 시간*",
-      "total_guests": "총 손님",
-      "total_stay_hours": "총 체류 시간",
+      "total_guests": "총 인원수",
+      "total_stay_hours": "총 이용 시간",
       "sub_total_price": "소계",
       "extra_hours": "추가 시간",
       "extra_price": "추가 요금",
@@ -58,7 +59,7 @@
       "email_placeholder": "이메일",
       "phoneNumber": "전화번호",
       "selectTime": "시간 선택",
-      "payment_method": "결제 방법: 수령 시 현금",
+      "payment_method": "결제 방법: 현금",
       "calculate_button": "1 추가 시간",
       "send_booking_button": " 2 내 예약을 보냈습니다",
       "calc_error_common": "현재 계산할 수 없습니다. 나중에 다시 시도하세요."
@@ -67,7 +68,7 @@
       "title": "STL에서",
       "description_one": "\"우리와 함께 머물기를 선택해 주셔서 감사합니다! 우리는 귀하를 모시게 되어 기쁘게 생각하며 이곳에서 즐거운 시간을 보내시기를 바랍니다. 숙박에 관한 중요한 정보는 우편함을 확인하시기 바랍니다.",
       "description_two": "도움이 필요하거나 질문이 있는 경우 언제든지 저희 팀에 문의해 주세요. 우리는 귀하가 편안하고 기억에 남는 경험을 할 수 있도록 최선을 다하고 있습니다.\"",
-      "ok_button": "좋아요!"
+      "ok_button": "완료하기!"
     }
   },
   "footer": {
