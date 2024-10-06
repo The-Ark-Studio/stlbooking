@@ -1,5 +1,3 @@
-# Dockerfile.dev
-
 # Bước 1: Sử dụng image refinedev/node:18
 FROM refinedev/node:18
 
@@ -10,10 +8,10 @@ RUN npm install -g pnpm
 WORKDIR /stl/fe
 
 # Bước 4: Sao chép các file cấu hình vào thư mục làm việc
-COPY package.json pnpm-lock.yaml* yarn.lock* package-lock.json* .npmrc* ./
+COPY package.json pnpm-lock.yaml* ./
 
 # Bước 5: Cài đặt các dependency
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 
 # Bước 6: Sao chép toàn bộ mã nguồn vào thư mục làm việc
 COPY . .
@@ -23,5 +21,5 @@ ENV NODE_ENV development
 ENV PORT 2005
 EXPOSE 2005
 
-# Chạy ứng dụng trong chế độ phát triển (có thể là pnpm run dev hoặc lệnh khác)
+# Chạy ứng dụng trong chế độ phát triển
 CMD ["pnpm", "run", "dev"]
