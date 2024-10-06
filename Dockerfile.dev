@@ -1,3 +1,4 @@
+
 # Bước 1: Sử dụng image refinedev/node:18
 FROM refinedev/node:18
 
@@ -8,7 +9,7 @@ RUN npm install -g pnpm
 WORKDIR /stl/fe
 
 # Bước 4: Sao chép các file cấu hình vào thư mục làm việc
-COPY package.json pnpm-lock.yaml* ./
+COPY package.json pnpm-lock.yaml* yarn.lock* package-lock.json* .npmrc* ./
 
 # Bước 5: Cài đặt các dependency
 RUN pnpm install --frozen-lockfile
@@ -16,10 +17,13 @@ RUN pnpm install --frozen-lockfile
 # Bước 6: Sao chép toàn bộ mã nguồn vào thư mục làm việc
 COPY . .
 
-# Bước 7: Thiết lập biến môi trường và chạy ứng dụng trong chế độ phát triển
-ENV NODE_ENV development
+# Bước 7: Xây dựng ứng dụng
+RUN pnpm run build
+
+# Bước 8: Thiết lập biến môi trường và chạy ứng dụng
+ENV NODE_ENV production
 ENV PORT 2005
 EXPOSE 2005
 
-# Chạy ứng dụng trong chế độ phát triển
-CMD ["pnpm", "run", "dev"]
+# Chỉ cần chạy lệnh start mà không cần gán PORT trong CMD
+CMD ["pnpm", "run", "start"]
