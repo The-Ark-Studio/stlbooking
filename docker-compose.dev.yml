@@ -7,6 +7,4 @@ services:
     ports:
       - "2005:2005"
     environment:
-      - NODE_ENV=development
-    volumes:
-      - .:/stl/fe # Mount source code vào container để đồng bộ khi phát triển
+      - NODE_ENV=production
