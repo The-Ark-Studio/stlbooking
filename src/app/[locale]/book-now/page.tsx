@@ -1,8 +1,8 @@
 'use client';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Banner from '@components/banner/Banner';
-import ImageBanner from '../../../../public/images/ImageBanner.png';
-import {Image, Typography, Table} from 'antd';
+import ImageBanner from '../../../../public/images/ImageBanner.jpg';
+import { Image, Typography, Table } from 'antd';
 import styled from 'styled-components';
 import BannerBooking from '../../../../public/images/bookNow/_ONY9838.jpg';
 import BookNow1 from '../../../../public/images/bookNow/_ONY9849.jpg';
@@ -15,24 +15,24 @@ import {
   extraHours as extraHoursMock,
 } from '@app/[locale]/book-now/partials/dataMock';
 
-import {type TableProps} from 'antd';
+import { type TableProps } from 'antd';
 import ButtonCustom from '@components/buttonCustom/ButtonCustom';
 import Colors from '@constants/Colors';
 import BookingFormModal from '@app/[locale]/book-now/partials/bookingModal/BookingModal';
-import {IBasePriceRange, IExtraHours} from '@interfaces/booking/booking';
+import { IBasePriceRange, IExtraHours } from '@interfaces/booking/booking';
 import SuccessModal from '@app/[locale]/book-now/partials/successModal/SuccessModal';
 
-const {Text} = Typography;
-import {useMediaQuery} from 'react-responsive';
-import {useTranslations} from 'next-intl';
+const { Text } = Typography;
+import { useMediaQuery } from 'react-responsive';
+import { useTranslations } from 'next-intl';
 
 const BookNowScreen = () => {
   const t = useTranslations('BookingScreen');
   const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
   const [isOpenSuccessModal, setIsOpenSuccessModal] = useState(false);
 
-  const isMobile = useMediaQuery({query: '(max-width: 576px)'});
-  const isTabletOrMobile = useMediaQuery({query: '(max-width: 1023px)'});
+  const isMobile = useMediaQuery({ query: '(max-width: 576px)' });
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1023px)' });
 
   const [basePriceRangeData, setBasePriceRangeData] = useState<
     IBasePriceRange[]
@@ -117,13 +117,13 @@ const BookNowScreen = () => {
           <ImagePrimary>
             <Image
               width="100%"
-              style={{height: isTabletOrMobile ? 500 : 600}}
+              style={{ height: isTabletOrMobile ? 500 : 600 }}
               preview={true}
               src={BannerBooking.src}
               alt=""
             />
           </ImagePrimary>
-          <ImageBottomList style={{width: '100%'}}>
+          <ImageBottomList style={{ width: '100%' }}>
             <div className="image-list-item">
               <Image preview={true} width="100%" src={BookNow1.src} alt="" />
             </div>
@@ -145,7 +145,7 @@ const BookNowScreen = () => {
           <ContentRightTop className="content-right__top">
             <div>
               <Text
-                style={{fontSize: isMobile ? 24 : 34}}
+                style={{ fontSize: isMobile ? 24 : 34 }}
                 className="title-text"
               >
                 {t('title_text')}
@@ -158,7 +158,7 @@ const BookNowScreen = () => {
              </Text> */}
             <div>
               <Text
-                style={{fontSize: isMobile ? 20 : 26}}
+                style={{ fontSize: isMobile ? 20 : 26 }}
                 className="sub-title-text"
               >
                 {t('subtitle_text')}
@@ -171,11 +171,11 @@ const BookNowScreen = () => {
 
           {/*Gallery for mobile view  */}
           {isMobile ? (
-            <ContentLeftWrap style={{width: '100%'}}>
+            <ContentLeftWrap style={{ width: '100%' }}>
               <ImagePrimary>
                 <Image
                   width="100%"
-                  style={{height: 300}}
+                  style={{ height: 300 }}
                   preview={true}
                   src={BannerBooking.src}
                   alt=""
@@ -228,7 +228,7 @@ const BookNowScreen = () => {
 
           <div>
             <Text
-              style={{fontSize: isMobile ? 22 : 26, color: Colors.neutral900}}
+              style={{ fontSize: isMobile ? 22 : 26, color: Colors.neutral900 }}
             >
               {t('base_price_range_table.title')}
             </Text>
@@ -247,7 +247,7 @@ const BookNowScreen = () => {
               Extra hours (apply for Adults only) */}
           <div id="booking__extra-hours">
             <Text
-              style={{fontSize: isMobile ? 22 : 26, color: Colors.neutral900}}
+              style={{ fontSize: isMobile ? 22 : 26, color: Colors.neutral900 }}
             >
               {t('extra_services_table.title')}
             </Text>

@@ -5,7 +5,7 @@
       "intro": "소개",
       "about": "회사 소개",
       "service": "서비스",
-      "gallery": "갱도",
+      "gallery": "갤러리",
       "contact": "연락하다",
       "partnerShip": "공동",
       "faqs": "자주 묻는 질문"
@@ -16,10 +16,10 @@
     "subtitle_text": "500,000VND부터 / 5시간",
     "description_text": "전용 발코니를 이용하실 수 있으며, 객실에는 현대적이고 고급스러운 장비가 갖추어져 있어 가장 멋진 시간을 보내실 수 있습니다.",
     "base_price_range_table": {
-      "title": "기본 가격대",
+      "title": "가격표",
       "adult_column_header": "성인",
       "children_column_header": "7~12세 어린이",
-      "babies_column_header": "7세 미만",
+      "babies_column_header": "7세 미만 어린이",
       "babies_column_row_cell": "무료"
     },
     "extra_services_table": {
