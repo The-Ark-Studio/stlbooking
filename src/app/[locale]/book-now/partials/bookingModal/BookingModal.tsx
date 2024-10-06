@@ -11,7 +11,7 @@ import {
   Checkbox,
   Typography,
   Row,
-  Col,
+  Col, Flex, Space,
 } from 'antd';
 import styled from 'styled-components';
 import Colors from '@constants/Colors';
@@ -81,6 +81,7 @@ const BookingFormModal = ({
   const [isLoadingCalculate, setIsLoadingCalculate] = useState(false);
   const [openCheckInTime, setOpenCheckInTime] = useState(false);
   const [openCheckOutTime, setOpenCheckOutTime] = useState(false);
+  const [calculationError, setCalculationError] = useState<null | string>(null);
 
   const { mutate: sendBooking, isLoading } = useCustomMutation();
 
@@ -93,6 +94,7 @@ const BookingFormModal = ({
     // Khi có sự thay đổi trong form, mở khóa nút Calculate và khóa lại nút Send my booking
     setIsCalculateDisabled(false);
     setIsSendBookingDisabled(true);
+    setCalculationError(null);
   };
 
   const handleCalculatePrice = async (data: IDataFormType) => {
@@ -109,7 +111,7 @@ const BookingFormModal = ({
 
     const url = 'https://services.theark.studio/api/booking-stls/calculation';
     try {
-      const response = await axiosInstance.post(
+      await axiosInstance.post(
         url,
         { data: payload },
         {
@@ -118,11 +120,20 @@ const BookingFormModal = ({
             // Authorization: 'Bearer your-auth-token',
           },
         }
-      );
-      setCalculationData(response.data.data);
-      setIsCalculateDisabled(!isCalculateDisabled);
-      setIsSendBookingDisabled(false);
-      setIsLoadingCalculate(false);
+      ).then(r => {
+        setCalculationData(r.data.data);
+        setCalculationError(null);
+      }).catch( e => {
+        if (e.status === 400) {
+          setCalculationError(e.response.data['message']);
+        } else {
+          setCalculationError(t('modal_booking.calc_error_common'));
+        }
+      }).finally(() => {
+        setIsCalculateDisabled(!isCalculateDisabled);
+        setIsSendBookingDisabled(false);
+        setIsLoadingCalculate(false);
+      });
     } catch (error) {
       setIsLoadingCalculate(false);
       console.log('🚀 ~  error:', error);
@@ -423,13 +434,18 @@ const BookingFormModal = ({
                       showNow={false}
                       placeholder={t('modal_booking.check_in_time')}
                       open={openCheckInTime}
+                      size="large"
+                      {...field}
+                      format={TIME_CHECK_IN_OUT_FORMAT}
+                      style={{ width: '100%' }}
                       onCalendarChange={(time, _) => {
+                        handleFormChange();
                         if (Array.isArray(time)) {
                           // Handle multiple selected times
                           time.forEach((selectedTime) => {
                             setValue(
-                              'checkinTime',
-                              dayjs(selectedTime.toDate())
+                                'checkinTime',
+                                dayjs(selectedTime.toDate())
                             );
                           });
                           setOpenCheckInTime(false);
@@ -439,13 +455,9 @@ const BookingFormModal = ({
                           setOpenCheckInTime(false);
                         }
                       }}
-                      size="large"
-                      {...field}
-                      format={TIME_CHECK_IN_OUT_FORMAT}
-                      style={{ width: '100%' }}
                       onChange={(time, _) => {
-                        setValue('checkinTime', dayjs(time));
                         handleFormChange();
+                        setValue('checkinTime', dayjs(time));
                         if (time) {
                           setOpenCheckInTime(false);
                         }
@@ -477,13 +489,18 @@ const BookingFormModal = ({
                       showNow={false}
                       placeholder={t('modal_booking.check_out_time')}
                       open={openCheckOutTime}
+                      size="large"
+                      {...field}
+                      format={TIME_CHECK_IN_OUT_FORMAT}
+                      style={{ width: '100%' }}
                       onCalendarChange={(time, _) => {
+                        handleFormChange();
                         if (Array.isArray(time)) {
                           // Handle multiple selected times
                           time.forEach((selectedTime) => {
                             setValue(
-                              'checkoutTime',
-                              dayjs(selectedTime.toDate())
+                                'checkoutTime',
+                                dayjs(selectedTime.toDate())
                             );
                           });
                           setOpenCheckOutTime(false);
@@ -493,10 +510,6 @@ const BookingFormModal = ({
                           setOpenCheckOutTime(false);
                         }
                       }}
-                      size="large"
-                      {...field}
-                      format={TIME_CHECK_IN_OUT_FORMAT}
-                      style={{ width: '100%' }}
                       onChange={(time, _) => {
                         setValue('checkoutTime', dayjs(time));
                         handleFormChange();
@@ -519,6 +532,13 @@ const BookingFormModal = ({
                 )}
               </Form.Item>
             </FormGroup>
+            <Flex style={{ marginBottom: "24px" }}>
+              {(calculationError != null) && (
+                  <Text type="danger">
+                    {calculationError}
+                  </Text>
+              )}
+            </Flex>
 
             {/* TODO For requesting Note is Disabled */}
             <NoteStyled>
@@ -580,7 +600,7 @@ const BookingFormModal = ({
                 </Form.Item>
               </div>
             </NoteStyled>
-            {!isCalculateDisabled ? null : (
+            {(!isCalculateDisabled || calculationError != null) ? null : (
               <div>
                 <FormGroup>
                   {/* Total Guests */}

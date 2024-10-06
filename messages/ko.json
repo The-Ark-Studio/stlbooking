@@ -61,7 +61,8 @@
       "selectTime": "시간 선택",
       "payment_method": "결제 방법: 현금",
       "calculate_button": "1 추가 시간",
-      "send_booking_button": " 2 내 예약을 보냈습니다"
+      "send_booking_button": " 2 내 예약을 보냈습니다",
+      "calc_error_common": "현재 계산할 수 없습니다. 나중에 다시 시도하세요."
     },
     "success_modal": {
       "title": "STL에서",
