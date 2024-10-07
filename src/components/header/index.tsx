@@ -25,10 +25,13 @@ const Header = () => {
   const localActive = useLocale();
   const [openSideBar, setOpenSideBar] = useState(false);
 
-  const [current, setCurrent] = useState('introduce');
+  const [current, setCurrent] = useState('');
   const [showHeader, setShowHeader] = useState(false);
 
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1023px)' });
+
+  const localNavigate = useLocale() === 'ko' ? 'ko' : '';
+  const domainURL = "https://stl.sg";
 
   const items: MenuItem[] = [
     {
@@ -40,12 +43,12 @@ const Header = () => {
           key: 'about1',
           label: `${t('Nav.about')}`,
           onClick: () => {
-            window.location.href = 'https://stl.sg/about-us'; // Domain about-us
+            window.location.href = `${domainURL}/${localNavigate}/about-us/`; // Domain about-us
           },
         },
       ],
-      onClick: () => {
-        window.location.href = 'https://stl.sg/'; // Domain home
+      onTitleClick: () => {
+        window.location.href = `${domainURL}/${localNavigate}/`; // Domain home
       },
     },
     {
@@ -57,14 +60,14 @@ const Header = () => {
           key: 'faqs',
           label: `${t('Nav.faqs')}`,
           onClick: () => {
-            window.location.href = 'https://stl.sg/saigon-travel-lounge/'; // Domain faqs
+            window.location.href = `${domainURL}/${localNavigate}/faqs/`; // Domain faqs
           },
         },
         {
           key: 'contact',
           label: `${t('Nav.contact')}`,
           onClick: () => {
-            window.location.href = 'https://stl.sg/contact/'; // Domain contact
+            window.location.href = `${domainURL}/${localNavigate}/contact/`; // Domain contact
           },
         },
         {
@@ -72,19 +75,19 @@ const Header = () => {
           label: `${t('Nav.partnerShip')}`,
           onClick: () => {
             window.location.href =
-              'https://stl.sg/elementor-page-4428/stl-partnership/'; // Domain partnership
+              `${domainURL}/${localNavigate}/elementor-page-4428/stl-partnership/`; // Domain partnership
           },
         },
       ],
-      onClick: () => {
-        window.location.href = 'https://stl.sg/service/'; // Domain service
+      onTitleClick: () => {
+        window.location.href = `${domainURL}/${localNavigate}/service/`; // Domain service
       },
     },
     {
       label: `${t('Nav.gallery')}`,
       key: 'gallery',
       onClick: () => {
-        window.location.href = 'https://stl.sg/gallery/'; // Domain gallery
+        window.location.href = `${domainURL}/${localNavigate}/gallery/`; // Domain gallery
       },
     },
   ];
