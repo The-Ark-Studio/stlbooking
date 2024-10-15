@@ -3,6 +3,7 @@ import {Button, Modal} from 'antd';
 import React, {useState} from 'react';
 import {ReactComponent as OpenHour} from '../../../../../../public/images/opening-hours.svg';
 import styled from 'styled-components';
+import {useTranslations} from 'next-intl';
 
 interface IWorkingHoursModalProps {
   open: boolean;
@@ -16,6 +17,9 @@ const WorkingHoursModal = ({
   const handleCancel = () => {
     setShowOpeningHourModal(false);
   };
+
+  const t = useTranslations('BookingScreen');
+
   return (
     <>
       <StyledModal
@@ -30,7 +34,7 @@ const WorkingHoursModal = ({
             <div
               style={{marginRight: 10, fontSize: 36, color: Colors.neutral600}}
             >
-              Opening Hour
+              {t('opening_hours_modal.title')}
             </div>
             <OpenHour width={40} height={40} />
           </div>
@@ -43,8 +47,8 @@ const WorkingHoursModal = ({
         closable={open}
         onCancel={handleCancel}
       >
-        <h2>Operating hours from Now until December 31, 2024</h2>
-        <p>From 5:00 PM to 12:00 AM the next day.</p>
+        <h2>{t('opening_hours_modal.description')}</h2>
+        {/* <p>From 17h:00 to 24h the next day.</p> */}
       </StyledModal>
     </>
   );
@@ -56,16 +60,15 @@ const StyledModal = styled(Modal)`
   max-width: 600px;
   .ant-modal-body {
     height: 200px;
-    padding: 50px !important;
-    padding-top: 30px !important;
+    padding: 40px 60px 0 !important;
   }
   h2 {
     font-size: 24px;
     font-weight: bold;
-    color: #0b2d6b;
     color: ${Colors.primary500};
     margin-top: 0;
     text-align: center;
+    line-height: 42px;
   }
   p {
     margin-top: 20px;

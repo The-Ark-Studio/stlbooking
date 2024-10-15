@@ -25,17 +25,16 @@ import SuccessModal from '@app/[locale]/book-now/partials/successModal/SuccessMo
 const {Text} = Typography;
 import {useMediaQuery} from 'react-responsive';
 import {useTranslations} from 'next-intl';
-import WorkingHoursModal from '@app/[locale]/book-now/partials/bookingModal/WorkingHoursModal';
+// import WorkingHoursModal from '@app/[locale]/book-now/partials/bookingModal/WorkingHoursModal';
 
 const BookNowScreen = () => {
   const t = useTranslations('BookingScreen');
   const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
   const [isOpenSuccessModal, setIsOpenSuccessModal] = useState(false);
-  const [showOpeningHourModal, setShowOpeningHourModal] = useState(false);
-
-  useEffect(() => {
-    setShowOpeningHourModal(true);
-  }, []);
+  // const [showOpeningHourModal, setShowOpeningHourModal] = useState(false);
+  // useEffect(() => {
+  //   setShowOpeningHourModal(true);
+  // }, []);
 
   const isMobile = useMediaQuery({query: '(max-width: 576px)'});
   // const isTabletOrMobile = useMediaQuery({query: '(max-width: 1023px)'});
@@ -299,12 +298,13 @@ const BookNowScreen = () => {
         />
       ) : null}
 
-      {showOpeningHourModal ? (
+      {/* disable from requirement */}
+      {/* {showOpeningHourModal ? (
         <WorkingHoursModal
           setShowOpeningHourModal={setShowOpeningHourModal}
           open={showOpeningHourModal}
         />
-      ) : null}
+      ) : null} */}
     </BookingNowWrapStyled>
   );
 };
