@@ -1,10 +1,10 @@
 'use client';
-import {useLocale, useTranslations} from 'next-intl';
-import {useEffect, useState, useTransition} from 'react';
-import {ReactComponent as KrFlag} from '../../../public/images/countryFlags/krFlag.svg';
-import {ReactComponent as EnFlag} from '../../../public/images/countryFlags/enFlag.svg';
+import { useLocale, useTranslations } from 'next-intl';
+import { useEffect, useState, useTransition } from 'react';
+import { ReactComponent as KrFlag } from '../../../public/images/countryFlags/krFlag.svg';
+import { ReactComponent as EnFlag } from '../../../public/images/countryFlags/enFlag.svg';
 import ButtonCustom from '@components/buttonCustom/ButtonCustom';
-import {Space, Typography, Menu, Drawer, Select} from 'antd';
+import { Space, Typography, Menu, Drawer, Select } from 'antd';
 import Image from 'next/image';
 import styled from 'styled-components';
 import Logo from '../../../public/images/logo/logo.png';
@@ -17,10 +17,10 @@ import {
   MenuOutlined,
 } from '@ant-design/icons';
 import Colors from '@constants/Colors';
-import type {MenuProps} from 'antd';
-import {useRouter} from 'next/navigation';
+import type { MenuProps } from 'antd';
+import { useRouter } from 'next/navigation';
 
-import {useMediaQuery} from 'react-responsive';
+import { useMediaQuery } from 'react-responsive';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -34,7 +34,7 @@ const Header = () => {
   const [current, setCurrent] = useState('');
   const [showHeader, setShowHeader] = useState(false);
 
-  const isTabletOrMobile = useMediaQuery({query: '(max-width: 1023px)'});
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1023px)' });
 
   const localNavigate = useLocale() === 'ko' ? 'ko' : '';
   const domainURL = 'https://stl.sg';
@@ -66,7 +66,7 @@ const Header = () => {
           key: 'facility',
           label: `${t('Nav.facility')}`,
           onClick: () =>
-            (window.location.href = `${domainURL}/${localNavigate}/`),
+            (window.location.href = `${domainURL}/${localNavigate}/service/`),
         },
         {
           key: 'faqs',
@@ -74,7 +74,7 @@ const Header = () => {
           onClick: () => {
             window.location.href = `${domainURL}/${localNavigate}/faqs/`; // Domain faqs
           },
-          disabled: true,
+          disabled: false,
         },
         {
           key: 'contact',
@@ -82,7 +82,7 @@ const Header = () => {
           onClick: () => {
             window.location.href = `${domainURL}/${localNavigate}/contact/`; // Domain contact
           },
-          disabled: true,
+          disabled: false,
         },
         {
           key: 'partnership',
@@ -90,11 +90,11 @@ const Header = () => {
           onClick: () => {
             window.location.href = `${domainURL}/${localNavigate}/elementor-page-4428/stl-partnership/`; // Domain partnership
           },
-          disabled: true,
+          disabled: false,
         },
       ],
       onTitleClick: () => {
-        window.location.href = `${domainURL}/${localNavigate}/service/`; // Domain service
+        // window.location.href = `${domainURL}/${localNavigate}/service/`; // Domain service
       },
     },
     {
@@ -139,7 +139,7 @@ const Header = () => {
   }, []);
 
   return (
-    <HeaderWrap id="header" style={{paddingBottom: '10px'}}>
+    <HeaderWrap id="header" style={{ paddingBottom: '10px' }}>
       <SpaceWrap>
         <Space>
           <Space>
@@ -150,7 +150,7 @@ const Header = () => {
 
           <Space
             id="main-navbar"
-            style={{display: isTabletOrMobile ? 'none' : ''}}
+            style={{ display: isTabletOrMobile ? 'none' : '' }}
           >
             <Space>
               <LanguageIconWrap>
@@ -163,11 +163,11 @@ const Header = () => {
                 {/* <LanguageTextStyle>English</LanguageTextStyle> */}
                 <Select
                   defaultValue={localActive}
-                  style={{width: 100}}
+                  style={{ width: 100 }}
                   onChange={handleChangeLanguage}
                   options={[
-                    {value: 'en', label: 'English'},
-                    {value: 'ko', label: 'Korean'},
+                    { value: 'en', label: 'English' },
+                    { value: 'ko', label: 'Korean' },
                   ]}
                   disabled={isPending}
                 />
@@ -181,7 +181,7 @@ const Header = () => {
                     mode="horizontal"
                     forceSubMenuRender
                     overflowedIndicator={false}
-                    style={{minWidth: '443px'}}
+                    style={{ minWidth: '443px' }}
                     items={items}
                   />
                 )}
@@ -191,8 +191,8 @@ const Header = () => {
         </Space>
 
         {/* opening hours */}
-        <Space style={{padding: '40px 0'}}>
-          <ClockCircleTwoToneIcon />
+        <Space style={{ padding: '40px 0' }}>
+          <ClockCircleOutlined />
           <div
             style={{
               fontSize: isTabletOrMobile ? '16px' : '18px',
@@ -216,7 +216,7 @@ const Header = () => {
           </ButtonCustom> */}
 
           {/* Mobile */}
-          <div id="mobile-menu" style={{marginLeft: 10}}>
+          <div id="mobile-menu" style={{ marginLeft: 10 }}>
             <ButtonCustom onClick={showSideBar}>
               {openSideBar ? <CloseOutlined /> : <MenuOutlined />}
             </ButtonCustom>

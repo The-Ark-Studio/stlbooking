@@ -52,6 +52,10 @@ const Footer = () => {
                 <Link href={"tel: " + t('contact.phone')}>{t('contact.phone')}</Link>
               </ItemStyled>
               <ItemStyled>
+                <MessageOutlined />
+                <Text>{t('contact.kakao')}</Text>
+              </ItemStyled>
+              <ItemStyled>
                 <HomeOutlined />
                 <Text>
                   {t('contact.address')}
