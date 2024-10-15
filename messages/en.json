@@ -8,8 +8,10 @@
       "partnerShip": "Partnership",
       "faqs": "FAQs",
       "service": "Service",
-      "gallery": "Gallery"
-    }
+      "gallery": "Gallery",
+      "facility": "Facility Overview"
+    },
+    "opening_hours": "Opening Hours (Until 2024/12/31): 5PM~12AM"
   },
   "BookingScreen": {
     "title_text": "Lounge Booking",
@@ -69,6 +71,10 @@
       "description_one": "Thank you for choosing to stay with us! We are delighted to have you and hope you enjoy your time here. Please check your mailbox for important information regarding your stay. If you need any assistance or have any questions, feel free to reach out to our team. We are here to ensure you have a comfortable and memorable experience.",
       "description_two": "If you need any assistance or have any questions, feel free to reach out to our team. We are here to ensure you have a comfortable and memorable experience.",
       "ok_button": "Ok!"
+    },
+    "opening_hours_modal": {
+      "title": "Opening Hours",
+      "description": "Opening Hours (Until 2024/12/31): 5PM~12AM"
     }
   },
   "footer": {
