@@ -9,7 +9,13 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import Logo from '../../../public/images/logo/logo.png';
 import LanguageIcon from '../../../public/images/Language.png';
-import { CloseOutlined, DownOutlined, MenuOutlined } from '@ant-design/icons';
+import {
+  ClockCircleOutlined,
+  ClockCircleTwoTone,
+  CloseOutlined,
+  DownOutlined,
+  MenuOutlined,
+} from '@ant-design/icons';
 import Colors from '@constants/Colors';
 import type { MenuProps } from 'antd';
 import { useRouter } from 'next/navigation';
@@ -31,7 +37,7 @@ const Header = () => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1023px)' });
 
   const localNavigate = useLocale() === 'ko' ? 'ko' : '';
-  const domainURL = "https://stl.sg";
+  const domainURL = 'https://stl.sg';
 
   const items: MenuItem[] = [
     {
@@ -57,11 +63,18 @@ const Header = () => {
       icon: <DownOutlined />,
       children: [
         {
+          key: 'facility',
+          label: `${t('Nav.facility')}`,
+          onClick: () =>
+            (window.location.href = `${domainURL}/${localNavigate}/service/`),
+        },
+        {
           key: 'faqs',
           label: `${t('Nav.faqs')}`,
           onClick: () => {
             window.location.href = `${domainURL}/${localNavigate}/faqs/`; // Domain faqs
           },
+          disabled: false,
         },
         {
           key: 'contact',
@@ -69,18 +82,19 @@ const Header = () => {
           onClick: () => {
             window.location.href = `${domainURL}/${localNavigate}/contact/`; // Domain contact
           },
+          disabled: false,
         },
         {
           key: 'partnership',
           label: `${t('Nav.partnerShip')}`,
           onClick: () => {
-            window.location.href =
-              `${domainURL}/${localNavigate}/elementor-page-4428/stl-partnership/`; // Domain partnership
+            window.location.href = `${domainURL}/${localNavigate}/elementor-page-4428/stl-partnership/`; // Domain partnership
           },
+          disabled: false,
         },
       ],
       onTitleClick: () => {
-        window.location.href = `${domainURL}/${localNavigate}/service/`; // Domain service
+        // window.location.href = `${domainURL}/${localNavigate}/service/`; // Domain service
       },
     },
     {
@@ -176,6 +190,18 @@ const Header = () => {
           </Space>
         </Space>
 
+        {/* opening hours */}
+        <Space style={{ padding: '40px 0' }}>
+          <ClockCircleOutlined />
+          <div
+            style={{
+              fontSize: isTabletOrMobile ? '16px' : '18px',
+              color: Colors.neutral600,
+            }}
+          >
+            {t('opening_hours')}
+          </div>
+        </Space>
         <div
           style={{
             display: isTabletOrMobile ? 'flex' : 'block',
@@ -357,6 +383,13 @@ const ListItemFlagsStyled = styled.ul`
   .country-flag-item svg {
     width: 40px;
     height: 20px;
+  }
+`;
+
+const ClockCircleTwoToneIcon = styled(ClockCircleTwoTone)`
+  svg {
+    width: 24px;
+    height: 24px;
   }
 `;
 

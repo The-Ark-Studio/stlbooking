@@ -8,8 +8,10 @@
       "gallery": "갤러리",
       "contact": "연락하다",
       "partnerShip": "공동",
-      "faqs": "자주 묻는 질문"
-    }
+      "faqs": "자주 묻는 질문",
+      "facility": "시설 안내"
+    },
+    "opening_hours": "영업시간 (2024/12/31까지) : 17시~24시"
   },
   "BookingScreen": {
     "title_text": "라운지 예약",
@@ -69,14 +71,19 @@
       "description_one": "\"우리와 함께 머물기를 선택해 주셔서 감사합니다! 우리는 귀하를 모시게 되어 기쁘게 생각하며 이곳에서 즐거운 시간을 보내시기를 바랍니다. 숙박에 관한 중요한 정보는 우편함을 확인하시기 바랍니다.",
       "description_two": "도움이 필요하거나 질문이 있는 경우 언제든지 저희 팀에 문의해 주세요. 우리는 귀하가 편안하고 기억에 남는 경험을 할 수 있도록 최선을 다하고 있습니다.\"",
       "ok_button": "완료하기!"
+    },
+    "opening_hours_modal": {
+      "title": "영업시간",
+      "description": "영업시간 (2024/12/31까지) : 17시~24시"
     }
   },
   "footer": {
     "contact": {
       "title": "연락처",
-      "email": "support@stl.sg",
+      "email": "fo@stl.sg",
       "phone": "02836223390",
       "address": "95 Vo Thi Sau길, 6등, 3군, 호치민 시, 베트남",
+      "kakao": "카카오톡 아이디: stl2024",
       "check_map": {
         "title": "지도 확인",
         "link": "https://www.google.com/maps/place/95+%C4%90.+V%C3%B5+Th%E1%BB%8B+S%C3%A1u,+Ph%C6%B0%E1%BB%9Dng+6,+Qu%E1%BA%ADn+3,+H%E1%BB%93+Ch%C3%AD+Minh+70000/@10.7866873,106.6884141,17z/data=!4m6!3m5!1s0x31752f3254c86d61:0x31fa21392192d696!8m2!3d10.786682!4d106.690989!16s%2Fg%2F11c20vt2hx?entry=ttu&g_ep=EgoyMDI0MTAwMi4xIKXMDSoASAFQAw%3D%3D"
