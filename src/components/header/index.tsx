@@ -66,7 +66,7 @@ const Header = () => {
           key: 'facility',
           label: `${t('Nav.facility')}`,
           onClick: () =>
-            (window.location.href = `${domainURL}/${localNavigate}/service/`),
+            (window.location.href = `${domainURL}/${localNavigate}/facility-overview/`),
         },
         {
           key: 'faqs',
