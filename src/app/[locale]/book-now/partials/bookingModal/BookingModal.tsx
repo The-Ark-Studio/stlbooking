@@ -11,7 +11,7 @@ import {
   Checkbox,
   Typography,
   Row,
-  Col, Flex, Space,
+  Col, Flex,
 } from 'antd';
 import styled from 'styled-components';
 import Colors from '@constants/Colors';
